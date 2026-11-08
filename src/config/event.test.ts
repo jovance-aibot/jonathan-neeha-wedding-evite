@@ -8,7 +8,7 @@ describe('confirmed event facts', () => {
     expect(`${eventConfig.draft.label} ${eventConfig.draft.detail}`.toLowerCase()).not.toContain('private')
     expect(eventConfig.draft.detail.toLowerCase()).not.toContain('not published')
     expect(eventConfig.rsvp.note.toLowerCase()).not.toContain('private')
-    expect(eventConfig.calendar.description.toLowerCase()).not.toContain('private')
+    expect('calendar' in eventConfig).toBe(false)
   })
 
   it('names the couple and the ceremony day', () => {
@@ -45,8 +45,4 @@ describe('confirmed event facts', () => {
     expect(eventConfig.map.embedUrl.startsWith('https://www.google.com/maps/embed?')).toBe(true)
   })
 
-  it('uses a safe ceremony calendar filename', () => {
-    expect(eventConfig.calendar.filename).toBe('jonathan-neeha-ceremony-2026-12-28.ics')
-    expect(eventConfig.calendar.filename).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*\.ics$/)
-  })
 })

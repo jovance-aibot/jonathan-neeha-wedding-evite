@@ -77,17 +77,6 @@ export type EventConfig = {
     title: string
     note: string
   }
-  calendar: {
-    filename: string
-    buttonLabel: string
-    note: string
-    errorMessage: string
-    prodid: string
-    uid: string
-    summary: string
-    location: string
-    description: string
-  }
   photos: {
     heading: string
     note: string
@@ -168,18 +157,6 @@ export const eventConfig = {
     hideLabel: 'Hide map',
     title: 'Map of Philip Pavilion in Memury',
     note: 'Get directions opens Philip Pavilion in Google Maps. The map stays off this page until you choose Show map.',
-  },
-  calendar: {
-    filename: 'jonathan-neeha-ceremony-2026-12-28.ics',
-    buttonLabel: 'Download ceremony calendar',
-    note: 'The file covers only the ceremony, 3:30–4:30 PM IST. The reception is left out because an end time is not set.',
-    errorMessage: 'The ceremony calendar could not be prepared from the event config.',
-    prodid: '-//Invitation Draft//Jonathan and Neeha//EN',
-    uid: 'ceremony-20261228-jonathan-neeha@draft.invalid',
-    summary: 'Ceremony — Jonathan Ve Vance and Neeha Shaitus',
-    location: 'Philip Pavilion, Memury — AC hall',
-    description:
-      'Ceremony in the AC hall at Philip Pavilion, Memury.\n3:30–4:30 PM India Standard Time (Asia/Kolkata).\nDraft preview. The reception is not included.',
   },
   photos: {
     heading: 'Photographs',

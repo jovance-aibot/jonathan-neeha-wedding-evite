@@ -1,20 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { eventConfig } from '../config/event.ts'
 import { Invitation } from './Invitation.tsx'
 
 const target = new Date('2026-12-28T15:30:00+05:30')
 
 describe('invitation details', () => {
-  beforeEach(() => {
-    vi.spyOn(URL, 'createObjectURL').mockImplementation((value) => {
-      captured = value as Blob
-      return 'blob:mock'
-    })
-    vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {})
-  })
-
   it('shows an expired ceremony instead of a zero clock', () => {
     render(<Invitation now={target} />)
     expect(screen.getByText(eventConfig.countdown.expiredMessage)).toBeInTheDocument()
@@ -41,36 +33,17 @@ describe('invitation details', () => {
     expect(screen.getByRole('alert')).toHaveTextContent(eventConfig.countdown.invalidMessage)
   })
 
-  it('downloads the ceremony file only after the calendar button is clicked', async () => {
-    const user = userEvent.setup()
-    const downloads: string[] = []
-    vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function click(this: HTMLAnchorElement) {
-      downloads.push(this.download)
-    })
-    const fetchSpy = vi.fn()
-    vi.stubGlobal('fetch', fetchSpy)
-
+  it('does not offer a calendar download', () => {
+    const createUrl = vi.spyOn(URL, 'createObjectURL')
     render(<Invitation now={new Date('2026-11-07T12:00:00+05:30')} />)
-    expect(URL.createObjectURL).not.toHaveBeenCalled()
-    expect(document.querySelector('form, input, textarea, select, audio, iframe')).toBeNull()
-    const directions = screen.getByRole('link', { name: eventConfig.map.directionsLabel })
-    expect(directions).toHaveAttribute('href', eventConfig.map.directionsUrl)
-    expect(directions).toHaveAttribute('target', '_blank')
-    expect(directions).toHaveAttribute('rel', 'noopener noreferrer')
-    expect(screen.getByText(eventConfig.rsvp.note)).toBeInTheDocument()
-    expect(screen.getByText(/Draft preview/)).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: eventConfig.calendar.buttonLabel }))
-
-    expect(URL.createObjectURL).toHaveBeenCalledTimes(1)
-    expect(downloads).toEqual([eventConfig.calendar.filename])
-    expect(captured).toBeInstanceOf(Blob)
-    const text = await captured?.text()
-    expect(text).toContain('DTSTART:20261228T100000Z')
-    expect(text).toContain('DTEND:20261228T110000Z')
-    expect(text).not.toContain('6:30')
-    expect(fetchSpy).not.toHaveBeenCalled()
-    expect(document.querySelector('form, input, textarea, select, audio, iframe')).toBeNull()
+    expect(screen.queryByRole('button', { name: /calendar/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /calendar/i })).not.toBeInTheDocument()
+    expect(document.querySelector('a[download]')).toBeNull()
+    expect(document.body.textContent).not.toMatch(/\.ics|download ceremony calendar|add to calendar/i)
+    expect(createUrl).not.toHaveBeenCalled()
+    expect(screen.getByText(eventConfig.ceremony.timeDisplay)).toBeInTheDocument()
+    expect(screen.getByText(eventConfig.reception.timeDisplay)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: eventConfig.map.directionsLabel })).toHaveAttribute(
       'href',
       eventConfig.map.directionsUrl,
@@ -119,20 +92,4 @@ describe('invitation details', () => {
     expect(fetchSpy).not.toHaveBeenCalled()
   })
 
-  it('does not download when the calendar config cannot be written', async () => {
-    const user = userEvent.setup()
-    render(
-      <Invitation
-        config={{
-          ...eventConfig,
-          calendar: { ...eventConfig.calendar, filename: '../nope.ics' },
-        }}
-      />,
-    )
-    await user.click(screen.getByRole('button', { name: eventConfig.calendar.buttonLabel }))
-    expect(URL.createObjectURL).not.toHaveBeenCalled()
-    expect(screen.getByRole('alert')).toHaveTextContent(eventConfig.calendar.errorMessage)
-  })
 })
-
-let captured: Blob | null = null

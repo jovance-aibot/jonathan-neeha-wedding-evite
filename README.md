@@ -30,9 +30,7 @@ Vite `base` is `/jonathan-neeha-wedding-evite/` so the script and stylesheet res
 
 Confirmed facts and wording live in [`src/config/event.ts`](src/config/event.ts).
 
-The ceremony start and the countdown target are the same instant: `2026-12-28T15:30:00+05:30` in `Asia/Kolkata`. After that instant the page says the ceremony time has passed. Less than a second before it, the page says less than a second remains.
-
-**Download ceremony calendar** builds `jonathan-neeha-ceremony-2026-12-28.ics` in the browser and saves it only when that button is clicked. The file is the ceremony only, 15:30–16:30 IST, which is 10:00–11:00 UTC. The reception is not in the file.
+The ceremony start and the countdown target are the same instant: `2026-12-28T15:30:00+05:30` in `Asia/Kolkata`. After that instant the page says the ceremony time has passed. Less than a second before it, the page says less than a second remains. The page does not offer a calendar file.
 
 ## Confirmed
 
@@ -53,8 +51,7 @@ No street address, contact details, dress code, parents, story, or extra events 
 ## Limits
 
 - The site is public at the Pages address above. A `noindex` hint asks crawlers not to index it. That hint is not access control.
-- There is no RSVP form and no guest storage.
-- The calendar download is a local save. Nothing is sent to an invite service.
+- There is no RSVP form and no guest storage. Nothing is sent to an invite service.
 - React’s production bundle includes the text `https://react.dev/errors/` for its error decoder, plus W3C namespace strings used by SVG. The invitation does not request those addresses.
 
 ## Technology actually installed
