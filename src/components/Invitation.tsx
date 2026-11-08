@@ -4,8 +4,6 @@ import { eventConfig as defaultConfig, type EventConfig } from '../config/event.
 import { Sprig, Vine } from './art.tsx'
 import { CoupleHeading } from './CoupleHeading.tsx'
 import { getCountdown, unitWord } from '../lib/countdown.ts'
-import { assertDownloadFilename, buildCeremonyIcs } from '../lib/ics.ts'
-import { downloadTextFile } from '../lib/download.ts'
 
 type InvitationProps = {
   config?: EventConfig
@@ -112,7 +110,6 @@ function ScheduleBlock({ config }: { config: EventConfig }) {
 }
 
 function VenueBlock({ config }: { config: EventConfig }) {
-  const [calendarError, setCalendarError] = useState<string | null>(null)
   const [mapRequested, setMapRequested] = useState(false)
   const mapToggleRef = useRef<HTMLButtonElement>(null)
   const skipMapFocus = useRef(true)
@@ -124,17 +121,6 @@ function VenueBlock({ config }: { config: EventConfig }) {
     }
     mapToggleRef.current?.focus()
   }, [mapRequested])
-
-  function onDownload() {
-    try {
-      const filename = assertDownloadFilename(config.calendar.filename)
-      const ics = buildCeremonyIcs(config, new Date())
-      downloadTextFile(ics, filename, 'text/calendar;charset=utf-8')
-      setCalendarError(null)
-    } catch {
-      setCalendarError(config.calendar.errorMessage)
-    }
-  }
 
   return (
     <section className="block" aria-labelledby="venue-heading">
@@ -152,9 +138,6 @@ function VenueBlock({ config }: { config: EventConfig }) {
         >
           {config.map.directionsLabel}
         </a>
-        <button type="button" className="button" onClick={onDownload}>
-          {config.calendar.buttonLabel}
-        </button>
         <button
           type="button"
           className="button button-quiet"
@@ -171,15 +154,9 @@ function VenueBlock({ config }: { config: EventConfig }) {
           <iframe title={config.map.title} src={config.map.embedUrl} loading="lazy" />
         </div>
       ) : null}
-      <p className="hint">{config.calendar.note}</p>
       <p id="directions-note" className="hint">
         {config.map.note}
       </p>
-      {calendarError ? (
-        <p className="alert" role="alert">
-          {calendarError}
-        </p>
-      ) : null}
     </section>
   )
 }

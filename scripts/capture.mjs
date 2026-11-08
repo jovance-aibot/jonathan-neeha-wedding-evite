@@ -1,5 +1,3 @@
-import { mkdtempSync, readdirSync, readFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import puppeteer from 'puppeteer-core'
@@ -132,36 +130,8 @@ const wideFont = await (async () => {
   return facts
 })()
 
-const downloadDir = mkdtempSync(join(tmpdir(), 'ceremony-ics-'))
-const client = await mobilePage.createCDPSession()
-await client.send('Browser.setDownloadBehavior', {
-  behavior: 'allow',
-  downloadPath: downloadDir,
-  eventsEnabled: true,
-})
-await mobilePage.click('button.button:not(.button-quiet)')
-const started = Date.now()
-let icsName = ''
-while (Date.now() - started < 4000) {
-  const found = readdirSync(downloadDir).find((name) => name.endsWith('.ics'))
-  if (found) {
-    icsName = found
-    break
-  }
-  await new Promise((resolveDelay) => setTimeout(resolveDelay, 100))
-}
-
 await browser.close()
 
-const report = {
-  desktopOverflow,
-  mobileOverflow,
-  remote,
-  pageErrors,
-  download: icsName
-    ? { name: icsName, text: readFileSync(join(downloadDir, icsName), 'utf8') }
-    : null,
-}
 console.log(JSON.stringify({
   desktopOverflow,
   mobileOverflow,
@@ -169,13 +139,10 @@ console.log(JSON.stringify({
   wideFont,
   remote,
   pageErrors,
-  downloadName: icsName,
-  downloadHasStart: report.download?.text.includes('DTSTART:20261228T100000Z') ?? false,
 }, null, 2))
 
 if (remote.length || pageErrors.length) process.exit(1)
 if (desktopOverflow.scrollWidth > desktopOverflow.clientWidth + 1) process.exit(1)
 if (mobileOverflow.scrollWidth > mobileOverflow.clientWidth + 1) process.exit(1)
-if (!report.download?.text.includes('DTSTART:20261228T100000Z')) process.exit(1)
 if (desktopClosed.envelopeDelta > 2 || desktopClosed.buttonsInside !== true || desktopClosed.overflow > 1) process.exit(1)
 if (wideFont.overflow > 1 || wideFont.framesFit !== true || wideFont.h1Outline !== 'none' || wideFont.sprigCentered > 4) process.exit(1)
