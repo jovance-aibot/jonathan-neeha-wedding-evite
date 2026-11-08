@@ -1,7 +1,8 @@
 /**
  * Confirmed facts for this invitation draft.
  * Edit this file to update names, times, and wording.
- * The ceremony and the reception are both at Philip Pavilion in Memury.
+ * The ceremony and the reception are both at Philip Pavilion.
+ * The displayed locality is Ramamangalam, Ernakulam. The directions link stays the supplied Maps URL.
  * Directions use the supplied Google Maps link. Do not replace that link
  * or invent another pin. The embed address is the no-key map Google
  * returned for that same link.
@@ -88,19 +89,19 @@ export const eventConfig = {
   ceremony: {
     title: 'Ceremony',
     venueName: 'Philip Pavilion',
-    locality: 'Memury',
+    locality: 'Ramamangalam, Ernakulam',
     room: 'AC hall',
     startIso: ceremonyStartIso,
     endIso: ceremonyEndIso,
-    timeDisplay: '3:30–4:30 PM IST',
-    placeDisplay: 'Philip Pavilion, Memury',
+    timeDisplay: '3:30 - 4:30 PM',
+    placeDisplay: 'Philip Pavilion, Ramamangalam, Ernakulam',
     note: 'In the AC hall.',
   },
   reception: {
     title: 'Reception',
     startIso: receptionStartIso,
     endIso: receptionEndIso,
-    timeDisplay: '6:30–9:30 PM IST',
+    timeDisplay: '6:30 - 9:30 PM',
     placeDisplay: 'Philip Pavilion, outdoors',
   },
   countdown: {
