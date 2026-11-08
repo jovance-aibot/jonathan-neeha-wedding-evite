@@ -1,10 +1,10 @@
 # Jonathan and Neeha — invitation draft
 
-The wedding invitation for Jonathan Ve Vance and Neeha Shaitus. The page is hosted with GitHub Pages from this repository. It does not collect replies or call a guest service. Fonts and photographs are files in this repository. Google Maps is requested only after Show map is clicked.
+The wedding invitation for Jonathan Ve Vance and Neeha Shaitus. The page is hosted with GitHub Pages from this repository. It does not collect replies or call a guest service. Fonts and photographs are files in this repository. Get directions opens the venue in Google Maps. The page does not embed a map.
 
 The live page is [https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/](https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/).
 
-The photographs are temporary stock images. They are not Jonathan and Neeha, and the evening scene is not Philip Pavilion. See `docs/photo-provenance.md`.
+Photograph licenses are recorded in `docs/photo-provenance.md`.
 
 ## Local run
 
@@ -44,10 +44,9 @@ Opening the envelope starts “Painted Woods in Autumn” by TheFealdoProject. *
 
 ## Still open on purpose
 
-- The photographs are stock, not the couple or the venue
 - There is no reply path
 
-No street address, contact details, dress code, parents, story, or extra events are invented here. **Get directions** uses the supplied Maps link and does not open it on its own. **Show map** is the only control that loads the map. The music control plays the supplied recording after Open invitation.
+No street address, contact details, dress code, parents, story, or extra events are invented here. **Get directions** uses the supplied Maps link and does not open it on its own. The page does not load a map. The music control plays the supplied recording after Open invitation.
 
 ## Limits
 

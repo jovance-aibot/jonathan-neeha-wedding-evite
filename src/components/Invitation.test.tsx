@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import { eventConfig } from '../config/event.ts'
 import { Invitation } from './Invitation.tsx'
@@ -50,67 +49,34 @@ describe('invitation details', () => {
     )
   })
 
-  it('keeps the map off the page until asked, without opening directions itself', async () => {
-    const user = userEvent.setup()
-    const fetchSpy = vi.fn()
-    vi.stubGlobal('fetch', fetchSpy)
+  it('offers directions only, with no map embed', () => {
     render(<Invitation now={new Date('2026-11-07T12:00:00+05:30')} />)
-
-    expect(document.querySelector('iframe')).toBeNull()
     const directions = screen.getByRole('link', { name: eventConfig.map.directionsLabel })
     expect(directions).toHaveAttribute('href', 'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic')
-
-    const toggle = screen.getByRole('button', { name: eventConfig.map.showLabel })
-    expect(toggle).toHaveAttribute('aria-expanded', 'false')
-
-    await user.click(toggle)
-
-    const frame = document.querySelector('iframe')
-    const hide = screen.getByRole('button', { name: eventConfig.map.hideLabel })
-    expect(frame).not.toBeNull()
-    expect(frame).toHaveAttribute('src', eventConfig.map.embedUrl)
-    expect(frame?.getAttribute('src')).toContain('Philips+pavilion,+Memury')
-    expect(frame?.getAttribute('allow') ?? '').not.toMatch(/geolocation/i)
-    expect(hide).toHaveAttribute('aria-expanded', 'true')
-    expect(hide).toHaveAttribute('aria-controls', 'venue-map')
-    expect(hide).toHaveFocus()
-    expect(directions).toHaveAttribute('href', eventConfig.map.directionsUrl)
-
-    await user.click(hide)
-
+    expect(directions).toHaveAttribute('target', '_blank')
+    expect(directions).toHaveAttribute('rel', 'noopener noreferrer')
+    expect(screen.queryByRole('button', { name: /map/i })).not.toBeInTheDocument()
     expect(document.querySelector('iframe')).toBeNull()
-    const showAgain = screen.getByRole('button', { name: eventConfig.map.showLabel })
-    expect(showAgain).toHaveAttribute('aria-expanded', 'false')
-    expect(showAgain).toHaveFocus()
-    expect(directions).toHaveAttribute('href', eventConfig.map.directionsUrl)
-
-    await user.click(showAgain)
-
-    expect(document.querySelector('iframe')).toHaveAttribute('src', eventConfig.map.embedUrl)
-    expect(screen.getByRole('button', { name: eventConfig.map.hideLabel })).toHaveFocus()
-    expect(directions).toHaveAttribute('href', 'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic')
-    expect(fetchSpy).not.toHaveBeenCalled()
+    expect(document.body.textContent).not.toMatch(/show map|hide map|google maps/i)
   })
 
   it('follows the photo layout without a verse, RSVP, or empty photo frames', () => {
     render(<Invitation now={new Date('2026-11-07T12:00:00+05:30')} />)
     const images = screen.getAllByRole('img')
     expect(images.map((image) => image.getAttribute('alt'))).toEqual([
-      'Stock photograph of a couple seen from behind, walking at sunset. Not Jonathan and Neeha.',
-      "Stock photograph of a bride and groom's hands and wedding rings. Not Jonathan and Neeha.",
-      'Stock photograph of an outdoor evening gathering under trees. Not Philip Pavilion.',
+      'A couple seen from behind, walking at sunset.',
+      'Hands with wedding rings.',
     ])
     expect(images[0]).toHaveAttribute('loading', 'eager')
     expect(images[1]).toHaveAttribute('loading', 'lazy')
-    expect(images[2]).toHaveAttribute('loading', 'lazy')
     expect(screen.getByText('See you there')).toBeInTheDocument()
     expect(screen.getByText('Jonathan & Neeha')).toBeInTheDocument()
-    expect(screen.getByText(eventConfig.stock.note)).toBeInTheDocument()
     expect(screen.getByText('Philip Pavilion')).toBeInTheDocument()
-    expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
+    expect(screen.getByText('Outdoors · same venue')).toBeInTheDocument()
+    expect(screen.queryByText('Outdoors at Philip Pavilion.')).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: /rsvp/i })).not.toBeInTheDocument()
     expect(document.body.textContent).not.toMatch(
-      /two are better|ecclesiastes|music is omitted|draft preview|end time is not set|yet to get|still unsettled|to be confirmed|placeholder/i,
+      /two are better|ecclesiastes|music is omitted|draft preview|end time is not set|yet to get|still unsettled|to be confirmed|placeholder|stock/i,
     )
     const following = Node.DOCUMENT_POSITION_FOLLOWING
     const ceremony = screen.getByText(eventConfig.ceremony.timeDisplay)
@@ -119,7 +85,6 @@ describe('invitation details', () => {
     expect(images[0].compareDocumentPosition(ceremony) & following).toBeTruthy()
     expect(ceremony.compareDocumentPosition(images[1]) & following).toBeTruthy()
     expect(images[1].compareDocumentPosition(venue) & following).toBeTruthy()
-    expect(venue.compareDocumentPosition(images[2]) & following).toBeTruthy()
-    expect(images[2].compareDocumentPosition(close) & following).toBeTruthy()
+    expect(venue.compareDocumentPosition(close) & following).toBeTruthy()
   })
 })

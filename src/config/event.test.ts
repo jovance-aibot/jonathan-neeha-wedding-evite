@@ -4,7 +4,7 @@ import { eventConfig } from './event.ts'
 
 describe('confirmed event facts', () => {
   it('does not describe the invitation as private or unpublished', () => {
-    const published = `${eventConfig.stock.note} ${eventConfig.venue.note} ${eventConfig.map.note}`.toLowerCase()
+    const published = `${eventConfig.venue.note} ${eventConfig.map.directionsLabel}`.toLowerCase()
     expect(published).not.toContain('private')
     expect(published).not.toContain('not published')
     expect(published).not.toContain('rsvp')
@@ -39,8 +39,6 @@ describe('confirmed event facts', () => {
     expect(eventConfig.reception.startIso).toBe('2026-12-28T18:30:00+05:30')
     expect(eventConfig.reception.endIso).toBe('2026-12-28T21:30:00+05:30')
     expect(eventConfig.reception.timeDisplay).toBe('6:30–9:30 PM IST')
-    expect(eventConfig.reception.note.toLowerCase()).not.toContain('awaiting')
-    expect(eventConfig.reception.note.toLowerCase()).not.toContain('not set')
     const receptionStart = new Date(eventConfig.reception.startIso)
     const receptionEnd = new Date(eventConfig.reception.endIso)
     expect(receptionEnd.getTime() - receptionStart.getTime()).toBe(3 * 60 * 60 * 1000)
@@ -48,8 +46,7 @@ describe('confirmed event facts', () => {
     expect(eventConfig.venue.note).toContain('AC hall')
     expect(eventConfig.map.directionsLabel).toBe('Get directions')
     expect(eventConfig.map.directionsUrl).toBe('https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic')
-    expect(eventConfig.map.embedUrl).toContain('WGW2%2B4C+Philips+pavilion,+Memury,+Keralam+686663')
-    expect(eventConfig.map.embedUrl.startsWith('https://www.google.com/maps/embed?')).toBe(true)
+    expect('embedUrl' in eventConfig.map).toBe(false)
   })
 
 })

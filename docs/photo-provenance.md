@@ -2,7 +2,7 @@
 
 Verified 8 November 2026 before this layout was published. Only the three photographs from layout A are used.
 
-The current Pexels license page, https://www.pexels.com/license/, says photos on Pexels may be used free on a website, including invitations, and may be modified. Attribution is not required. Unaltered copies may not be sold as stock or prints, the pictures may not imply endorsement, and they may not be redistributed on another stock platform. This page states that the photographs are temporary stock imagery and are not Jonathan, Neeha, or Philip Pavilion. No model or property release was found on the source pages, so none is claimed.
+The current Pexels license page, https://www.pexels.com/license/, says photos on Pexels may be used free on a website, including invitations, and may be modified. Attribution is not required. Unaltered copies may not be sold as prints, the pictures may not imply endorsement, and they may not be redistributed on another stock platform. No model or property release was found on the source pages, so none is claimed. The invitation page shows the couple and rings photographs only. The evening setting photograph is not published on the page.
 
 | File | Pexels photo | Source page | Name listed on that page | Match |
 |---|---|---|---|---|

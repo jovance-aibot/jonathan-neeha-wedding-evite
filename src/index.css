@@ -940,6 +940,10 @@ figcaption {
   color: #4a403a;
 }
 
+.close {
+  margin-top: 2.6rem;
+}
+
 .close-lead {
   margin-bottom: 0.85rem;
 }
