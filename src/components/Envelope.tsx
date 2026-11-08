@@ -114,13 +114,6 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                   <text x="600" y="802" textAnchor="middle" fontFamily="Georgia, serif" fontSize="18" fontStyle="italic" fill="#4a403a">
                     Outdoors
                   </text>
-                  <path d="M490 820 H710" fill="none" stroke="#3e5144" strokeOpacity="0.35" strokeWidth="1.2" />
-                  <text x="600" y="846" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontStyle="italic" fill="#2a2420">
-                    Two are better than one
-                  </text>
-                  <text x="600" y="870" textAnchor="middle" fontFamily="Georgia, serif" fontSize="15" fill="#3e5144">
-                    Ecclesiastes 4:9 · KJV
-                  </text>
                 </g>
               </g>
               <g clipPath="url(#wine-clip)">
