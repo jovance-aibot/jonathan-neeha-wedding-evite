@@ -92,22 +92,23 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
           </p>
           <div className="shared-venue">
             <h2 className="shared-name">{config.ceremony.venueName}</h2>
-            <ol className="day-list">
-              <li>
+            <div className="day-columns">
+              <div className="day-col">
+                <p className="event-role">{config.ceremony.title}</p>
                 <p className="when">
                   <TimeRange value={config.ceremony.timeDisplay} />
                 </p>
-                <p className="event-role">{config.ceremony.title}</p>
                 <p className="sub">{config.ceremony.room}</p>
-              </li>
-              <li>
+              </div>
+              <div className="day-rule-vert" aria-hidden="true" />
+              <div className="day-col">
+                <p className="event-role">{config.reception.title}</p>
                 <p className="when">
                   <TimeRange value={config.reception.timeDisplay} />
                 </p>
-                <p className="event-role">{config.reception.title}</p>
                 <p className="sub">Outdoor space</p>
-              </li>
-            </ol>
+              </div>
+            </div>
           </div>
         </section>
         <Portrait className="portrait-again" variant="garden" alt={secondAlt} />
