@@ -39,7 +39,8 @@ export function DateParts({ display }: { display: string }) {
   )
 }
 
-const portraitAlt = 'Jonathan Ve Vance and Neeha Shaitus standing together outdoors, shown from head to mid-leg.'
+const heroAlt = 'Neeha Shaitus in a green dress and Jonathan Ve Vance in a pink striped shirt, standing in a garden.'
+const secondAlt = 'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing together outdoors, shown from head to mid-leg.'
 
 export function Invitation({ config = defaultConfig, now, headingRef }: InvitationProps) {
   return (
@@ -47,7 +48,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
       <article className="story-inner">
         <header className="hero">
           <div className="hero-photo">
-            <Portrait eager overlay alt={portraitAlt} />
+            <Portrait eager overlay variant="hero" alt={heroAlt} />
             <div className="hero-title">
               <p className="kicker join-line">Please join us to celebrate</p>
               <CoupleHeading config={config} headingRef={headingRef} focusable />
@@ -75,7 +76,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
               <p className="sub">Outdoor space</p>
             </div>
           </section>
-          <Portrait className="portrait-again" alt="The same photograph of Jonathan Ve Vance and Neeha Shaitus." />
+          <Portrait className="portrait-again" alt={secondAlt} />
           <VenueBlock config={config} />
         </div>
         <footer className="close">
@@ -96,23 +97,30 @@ function Portrait({
   eager = false,
   overlay = false,
   className = '',
+  variant = 'second',
 }: {
   alt: string
   eager?: boolean
   overlay?: boolean
   className?: string
+  variant?: 'hero' | 'second'
 }) {
-  const full = `${base}photos/portrait-1066.webp`
-  const small = `${base}photos/portrait-640.webp`
+  const file = variant === 'hero'
+    ? { small: 'hero-720.webp', smallW: 720, full: 'hero-1200.webp', fullW: 1200, jpg: 'hero-1200.jpg', w: 1200, h: 1600 }
+    : { small: 'portrait-640.webp', smallW: 640, full: 'portrait-1066.webp', fullW: 1066, jpg: 'portrait-1066.jpg', w: 1066, h: 1600 }
   return (
     <figure className={className ? `portrait ${className}` : 'portrait'}>
       <div className="portrait-media">
         <picture>
-          <source type="image/webp" srcSet={`${small} 640w, ${full} 1066w`} sizes="(min-width: 800px) 28rem, 92vw" />
+          <source
+            type="image/webp"
+            srcSet={`${base}photos/${file.small} ${file.smallW}w, ${base}photos/${file.full} ${file.fullW}w`}
+            sizes="(min-width: 800px) 28rem, 92vw"
+          />
           <img
-            src={`${base}photos/portrait-1066.jpg`}
-            width={1066}
-            height={1600}
+            src={`${base}photos/${file.jpg}`}
+            width={file.w}
+            height={file.h}
             alt={alt}
             loading={eager ? 'eager' : 'lazy'}
             decoding="async"

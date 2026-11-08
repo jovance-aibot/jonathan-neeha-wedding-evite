@@ -1,6 +1,10 @@
 # Photograph provenance
 
-The invitation publishes one photograph of Jonathan Ve Vance and Neeha Shaitus, supplied by them for this page and shown twice. The original file is 1066 by 1600 pixels and 297,572 bytes, SHA-256 `f7f2c0b942e2930d2636582ebb416d23542a9d09562c65fdd4925e6d410dc6c9`. The public JPEG is that same frame with the EXIF and Photoshop segments removed, so the picture is not recompressed. A WebP of the same frame and a 640-pixel-wide WebP are the delivery copies. The picture ends around mid-leg. Earlier stock photographs are no longer on the page.
+The invitation publishes two photographs of Jonathan Ve Vance and Neeha Shaitus, both supplied by them.
+
+The first photograph, used with the names over it on a phone, is the garden picture: Neeha in a green dress and Jonathan in a pink striped shirt. The supplied file is 1200 by 1600 pixels and 539,072 bytes, SHA-256 `40373aef6ef01356d4adac0eda1054c7514b92bd903b50493cc7c7030280c956`. The public JPEG is that full frame with the EXIF and Photoshop segments removed. A WebP of the same frame and a 720-pixel-wide WebP are the delivery copies.
+
+The second photograph is the earlier outdoor portrait, Jonathan in a white shirt and Neeha in a blue dress, 1066 by 1600, SHA-256 `f7f2c0b942e2930d2636582ebb416d23542a9d09562c65fdd4925e6d410dc6c9`. Its public JPEG is the same frame with metadata removed. That picture ends around mid-leg. Earlier stock photographs are no longer on the page.
 
 The notes below record the stock files that were used before this photograph replaced them.
 
