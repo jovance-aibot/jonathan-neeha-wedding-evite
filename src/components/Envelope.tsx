@@ -12,9 +12,17 @@ type EnvelopeGateProps = {
 export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps) {
   const { partnerA, partnerB } = eventConfig.couple
   const monogram = `${partnerA.initial} & ${partnerB.initial}`
+  const gateDate = eventConfig.when.display.replace(', ', ' · ')
   return (
     <main className="gate">
       <div className="gate-body">
+        <header className="gate-intro">
+          <p className="gate-kicker">Please join us to celebrate</p>
+          <p className="gate-names">
+            {partnerA.display.split(' ')[0]} <span className="amp">&amp;</span> {partnerB.display.split(' ')[0]}
+          </p>
+          <p className="gate-date">{gateDate}</p>
+        </header>
         <button
           type="button"
           id="open-invitation"
@@ -79,39 +87,107 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
               <g clipPath="url(#sheet-clip)">
                 <g className="riser">
                   <rect x="150" y="320" width="900" height="920" rx="6" fill="#fbf6ee" stroke="#3e5144" strokeOpacity="0.22" />
-                  <text x="600" y="408" textAnchor="middle" fontFamily="Georgia, serif" fontSize="58" fill="#2a2420">
-                    {monogram}
+                  <text x="600" y="408" textAnchor="middle" fontSize="58" fill="#2a2420">
+                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="600">
+                      {partnerA.initial}
+                    </tspan>
+                    <tspan fontFamily="Great Vibes, cursive" fontSize="64">
+                      {' '}
+                      &amp;{' '}
+                    </tspan>
+                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="600">
+                      {partnerB.initial}
+                    </tspan>
                   </text>
-                  <text x="600" y="462" textAnchor="middle" fontFamily="Georgia, serif" fontSize="24" fill="#2a2420">
-                    {partnerA.display} and {partnerB.display}
+                  <text x="600" y="462" textAnchor="middle" fontSize="22" fill="#2a2420">
+                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="600">
+                      {partnerA.display}
+                    </tspan>
+                    <tspan fontFamily="Great Vibes, cursive" fontSize="28">
+                      {' '}
+                      &amp;{' '}
+                    </tspan>
+                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="600">
+                      {partnerB.display}
+                    </tspan>
                   </text>
-                  <text x="600" y="500" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontStyle="italic" fill="#4a403a">
+                  <text
+                    x="600"
+                    y="500"
+                    textAnchor="middle"
+                    fontFamily="Cormorant Garamond, serif"
+                    fontSize="20"
+                    fontStyle="italic"
+                    fill="#4a403a"
+                  >
                     {eventConfig.when.display}
                   </text>
                   <path d="M430 528 H520 M680 528 H770" fill="none" stroke="#3e5144" strokeOpacity="0.4" strokeWidth="1.4" />
                   <path d="M600 520 l7 8 -7 8 -7 -8 Z" fill="#3e5144" opacity="0.5" />
-                  <text x="600" y="572" textAnchor="middle" fontFamily="Georgia, serif" fontSize="28" fill="#2a2420">
+                  <text x="600" y="572" textAnchor="middle" fontFamily="Bodoni Moda, serif" fontWeight="600" fontSize="28" fill="#2a2420">
                     {eventConfig.ceremony.venueName}
                   </text>
-                  <text x="600" y="606" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontStyle="italic" fill="#4a403a">
+                  <text
+                    x="600"
+                    y="606"
+                    textAnchor="middle"
+                    fontFamily="Cormorant Garamond, serif"
+                    fontSize="20"
+                    fontStyle="italic"
+                    fill="#4a403a"
+                  >
                     {eventConfig.ceremony.locality}
                   </text>
-                  <text x="600" y="658" textAnchor="middle" fontFamily="Georgia, serif" fontSize="16" letterSpacing="3" fill="#3e5144">
+                  <text
+                    x="600"
+                    y="658"
+                    textAnchor="middle"
+                    fontFamily="Cormorant Garamond, serif"
+                    fontWeight="600"
+                    fontSize="16"
+                    letterSpacing="3"
+                    fill="#3e5144"
+                  >
                     CEREMONY
                   </text>
-                  <text x="600" y="688" textAnchor="middle" fontFamily="Georgia, serif" fontSize="22" fill="#2a2420">
+                  <text x="600" y="688" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="22" fill="#2a2420">
                     {eventConfig.ceremony.timeDisplay}
                   </text>
-                  <text x="600" y="716" textAnchor="middle" fontFamily="Georgia, serif" fontSize="18" fontStyle="italic" fill="#4a403a">
+                  <text
+                    x="600"
+                    y="716"
+                    textAnchor="middle"
+                    fontFamily="Cormorant Garamond, serif"
+                    fontSize="18"
+                    fontStyle="italic"
+                    fill="#4a403a"
+                  >
                     {eventConfig.ceremony.room}
                   </text>
-                  <text x="600" y="748" textAnchor="middle" fontFamily="Georgia, serif" fontSize="16" letterSpacing="3" fill="#3e5144">
+                  <text
+                    x="600"
+                    y="748"
+                    textAnchor="middle"
+                    fontFamily="Cormorant Garamond, serif"
+                    fontWeight="600"
+                    fontSize="16"
+                    letterSpacing="3"
+                    fill="#3e5144"
+                  >
                     RECEPTION
                   </text>
-                  <text x="600" y="776" textAnchor="middle" fontFamily="Georgia, serif" fontSize="22" fill="#2a2420">
+                  <text x="600" y="776" textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontSize="22" fill="#2a2420">
                     {eventConfig.reception.timeDisplay}
                   </text>
-                  <text x="600" y="802" textAnchor="middle" fontFamily="Georgia, serif" fontSize="18" fontStyle="italic" fill="#4a403a">
+                  <text
+                    x="600"
+                    y="802"
+                    textAnchor="middle"
+                    fontFamily="Cormorant Garamond, serif"
+                    fontSize="18"
+                    fontStyle="italic"
+                    fill="#4a403a"
+                  >
                     Outdoors
                   </text>
                 </g>
@@ -142,7 +218,7 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                   <path d={waxPath} fill="url(#wine-wax)" stroke="#d7bb8b" strokeWidth="2" />
                   <circle cx="600" cy="993" r="73" fill="none" stroke="#73513c" strokeOpacity="0.48" strokeWidth="2" />
                   <circle cx="600" cy="993" r="68" fill="none" stroke="#73513c" strokeOpacity="0.24" />
-                  <text x="600" y="1006" textAnchor="middle" fontFamily="Georgia, serif" fontSize="36" fill="#73513c">
+                  <text x="600" y="1006" textAnchor="middle" fontFamily="Bodoni Moda, serif" fontWeight="600" fontSize="36" fill="#73513c">
                     {monogram}
                   </text>
                 </g>
@@ -151,6 +227,14 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
           </div>
           <span className="open-cue">{eventConfig.gate.openLabel}</span>
         </button>
+        <div className="gate-divider" aria-hidden="true">
+          <span />
+        </div>
+        <section className="gate-venue" aria-label="Venue">
+          <p className="gate-kicker">The venue</p>
+          <p className="gate-venue-name">{eventConfig.ceremony.venueName}</p>
+          <p className="gate-locality">{eventConfig.ceremony.locality}</p>
+        </section>
       </div>
     </main>
   )

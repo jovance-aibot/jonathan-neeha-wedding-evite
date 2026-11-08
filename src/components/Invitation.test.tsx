@@ -70,7 +70,7 @@ describe('invitation details', () => {
     expect(images[0]).toHaveAttribute('loading', 'eager')
     expect(images[1]).toHaveAttribute('loading', 'lazy')
     expect(screen.getByText('See you there')).toBeInTheDocument()
-    expect(screen.getByText('Jonathan & Neeha')).toBeInTheDocument()
+    expect(document.querySelector('.sign')?.textContent?.replace(/\s+/g, ' ').trim()).toBe('Jonathan & Neeha')
     expect(screen.getByText('Philip Pavilion')).toBeInTheDocument()
     expect(screen.getByText('Outdoors · same venue')).toBeInTheDocument()
     expect(screen.queryByText('Outdoors at Philip Pavilion.')).not.toBeInTheDocument()
