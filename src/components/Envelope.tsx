@@ -7,15 +7,35 @@ type EnvelopeGateProps = {
   openButtonRef: RefObject<HTMLButtonElement | null>
   onOpen: () => void
   onSkip: () => void
+  onRecedeEnd: () => void
 }
 
-export function EnvelopeGate({ opening, openButtonRef, onOpen, onSkip }: EnvelopeGateProps) {
+export function EnvelopeGate({ opening, openButtonRef, onOpen, onSkip, onRecedeEnd }: EnvelopeGateProps) {
   const { partnerA, partnerB } = eventConfig.couple
   return (
     <main className="gate">
       <div className="gate-body">
-        <div className="envelope-wrap">
-          <div className={opening ? 'envelope is-opening' : 'envelope'} aria-hidden="true">
+        <div
+          className={opening ? 'envelope-wrap is-opening' : 'envelope-wrap'}
+          onAnimationEnd={(event) => {
+            if (event.animationName !== 'envelope-recede') return
+            if (event.target !== event.currentTarget) return
+            onRecedeEnd()
+          }}
+        >
+          <div className="envelope" aria-hidden="true">
+            <div className="env-back" />
+            <div className="riser">
+              <p className="riser-mark">
+                <span>{partnerA.initial}</span>
+                <span className="amp">&amp;</span>
+                <span>{partnerB.initial}</span>
+              </p>
+              <p className="riser-names">
+                {partnerA.display} and {partnerB.display}
+              </p>
+              <p className="riser-date">{eventConfig.when.display}</p>
+            </div>
             <div className="flap" />
             <div className="pocket" />
             <div className="seal">

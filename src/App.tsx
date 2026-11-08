@@ -6,7 +6,7 @@ import { usePrefersReducedMotion } from './lib/motion.ts'
 
 type Phase = 'closed' | 'opening' | 'invitation'
 
-const OPEN_MS = 720
+export const OPEN_MS = 2100
 const MUSIC_VOLUME = 0.35
 
 export default function App() {
@@ -96,6 +96,7 @@ export default function App() {
           openButtonRef={openButtonRef}
           onOpen={openInvitation}
           onSkip={reveal}
+          onRecedeEnd={reveal}
         />
       )}
       <button

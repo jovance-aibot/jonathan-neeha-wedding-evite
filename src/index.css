@@ -141,7 +141,11 @@ h1:focus-visible {
 .envelope-wrap {
   width: 100%;
   margin: 0.85rem auto 0;
-  perspective: 900px;
+  perspective: 1100px;
+}
+
+.envelope-wrap.is-opening {
+  animation: envelope-recede 560ms 1500ms ease forwards;
 }
 
 .envelope {
@@ -151,39 +155,102 @@ h1:focus-visible {
   background: #f6d7c8;
   border: 1px solid rgba(62, 81, 68, 0.35);
   box-shadow: var(--shadow);
+  transform-style: preserve-3d;
+}
+
+.env-back {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, #efe4d6 0%, #f7efe6 42%, var(--paper) 100%);
+}
+
+.riser {
+  position: absolute;
+  z-index: 1;
+  left: 9%;
+  right: 9%;
+  top: 16%;
+  height: 74%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.2rem;
+  padding: 0.7rem 0.45rem 0.4rem;
+  overflow: hidden;
+  text-align: center;
+  background: var(--paper);
+  border: 1px solid rgba(62, 81, 68, 0.35);
+  box-shadow: 0 10px 18px rgba(80, 40, 20, 0.08);
+  transform: translateY(48%);
+  opacity: 0;
+}
+
+.envelope-wrap.is-opening .riser {
+  animation: card-rise 980ms 620ms cubic-bezier(0.16, 0.84, 0.32, 1) forwards;
+}
+
+.riser-mark {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+.riser-mark .amp {
+  margin: 0 0.2rem;
+  color: var(--sage);
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+.riser-names,
+.riser-date {
+  margin: 0;
+  max-width: 100%;
+}
+
+.riser-names {
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.riser-date {
+  font-size: 0.68rem;
+  font-style: italic;
+  color: var(--soft);
 }
 
 .flap {
   position: absolute;
   inset: 0 0 28% 0;
-  z-index: 3;
+  z-index: 2;
   background: linear-gradient(#f4d2c2, var(--flap));
   clip-path: polygon(0 0, 50% 78%, 100% 0);
   transform-origin: top center;
   backface-visibility: hidden;
-  transition: transform 700ms ease;
 }
 
-.envelope.is-opening .flap {
-  transform: rotateX(180deg);
+.envelope-wrap.is-opening .flap {
+  animation: flap-open 820ms 300ms cubic-bezier(0.45, 0.05, 0.2, 1) forwards;
 }
 
 .pocket {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  padding-top: 3.5rem;
+  z-index: 3;
   background:
     linear-gradient(90deg, rgba(90, 50, 30, 0.05), transparent 16%, transparent 84%, rgba(90, 50, 30, 0.05)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 28%),
     var(--paper);
   clip-path: polygon(0 46%, 50% 72%, 100% 46%, 100% 100%, 0 100%);
 }
 
 .seal {
   position: absolute;
-  z-index: 4;
+  z-index: 5;
   left: 50%;
   top: 43%;
   width: 4.7rem;
@@ -204,7 +271,10 @@ h1:focus-visible {
     0 8px 16px rgba(80, 40, 20, 0.08),
     inset 0 0 0 0.28rem var(--paper),
     inset 0 0 0 0.36rem var(--sage);
-  transition: opacity 280ms ease;
+}
+
+.envelope-wrap.is-opening .seal {
+  animation: seal-release 460ms ease forwards;
 }
 
 .seal-rule {
@@ -213,8 +283,49 @@ h1:focus-visible {
   background: var(--sage);
 }
 
-.envelope.is-opening .seal {
-  opacity: 0;
+@keyframes seal-release {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  65% {
+    transform: translate(-50%, -68%) scale(0.94);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -78%) scale(0.88);
+    opacity: 0;
+  }
+}
+
+@keyframes flap-open {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(188deg);
+  }
+}
+
+@keyframes card-rise {
+  0% {
+    transform: translateY(48%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-42%);
+    opacity: 1;
+  }
+}
+
+@keyframes envelope-recede {
+  to {
+    transform: translateY(10px) scale(0.96);
+    opacity: 0;
+  }
 }
 
 .gate-card {
