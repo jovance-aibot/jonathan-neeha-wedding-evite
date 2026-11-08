@@ -69,7 +69,7 @@ describe('buildCeremonyIcs', () => {
     expect(logical).toContain('DTSTART:20261228T100000Z')
     expect(logical).toContain('DTEND:20261228T110000Z')
     expect(logical).toContain('SUMMARY:Ceremony — Jonathan Ve Vance and Neeha Shaitus')
-    expect(logical).toContain('LOCATION:Philips Pavilion\\, Memury — AC hall')
+    expect(logical).toContain('LOCATION:Philip Pavilion\\, Memury — AC hall')
     expect(logical.some((line) => line.startsWith('DESCRIPTION:') && line.includes('not included'))).toBe(
       true,
     )

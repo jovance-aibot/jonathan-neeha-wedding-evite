@@ -113,6 +113,7 @@ function ScheduleBlock({ config }: { config: EventConfig }) {
 
 function VenueBlock({ config }: { config: EventConfig }) {
   const [calendarError, setCalendarError] = useState<string | null>(null)
+  const [mapRequested, setMapRequested] = useState(false)
 
   function onDownload() {
     try {
@@ -132,21 +133,32 @@ function VenueBlock({ config }: { config: EventConfig }) {
       <p className="venue-locality">{config.ceremony.locality}</p>
       <p className="note">{config.venue.note}</p>
       <div className="stack-actions">
+        <a
+          className="button"
+          href={config.map.directionsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="directions-note"
+        >
+          {config.map.directionsLabel}
+        </a>
         <button type="button" className="button" onClick={onDownload}>
           {config.calendar.buttonLabel}
         </button>
-        <button
-          type="button"
-          className="button button-quiet"
-          disabled
-          aria-describedby="map-note"
-        >
-          {config.map.disabledLabel}
-        </button>
+        {mapRequested ? null : (
+          <button type="button" className="button button-quiet" onClick={() => setMapRequested(true)}>
+            {config.map.showLabel}
+          </button>
+        )}
       </div>
+      {mapRequested ? (
+        <div className="map-frame">
+          <iframe title={config.map.title} src={config.map.embedUrl} loading="lazy" />
+        </div>
+      ) : null}
       <p className="hint">{config.calendar.note}</p>
-      <p id="map-note" className="hint">
-        {config.map.disabledNote}
+      <p id="directions-note" className="hint">
+        {config.map.note}
       </p>
       {calendarError ? (
         <p className="alert" role="alert">

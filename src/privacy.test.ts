@@ -16,6 +16,11 @@ function filesIn(path: string): string[] {
   return readdirSync(path).flatMap((entry) => filesIn(join(path, entry)))
 }
 
+const allowedUrls = [
+  'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic',
+  'https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sWGW2%2B4C+Philips+pavilion,+Memury,+Keralam+686663',
+]
+
 const banned: Array<[string, RegExp]> = [
   ['fetch', /fetch\s*\(/],
   ['xhr', /XMLHttpRequest/],
@@ -29,8 +34,15 @@ const banned: Array<[string, RegExp]> = [
   ['mailto', /mailto:/i],
   ['telephone', /tel:/i],
   ['websocket', /WebSocket/],
-  ['iframe', /<iframe\b/i],
+  ['geolocation', /navigator\.geolocation|allow=["'][^"']*geolocation/i],
+  ['window open', /window\.open\s*\(/],
 ]
+
+function scrub(text: string): string {
+  let next = text.split(svgNamespace).join('')
+  for (const url of allowedUrls) next = next.split(url).join('')
+  return next
+}
 
 describe('privacy boundaries', () => {
   it('keeps the draft free of remote calls, media, and guest endpoints', () => {
@@ -38,9 +50,18 @@ describe('privacy boundaries', () => {
     expect(files.length).toBeGreaterThan(5)
     const hits: string[] = []
     for (const file of files) {
-      const text = readFileSync(file, 'utf8').split(svgNamespace).join('')
+      const raw = readFileSync(file, 'utf8')
+      const text = scrub(raw)
       for (const [label, pattern] of banned) {
         if (pattern.test(text)) hits.push(`${file}: ${label}`)
+      }
+      const iframes = raw.match(/<iframe\b[^>]*>/gi) ?? []
+      if (iframes.length > 0 && !file.endsWith('src/components/Invitation.tsx')) {
+        hits.push(`${file}: iframe`)
+      }
+      if (iframes.length > 1) hits.push(`${file}: extra iframe`)
+      if (iframes.some((tag) => /src\s*=\s*["']https?:/i.test(tag) || /geolocation/i.test(tag))) {
+        hits.push(`${file}: unsafe iframe`)
       }
     }
     expect(hits).toEqual([])

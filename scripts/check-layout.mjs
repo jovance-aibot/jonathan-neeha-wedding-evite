@@ -39,7 +39,11 @@ async function facts(page) {
       sprigCentered: sheet && sprig ? Math.abs(box(sprig).cx - box(sheet).cx) : null,
       framesFit: opened ? frames.every(Boolean) : null,
       rsvp: document.body.innerText.includes('Replies are not collected here'),
-      mapDisabled: document.querySelector('button[disabled]')?.textContent ?? '',
+      directionsText: document.querySelector('a.button')?.textContent?.trim() ?? '',
+      directionsHref: document.querySelector('a.button')?.getAttribute('href') ?? '',
+      directionsTarget: document.querySelector('a.button')?.getAttribute('target') ?? '',
+      directionsRel: document.querySelector('a.button')?.getAttribute('rel') ?? '',
+      mapLoaded: document.querySelector('iframe') !== null,
     }
   })
 }
@@ -76,7 +80,15 @@ for (const row of results) {
   if (row.wide.framesFit !== true) bad.push(`${row.viewport} wide font frames`)
   if (row.wide.overflow > 1) bad.push(`${row.viewport} wide font overflow`)
   if (!row.opened.rsvp) bad.push(`${row.viewport} rsvp`)
-  if (row.opened.mapDisabled.trim() !== 'Map unavailable') bad.push(`${row.viewport} map`)
+  if (row.opened.directionsText !== 'Get directions') bad.push(`${row.viewport} directions label`)
+  if (row.opened.directionsHref !== 'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic') {
+    bad.push(`${row.viewport} directions href`)
+  }
+  if (row.opened.directionsTarget !== '_blank') bad.push(`${row.viewport} directions target`)
+  if (!row.opened.directionsRel.includes('noopener') || !row.opened.directionsRel.includes('noreferrer')) {
+    bad.push(`${row.viewport} directions rel`)
+  }
+  if (row.opened.mapLoaded) bad.push(`${row.viewport} map loaded before request`)
 }
 if (bad.length) {
   console.error(bad.join('\n'))

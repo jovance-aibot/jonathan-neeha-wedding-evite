@@ -1,9 +1,10 @@
 /**
  * Confirmed facts for this invitation draft.
  * Edit this file to update names, times, and wording.
- * The ceremony is the only event with a verified place and end time.
- * Do not fill the reception location, a map pin, photographs, or contact
- * details until those are actually known.
+ * The ceremony and the reception are both at Philip Pavilion in Memury.
+ * Directions use the supplied Google Maps link. Do not replace that link
+ * or invent another pin. The embed address is the no-key map Google
+ * returned for that same link.
  * The noscript paragraph in index.html repeats the ceremony facts for
  * browsers without JavaScript. Update that sentence with these facts.
  */
@@ -44,7 +45,6 @@ export type EventConfig = {
     timeDisplay: string
     placeDisplay: string
     note: string
-    locationStatus: 'awaiting-confirmation'
   }
   countdown: {
     targetIso: string
@@ -69,9 +69,12 @@ export type EventConfig = {
     note: string
   }
   map: {
-    enabled: false
-    disabledLabel: string
-    disabledNote: string
+    directionsLabel: string
+    directionsUrl: string
+    embedUrl: string
+    showLabel: string
+    title: string
+    note: string
   }
   calendar: {
     filename: string
@@ -117,21 +120,20 @@ export const eventConfig = {
   },
   ceremony: {
     title: 'Ceremony',
-    venueName: 'Philips Pavilion',
+    venueName: 'Philip Pavilion',
     locality: 'Memury',
     room: 'AC hall',
     startIso: ceremonyStartIso,
     endIso: ceremonyEndIso,
     timeDisplay: '3:30–4:30 PM IST',
-    placeDisplay: 'Philips Pavilion, Memury',
+    placeDisplay: 'Philip Pavilion, Memury',
     note: 'In the AC hall.',
   },
   reception: {
     title: 'Reception',
     timeDisplay: 'From 6:30 PM IST',
-    placeDisplay: 'Outdoors',
-    note: 'The location is awaiting confirmation. An end time is not set.',
-    locationStatus: 'awaiting-confirmation',
+    placeDisplay: 'Philip Pavilion, outdoors',
+    note: 'Outdoors at Philip Pavilion. An end time is not set.',
   },
   countdown: {
     targetIso: ceremonyStartIso,
@@ -153,26 +155,29 @@ export const eventConfig = {
     scheduleHeading: 'The day',
   },
   venue: {
-    heading: 'Ceremony venue',
-    note: 'The ceremony is held in the AC hall. This card is for the ceremony only. The reception is listed on its own, and its location is awaiting confirmation.',
+    heading: 'Venue',
+    note: 'The ceremony is in the AC hall at Philip Pavilion. The reception is outdoors at the same venue.',
   },
   map: {
-    enabled: false,
-    disabledLabel: 'Map unavailable',
-    disabledNote:
-      'A map will appear here after a verified pin is added. This draft does not guess a location.',
+    directionsLabel: 'Get directions',
+    directionsUrl: 'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic',
+    embedUrl:
+      'https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sWGW2%2B4C+Philips+pavilion,+Memury,+Keralam+686663',
+    showLabel: 'Show map',
+    title: 'Map of Philip Pavilion in Memury',
+    note: 'Get directions opens Philip Pavilion in Google Maps. The map stays off this page until you choose Show map.',
   },
   calendar: {
     filename: 'jonathan-neeha-ceremony-2026-12-28.ics',
     buttonLabel: 'Download ceremony calendar',
-    note: 'The file covers only the ceremony, 3:30–4:30 PM IST. The reception is left out because its location and end time are not confirmed.',
+    note: 'The file covers only the ceremony, 3:30–4:30 PM IST. The reception is left out because an end time is not set.',
     errorMessage: 'The ceremony calendar could not be prepared from the event config.',
     prodid: '-//Invitation Draft//Jonathan and Neeha//EN',
     uid: 'ceremony-20261228-jonathan-neeha@draft.invalid',
     summary: 'Ceremony — Jonathan Ve Vance and Neeha Shaitus',
-    location: 'Philips Pavilion, Memury — AC hall',
+    location: 'Philip Pavilion, Memury — AC hall',
     description:
-      'Ceremony in the AC hall at Philips Pavilion, Memury.\n3:30–4:30 PM India Standard Time (Asia/Kolkata).\nDraft preview. The reception is not included.',
+      'Ceremony in the AC hall at Philip Pavilion, Memury.\n3:30–4:30 PM India Standard Time (Asia/Kolkata).\nDraft preview. The reception is not included.',
   },
   photos: {
     heading: 'Photographs',
@@ -190,8 +195,6 @@ export const eventConfig = {
   notesHeading: 'Still open in this draft',
   placeholders: [
     'Photographs have not been added.',
-    'A verified map pin has not been added.',
-    'The reception location is awaiting confirmation.',
     'No reply path is open.',
     'Music is omitted until a permitted recording is supplied.',
   ],
