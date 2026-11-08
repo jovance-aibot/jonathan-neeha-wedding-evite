@@ -1524,17 +1524,6 @@ figcaption {
   }
 }
 
-@media (max-width: 1239px) {
-  .story > article {
-    width: auto;
-    margin-right: calc(0.85rem + 64px + 12px - 16px);
-  }
-
-  .hero-band {
-    min-height: 100dvh;
-  }
-}
-
 @media (max-width: 380px) {
   .day-list li {
     grid-template-columns: 1fr;
