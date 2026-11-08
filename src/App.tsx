@@ -87,19 +87,6 @@ export default function App() {
     <>
       <header className="draft-bar">
         <p className="draft-flag">{eventConfig.draft.label}</p>
-        <button type="button" className="music-toggle" aria-pressed={musicOn} onClick={() => (musicOn ? stopMusic() : playMusic())}>
-          <MusicMark on={musicOn} />
-          <span>{musicOn ? 'Turn music off' : 'Play music'}</span>
-        </button>
-        <audio
-          ref={audioRef}
-          src={`${import.meta.env.BASE_URL}audio/painted-woods-in-autumn.mp3`}
-          loop
-          preload="none"
-          onPlay={() => setMusicOn(true)}
-          onPause={() => setMusicOn(false)}
-          onError={() => setMusicOn(false)}
-        />
       </header>
       {phase === 'invitation' ? (
         <Invitation headingRef={headingRef} />
@@ -111,6 +98,24 @@ export default function App() {
           onSkip={reveal}
         />
       )}
+      <button
+        type="button"
+        className="music-toggle"
+        aria-pressed={musicOn}
+        aria-label={musicOn ? 'Turn music off' : 'Play music'}
+        onClick={() => (musicOn ? stopMusic() : playMusic())}
+      >
+        <MusicMark on={musicOn} />
+      </button>
+      <audio
+        ref={audioRef}
+        src={`${import.meta.env.BASE_URL}audio/painted-woods-in-autumn.mp3`}
+        loop
+        preload="none"
+        onPlay={() => setMusicOn(true)}
+        onPause={() => setMusicOn(false)}
+        onError={() => setMusicOn(false)}
+      />
     </>
   )
 }
