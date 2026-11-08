@@ -20,7 +20,6 @@ async function facts(page) {
       return { x: rect.x, w: rect.width, right: rect.right, cx: rect.x + rect.width / 2 }
     }
     const envelope = document.querySelector('.envelope')
-    const card = document.querySelector('.gate-card')
     const h1 = document.querySelector('h1')
     const sheet = document.querySelector('.sheet')
     const sprig = document.querySelector('.closing-sprig')
@@ -29,12 +28,12 @@ async function facts(page) {
       const label = frame.querySelector('span')
       return label.getBoundingClientRect().width <= frame.getBoundingClientRect().width - 4
     })
-    const cardBox = card ? box(card) : null
-    const buttons = [...document.querySelectorAll('.gate .button')].map(box)
+    const envelopeBox = envelope ? box(envelope) : null
     return {
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      envelopeDelta: envelope && cardBox ? Math.abs(box(envelope).w - cardBox.w) : null,
-      buttonsInside: cardBox ? buttons.every((button) => button.x >= cardBox.x - 1 && button.right <= cardBox.right + 1) : null,
+      envelopeInside: envelopeBox
+        ? envelopeBox.x >= -1 && envelopeBox.right <= document.documentElement.clientWidth + 1
+        : null,
       h1Outline: h1 ? getComputedStyle(h1).outlineStyle : null,
       sprigCentered: sheet && sprig ? Math.abs(box(sprig).cx - box(sheet).cx) : null,
       framesFit: opened ? frames.every(Boolean) : null,
@@ -58,7 +57,7 @@ for (const viewport of [
   await page.setViewport(viewport)
   await page.goto(target, { waitUntil: 'load' })
   const closed = await facts(page)
-  await page.click('#skip-envelope')
+  await page.click('#open-invitation')
   await page.waitForFunction(() => document.body.innerText.includes('AC hall'))
   const opened = await facts(page)
   await page.addStyleTag({ content: ':root { --serif: "DejaVu Serif", serif; --sans: "DejaVu Sans", sans-serif; }' })
@@ -73,8 +72,7 @@ console.log(JSON.stringify(results, null, 2))
 const bad = []
 for (const row of results) {
   if (row.closed.overflow > 1) bad.push(`${row.viewport} overflow`)
-  if (row.closed.envelopeDelta > 2) bad.push(`${row.viewport} envelope delta ${row.closed.envelopeDelta}`)
-  if (row.closed.buttonsInside !== true) bad.push(`${row.viewport} buttons`)
+  if (row.closed.envelopeInside !== true) bad.push(`${row.viewport} envelope`)
   if (row.opened.h1Outline !== 'none') bad.push(`${row.viewport} heading outline ${row.opened.h1Outline}`)
   if (row.opened.sprigCentered > 6) bad.push(`${row.viewport} sprig ${row.opened.sprigCentered}`)
   if (row.wide.framesFit !== true) bad.push(`${row.viewport} wide font frames`)

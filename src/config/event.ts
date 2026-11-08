@@ -56,8 +56,6 @@ export type EventConfig = {
   gate: {
     kicker: string
     openLabel: string
-    skipLabel: string
-    hint: string
   }
   copy: {
     invitation: string
@@ -135,8 +133,6 @@ export const eventConfig = {
   gate: {
     kicker: 'Wedding invitation',
     openLabel: 'Open invitation',
-    skipLabel: 'Skip the envelope',
-    hint: 'Opening plays a short paper motion and starts the music. Skip reveals the invitation without music.',
   },
   copy: {
     invitation: 'You are warmly invited to celebrate their marriage.',
