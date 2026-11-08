@@ -107,14 +107,14 @@ h1:focus-visible {
   right: max(0.85rem, env(safe-area-inset-right));
   bottom: max(0.85rem, env(safe-area-inset-bottom));
   z-index: 6;
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   border: 1px solid var(--sage);
-  border-radius: 999px;
+  border-radius: 18px;
   background: var(--paper);
   color: var(--ink);
   box-shadow: 0 8px 22px rgba(90, 48, 28, 0.16);
@@ -130,7 +130,7 @@ h1:focus-visible {
   min-height: calc(100vh - 2.4rem);
   min-height: calc(100dvh - 2.4rem);
   display: flex;
-  padding: 0.5rem 0.85rem calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  padding: 0.5rem 0.85rem calc(6rem + env(safe-area-inset-bottom, 0px));
 }
 
 .gate-body {
@@ -349,7 +349,7 @@ a.button {
 }
 
 .invitation {
-  padding: 0 0 calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  padding: 0 0 calc(6rem + env(safe-area-inset-bottom, 0px));
 }
 
 .sheet {
