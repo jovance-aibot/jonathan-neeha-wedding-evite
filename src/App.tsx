@@ -13,7 +13,6 @@ export default function App() {
   const reduced = usePrefersReducedMotion()
   const [phase, setPhase] = useState<Phase>('closed')
   const [musicOn, setMusicOn] = useState(false)
-  const openButtonRef = useRef<HTMLButtonElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const revealTimer = useRef<number | null>(null)
   const revealed = useRef(false)
@@ -27,10 +26,6 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dataset.motion = reduced ? 'reduce' : 'full'
   }, [reduced])
-
-  useEffect(() => {
-    if (phase === 'closed') openButtonRef.current?.focus()
-  }, [phase])
 
   useEffect(() => {
     if (phase === 'invitation') headingRef.current?.focus()
@@ -91,12 +86,7 @@ export default function App() {
       {phase === 'invitation' ? (
         <Invitation headingRef={headingRef} />
       ) : (
-        <EnvelopeGate
-          opening={phase === 'opening'}
-          openButtonRef={openButtonRef}
-          onOpen={openInvitation}
-          onRecedeEnd={reveal}
-        />
+        <EnvelopeGate opening={phase === 'opening'} onOpen={openInvitation} onRecedeEnd={reveal} />
       )}
       <button
         type="button"

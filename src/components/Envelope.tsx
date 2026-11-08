@@ -1,4 +1,3 @@
-import type { RefObject } from 'react'
 import { eventConfig } from '../config/event.ts'
 
 const waxPath =
@@ -6,12 +5,11 @@ const waxPath =
 
 type EnvelopeGateProps = {
   opening: boolean
-  openButtonRef: RefObject<HTMLButtonElement | null>
   onOpen: () => void
   onRecedeEnd: () => void
 }
 
-export function EnvelopeGate({ opening, openButtonRef, onOpen, onRecedeEnd }: EnvelopeGateProps) {
+export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps) {
   const { partnerA, partnerB } = eventConfig.couple
   const monogram = `${partnerA.initial} & ${partnerB.initial}`
   return (
@@ -21,7 +19,6 @@ export function EnvelopeGate({ opening, openButtonRef, onOpen, onRecedeEnd }: En
           type="button"
           id="open-invitation"
           className="envelope-open"
-          ref={openButtonRef}
           aria-label={eventConfig.gate.openLabel}
           onClick={onOpen}
         >
@@ -70,46 +67,59 @@ export function EnvelopeGate({ opening, openButtonRef, onOpen, onRecedeEnd }: En
                 <clipPath id="wine-clip">
                   <rect x="120" y="650" width="960" height="610" rx="9" />
                 </clipPath>
+                <clipPath id="sheet-clip">
+                  <rect x="80" y="0" width="1040" height="1262" />
+                </clipPath>
               </defs>
               <g clipPath="url(#wine-clip)">
                 <rect x="120" y="650" width="960" height="610" fill="#2a1218" />
                 <rect x="120" y="650" width="960" height="610" fill="url(#wine-body)" />
                 <rect x="120" y="650" width="960" height="610" filter="url(#wine-grain)" opacity="0.55" />
+              </g>
+              <g clipPath="url(#sheet-clip)">
                 <g className="riser">
-                  <rect x="300" y="790" width="600" height="280" rx="8" fill="#fbf6ee" stroke="#3e5144" strokeOpacity="0.28" />
-                  <text x="600" y="880" textAnchor="middle" fontFamily="Georgia, serif" fontSize="48" fill="#2a2420">
+                  <rect x="150" y="320" width="900" height="920" rx="6" fill="#fbf6ee" stroke="#3e5144" strokeOpacity="0.22" />
+                  <text x="600" y="430" textAnchor="middle" fontFamily="Georgia, serif" fontSize="64" fill="#2a2420">
                     {monogram}
                   </text>
-                  <text x="600" y="928" textAnchor="middle" fontFamily="Georgia, serif" fontSize="18" fill="#2a2420">
+                  <text x="600" y="496" textAnchor="middle" fontFamily="Georgia, serif" fontSize="28" fill="#2a2420">
                     {partnerA.display} and {partnerB.display}
                   </text>
-                  <text x="600" y="962" textAnchor="middle" fontFamily="Georgia, serif" fontSize="16" fontStyle="italic" fill="#4a403a">
+                  <text x="600" y="542" textAnchor="middle" fontFamily="Georgia, serif" fontSize="22" fontStyle="italic" fill="#4a403a">
                     {eventConfig.when.display}
                   </text>
                 </g>
+              </g>
+              <g clipPath="url(#wine-clip)">
                 <path d="M122 659 L662 1037 L122 1257Z" fill="#572a39" />
                 <path d="M1078 659 L538 1037 L1078 1257Z" fill="#572a39" />
-              </g>
-              <g className="flap">
-                <path d="M122 652 H1078 L645 1003 Q600 1035 555 1003Z" fill="url(#wine-flap)" stroke="#3f1e2b" strokeOpacity="0.4" strokeWidth="1.5" />
-                <path d="M142 700 H548 M652 700 H1058" fill="none" stroke="#cbb087" strokeOpacity="0.55" strokeWidth="1.5" />
-                <path d="M564 652 H636 V940 H564Z" fill="url(#wine-ribbon)" />
-                <path d="M571 654 V938 M629 654 V938" stroke="#fbebcb" strokeOpacity="0.6" />
+                <g className="flap">
+                  <path
+                    d="M122 652 H1078 L645 1003 Q600 1035 555 1003Z"
+                    fill="url(#wine-flap)"
+                    stroke="#3f1e2b"
+                    strokeOpacity="0.4"
+                    strokeWidth="1.5"
+                  />
+                  <path d="M142 700 H548 M652 700 H1058" fill="none" stroke="#cbb087" strokeOpacity="0.55" strokeWidth="1.5" />
+                </g>
               </g>
               <g className="pocket">
                 <path d="M122 1258 L122 1234 L552 942 Q600 913 648 942 L1078 1234 L1078 1258Z" fill="url(#wine-pocket)" />
                 <path d="M126 1235 L553 944 M647 944 L1074 1235" fill="none" stroke="#3f1e2b" strokeOpacity="0.32" strokeWidth="2" />
-                <path d="M564 1055 H636 V1260 H564Z" fill="url(#wine-ribbon)" />
-                <path d="M571 1057 V1258 M629 1057 V1258" stroke="#fbebcb" strokeOpacity="0.6" />
               </g>
-              <g className="seal">
-                <path d={waxPath} fill="#23161c" opacity="0.2" transform="translate(0 6)" />
-                <path d={waxPath} fill="url(#wine-wax)" stroke="#d7bb8b" strokeWidth="2" />
-                <circle cx="600" cy="993" r="73" fill="none" stroke="#73513c" strokeOpacity="0.48" strokeWidth="2" />
-                <circle cx="600" cy="993" r="68" fill="none" stroke="#73513c" strokeOpacity="0.24" />
-                <text x="600" y="1006" textAnchor="middle" fontFamily="Georgia, serif" fontSize="36" fill="#73513c">
-                  {monogram}
-                </text>
+              <g className="closure">
+                <path className="ribbon" d="M564 652 H636 V1258 H564Z" fill="url(#wine-ribbon)" />
+                <path d="M571 654 V1256 M629 654 V1256" stroke="#fbebcb" strokeOpacity="0.6" />
+                <g className="seal">
+                  <path d={waxPath} fill="#23161c" opacity="0.2" transform="translate(0 6)" />
+                  <path d={waxPath} fill="url(#wine-wax)" stroke="#d7bb8b" strokeWidth="2" />
+                  <circle cx="600" cy="993" r="73" fill="none" stroke="#73513c" strokeOpacity="0.48" strokeWidth="2" />
+                  <circle cx="600" cy="993" r="68" fill="none" stroke="#73513c" strokeOpacity="0.24" />
+                  <text x="600" y="1006" textAnchor="middle" fontFamily="Georgia, serif" fontSize="36" fill="#73513c">
+                    {monogram}
+                  </text>
+                </g>
               </g>
             </svg>
           </div>

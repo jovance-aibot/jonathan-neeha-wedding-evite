@@ -135,22 +135,26 @@ h1:focus-visible {
   min-height: calc(100vh - 2.4rem);
   min-height: calc(100dvh - 2.4rem);
   display: flex;
+  overflow: visible;
   padding: 0.5rem 0.85rem calc(6rem + env(safe-area-inset-bottom, 0px));
 }
 
 .gate-body {
   width: min(28rem, 100%);
   margin: auto;
+  overflow: visible;
 }
 
 .envelope-wrap {
   width: 100%;
   margin: 0.85rem auto 0;
+  /* Room for the sheet to stand above the envelope without meeting the viewport edge. */
+  padding-top: 38%;
   perspective: 1200px;
 }
 
 .envelope-wrap.is-opening {
-  animation: envelope-recede 800ms 3200ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: envelope-recede 700ms 3300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .envelope {
@@ -161,51 +165,35 @@ h1:focus-visible {
   filter: drop-shadow(0 18px 28px rgba(63, 30, 43, 0.28));
 }
 
-.flap,
-.seal,
-.riser {
-  transform-box: view-box;
-}
-
 .flap {
+  transform-box: view-box;
   transform-origin: 50% 0%;
-}
-
-.seal {
-  transform-origin: 50% 56%;
-  transform-box: fill-box;
 }
 
 .riser {
   transform-box: fill-box;
   transform-origin: center bottom;
-  transform: translateY(38%);
-  opacity: 0;
+  transform: translateY(47%);
 }
 
-.envelope-wrap.is-opening .seal {
-  animation: seal-release 900ms cubic-bezier(0.33, 0.1, 0.25, 1) forwards;
+.envelope-wrap.is-opening .closure {
+  animation: closure-fade 1200ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .envelope-wrap.is-opening .flap {
-  animation: flap-open 1200ms 850ms cubic-bezier(0.42, 0.02, 0.18, 1) forwards;
+  animation: flap-open 1200ms 750ms cubic-bezier(0.42, 0.02, 0.18, 1) forwards;
 }
 
 .envelope-wrap.is-opening .riser {
-  animation: card-rise 1450ms 1650ms cubic-bezier(0.16, 0.78, 0.22, 1) forwards;
+  animation: card-rise 1900ms 1300ms cubic-bezier(0.22, 0.15, 0.2, 1) forwards;
 }
 
-@keyframes seal-release {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-8px) scale(0.98);
+@keyframes closure-fade {
+  0%,
+  22% {
     opacity: 1;
   }
   100% {
-    transform: translateY(-26px) scale(0.9);
     opacity: 0;
   }
 }
@@ -220,16 +208,11 @@ h1:focus-visible {
 }
 
 @keyframes card-rise {
-  0% {
-    transform: translateY(38%);
-    opacity: 0;
+  from {
+    transform: translateY(47%);
   }
-  14% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-62%);
-    opacity: 1;
+  to {
+    transform: translateY(0);
   }
 }
 
@@ -255,6 +238,20 @@ h1:focus-visible {
   font: inherit;
   text-align: center;
   cursor: pointer;
+  overflow: visible;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.envelope-open:focus,
+.envelope-open:focus-visible {
+  outline: none;
+}
+
+.envelope-open:focus-visible .open-cue {
+  outline: 2px solid var(--sage);
+  outline-offset: 5px;
+  border-radius: 2px;
 }
 
 .open-cue {
