@@ -3,7 +3,7 @@ import { act } from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
-import App from './App.tsx'
+import App, { OPEN_MS } from './App.tsx'
 import { eventConfig } from './config/event.ts'
 import { setReducedMotion } from './test/matchMedia.ts'
 
@@ -44,21 +44,56 @@ describe('envelope gate', () => {
     expect(screen.queryByRole('button', { name: eventConfig.gate.openLabel })).not.toBeInTheDocument()
   })
 
-  it('holds the invitation back until the short open motion finishes', async () => {
+  it('holds the invitation back until the layered open motion finishes', async () => {
     vi.useFakeTimers()
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
-    expect(document.querySelector('.envelope.is-opening')).not.toBeNull()
+    expect(document.querySelector('.envelope-wrap.is-opening .riser')).not.toBeNull()
+    expect(document.querySelector('.flap')).not.toBeNull()
+    expect(document.querySelector('.pocket')).not.toBeNull()
     expect(screen.queryByText(eventConfig.reception.note)).not.toBeInTheDocument()
     await act(async () => {
-      await vi.advanceTimersByTimeAsync(719)
+      await vi.advanceTimersByTimeAsync(OPEN_MS - 1)
     })
     expect(screen.queryByText(eventConfig.reception.note)).not.toBeInTheDocument()
+    expect(document.querySelector('.envelope')).not.toBeNull()
     await act(async () => {
       await vi.advanceTimersByTimeAsync(1)
     })
     expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
+    expect(document.querySelector('.envelope')).toBeNull()
     expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
+  })
+
+  it('lets skip reveal the invitation during the open motion', async () => {
+    vi.useFakeTimers()
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(500)
+    })
+    fireEvent.click(screen.getByRole('button', { name: eventConfig.gate.skipLabel }))
+    expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
+    expect(document.querySelector('.envelope')).toBeNull()
+    expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
+  })
+
+  it('ignores a second open click while the envelope is already opening', async () => {
+    vi.useFakeTimers()
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play').mockImplementation(function playNow(this: HTMLMediaElement) {
+      this.dispatchEvent(new Event('play'))
+      return Promise.resolve()
+    })
+    render(<App />)
+    const open = screen.getByRole('button', { name: eventConfig.gate.openLabel })
+    fireEvent.click(open)
+    fireEvent.click(open)
+    expect(play).toHaveBeenCalledTimes(1)
+    expect(document.querySelectorAll('.envelope-wrap.is-opening')).toHaveLength(1)
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(OPEN_MS)
+    })
+    expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
   })
 })
 
@@ -128,7 +163,7 @@ describe('music', () => {
     render(<App />)
     await user.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
     expect(screen.getByRole('button', { name: 'Play music' })).toHaveAttribute('aria-pressed', 'false')
-    expect(document.querySelector('.envelope.is-opening, .invitation')).not.toBeNull()
+    expect(document.querySelector('.envelope-wrap.is-opening, .invitation')).not.toBeNull()
   })
 
   it('survives a missing audio file and can be used from the keyboard', async () => {
