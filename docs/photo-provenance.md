@@ -12,4 +12,4 @@ The current Pexels license page, https://www.pexels.com/license/, says photos on
 
 The site images are cropped, metadata-stripped AVIF and WebP files generated from those downloads. They are not hotlinked.
 
-Fonts are self-hosted subsets of the SIL Open Font License 1.1 files from the Google Fonts `ofl` directories: Noto Serif (copyright 2022 The Noto Project Authors) and Source Sans 3 (copyright 2010–2020 Adobe, reserved name Source). The license texts are in `licenses/fonts/`.
+Fonts are self-hosted subsets of the SIL Open Font License 1.1 files from the Google Fonts `ofl` directories: Bodoni Moda, Cormorant Garamond, and Great Vibes. The license texts are in `licenses/fonts/`.

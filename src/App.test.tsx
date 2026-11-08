@@ -29,7 +29,10 @@ describe('envelope gate', () => {
     expect(Number(clip?.getAttribute('y')) + Number(clip?.getAttribute('height'))).toBeLessThanOrEqual(1240)
     expect(open.querySelector('.riser')?.parentElement?.getAttribute('clip-path')).toBe('url(#sheet-clip)')
     expect(open).toHaveTextContent('Philip Pavilion')
-    expect(open).toHaveTextContent('Ramamangalam, Ernakulam')
+    expect(screen.getByText('Please join us to celebrate')).toBeInTheDocument()
+    expect(screen.getByText('Monday · 28 December 2026')).toBeInTheDocument()
+    expect(screen.getByText('The venue')).toBeInTheDocument()
+    expect(screen.getAllByText('Ramamangalam, Ernakulam').length).toBeGreaterThan(0)
     expect(open).not.toHaveTextContent('IST')
     expect(open).toHaveTextContent(eventConfig.ceremony.timeDisplay)
     expect(open).toHaveTextContent('AC hall')
@@ -142,6 +145,9 @@ describe('music', () => {
     expect(css).toMatch(/\.envelope-open:focus,\s*\.envelope-open:focus-visible \{\s*outline: none;/)
     expect(css).toMatch(/\.envelope-open:focus-visible \.open-cue/)
     expect(css).toContain('closure-fade')
+    expect(css).toContain('font-family: "Bodoni Moda"')
+    expect(css).toContain('font-family: "Cormorant Garamond"')
+    expect(css).toContain('font-family: "Great Vibes"')
     expect(toggle.querySelector('.music-mark path')?.getAttribute('d')).toBe(
       'M9 17.5a2.5 2.5 0 1 1-2-2.45V6.2l10-2v9.35a2.5 2.5 0 1 1-2-2.45V7.1l-6 1.2v9.2z',
     )

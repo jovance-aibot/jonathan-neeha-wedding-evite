@@ -46,7 +46,10 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
         <footer className="close">
           <p className="close-lead">We would love to celebrate with you</p>
           <p className="see">See you there</p>
-          <p className="sign">Jonathan &amp; Neeha</p>
+          <p className="sign">
+            {config.couple.partnerA.display.split(' ')[0]} <span className="amp">&amp;</span>{' '}
+            {config.couple.partnerB.display.split(' ')[0]}
+          </p>
         </footer>
       </article>
     </main>

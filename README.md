@@ -65,4 +65,4 @@ No street address, contact details, dress code, parents, story, or extra events 
 - oxlint 1.92.0
 - Puppeteer core 25.16.0, used only to capture local screenshots of the offline file
 
-The opened page uses self-hosted Noto Serif and Source Sans 3, subset under the SIL Open Font License. Those license texts are in `licenses/fonts/`. The envelope artwork stays in the original system serif. Dependency licenses stay recorded in `package-lock.json`.
+The page uses self-hosted Bodoni Moda, Cormorant Garamond, and Great Vibes, subset under the SIL Open Font License. Those license texts are in `licenses/fonts/`. Dependency licenses stay recorded in `package-lock.json`.
