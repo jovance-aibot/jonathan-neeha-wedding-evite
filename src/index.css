@@ -8,21 +8,24 @@
 
 :root {
   color-scheme: light;
-  --cloth: #efd3c4;
-  --cloth-deep: #e4c0ad;
-  --paper: #fbf6ee;
-  --paper-2: #fffdf9;
-  --shade: #f3eadf;
-  --peach: #f0cbb8;
-  --flap: #e7bba6;
-  --ink: #2a2420;
-  --soft: #4a403a;
-  --sage: #3e5144;
-  --line: rgba(62, 81, 68, 0.32);
-  --focus: #1f3a2c;
+  --cloth: #eaf0e6;
+  --cloth-deep: #dfe9dc;
+  --mist: #f4f7f1;
+  --paper: #f8f6ef;
+  --paper-2: #f8f6ef;
+  --shade: #eaf0e6;
+  --peach: #dfe9dc;
+  --flap: #86a781;
+  --ink: #233a2e;
+  --soft: #4a5f51;
+  --sage: #4a5f51;
+  --label: #6e6034;
+  --amp: #8a7341;
+  --line: rgba(35, 58, 46, 0.22);
+  --focus: #233a2e;
   --serif: "Iowan Old Style", Palatino, "Palatino Linotype", "Liberation Serif", "DejaVu Serif", Georgia, "Times New Roman", serif;
   --sans: "Segoe UI", "Liberation Sans", "DejaVu Sans", system-ui, sans-serif;
-  --shadow: 0 18px 46px rgba(90, 48, 28, 0.14);
+  --shadow: 0 18px 46px rgba(35, 58, 46, 0.12);
 }
 
 *,
@@ -41,9 +44,7 @@ body {
   min-height: 100dvh;
   color: var(--ink);
   background-color: var(--cloth);
-  background-image:
-    radial-gradient(ellipse 90% 48% at 50% -12%, #f8e6dc, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 100% 100%, #e8bfae, transparent 70%);
+  background-image: linear-gradient(180deg, var(--mist) 0%, var(--cloth) 48%, var(--cloth-deep) 100%);
   font-family: "Marcellus", var(--serif);
   font-size: 1.0625rem;
   font-weight: 400;
@@ -98,7 +99,7 @@ h1:focus-visible {
 }
 
 ::selection {
-  background: #e7c3b0;
+  background: #dfe9dc;
   color: var(--ink);
 }
 
@@ -135,7 +136,7 @@ h1:focus-visible {
   border-radius: 18px;
   background: var(--paper);
   color: var(--ink);
-  box-shadow: 0 8px 22px rgba(90, 48, 28, 0.16);
+  box-shadow: 0 8px 22px rgba(35, 58, 46, 0.16);
   cursor: pointer;
 }
 
@@ -174,7 +175,7 @@ h1:focus-visible {
   width: 100%;
   height: auto;
   overflow: visible;
-  filter: drop-shadow(0 18px 28px rgba(63, 30, 43, 0.28));
+  filter: drop-shadow(0 18px 28px rgba(35, 58, 46, 0.22));
 }
 
 .flap {
@@ -295,7 +296,7 @@ h1:focus-visible {
 .gate-kicker {
   margin: 0;
   font-size: 0.72rem;
-  color: #6d3142;
+  color: var(--label);
 }
 
 .gate-names {
@@ -315,7 +316,7 @@ h1:focus-visible {
   font-weight: 400;
   font-size: 1.3em;
   line-height: 1;
-  color: #9a7040;
+  color: var(--amp);
 }
 
 .gate-date {
@@ -354,14 +355,14 @@ h1:focus-visible {
   content: "";
   height: 1px;
   flex: 1;
-  background: rgba(109, 49, 66, 0.4);
+  background: #a8925e;
 }
 
 .gate-divider span {
   width: 0.38rem;
   height: 0.38rem;
   transform: rotate(45deg);
-  background: #6d3142;
+  background: #a8925e;
 }
 
 .gate-venue {
@@ -418,7 +419,7 @@ h1:focus-visible {
 
 .and {
   margin: 0.2rem 0;
-  color: #9a7040;
+  color: var(--amp);
   font-style: normal;
   font-weight: 400;
   font-size: 1.3em;
@@ -555,7 +556,7 @@ a.button {
 }
 
 .amp {
-  color: #9a7040;
+  color: var(--amp);
   font-size: 1.3em;
   font-style: normal;
   font-weight: 400;
@@ -783,8 +784,8 @@ figcaption {
 .alert {
   margin: 0.8rem 0 0;
   padding: 0.75rem 0.9rem;
-  border: 1px solid #8d4e38;
-  background: #f8ece4;
+  border: 1px solid #4a5f51;
+  background: #eaf0e6;
   color: var(--ink);
 }
 
@@ -835,8 +836,8 @@ figcaption {
 }
 
 .story {
-  background: #f6f0e8;
-  color: #2a2420;
+  background: transparent;
+  color: var(--ink);
   min-height: 100vh;
   min-height: 100dvh;
   padding: 2.4rem 1.1rem calc(6.5rem + env(safe-area-inset-bottom, 0px));
@@ -884,7 +885,7 @@ figcaption {
   font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #6d3142;
+  color: var(--label);
 }
 
 .story h1 {
@@ -902,7 +903,7 @@ figcaption {
 
 .story h1 .and {
   margin: 0.08rem 0;
-  color: #9a7040;
+  color: var(--amp);
   font-family: "Marcellus", var(--serif);
   font-size: 1.3em;
   font-style: normal;
@@ -931,7 +932,7 @@ figcaption {
   font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #6d3142;
+  color: var(--label);
 }
 
 .story .count-grid {
@@ -976,7 +977,7 @@ figcaption {
   display: block;
   width: 100%;
   height: auto;
-  background: #e7d7cb;
+  background: #eaf0e6;
 }
 
 .times {
@@ -1029,9 +1030,9 @@ figcaption {
 .story .button {
   width: auto;
   min-width: 11rem;
-  border-color: #6d3142;
-  background: #6d3142;
-  color: #f6f0e8;
+  border-color: #2f5040;
+  background: #2f5040;
+  color: #f7f4ea;
   font-weight: 400;
 }
 
@@ -1039,7 +1040,7 @@ figcaption {
   min-height: 44px;
   border: 0;
   background: transparent;
-  color: #6d3142;
+  color: var(--label);
   text-decoration: underline;
   text-underline-offset: 0.22em;
 }
@@ -1056,7 +1057,7 @@ figcaption {
 .stock-note {
   margin-top: 0.2rem;
   margin-bottom: 1.6rem;
-  color: #4a403a;
+  color: var(--soft);
 }
 
 .close {
@@ -1074,7 +1075,7 @@ figcaption {
   font-weight: 400;
   font-style: normal;
   line-height: 1.2;
-  color: #6d3142;
+  color: var(--ink);
 }
 
 .sign {
@@ -1090,16 +1091,16 @@ figcaption {
   position: relative;
   margin: 0;
   padding: 0.45rem;
-  background: #f7efe6;
-  border: 1px solid rgba(158, 122, 74, 0.45);
-  box-shadow: 0 14px 32px rgba(90, 48, 28, 0.12);
+  background: #f8f6ef;
+  border: 1px solid rgba(168, 146, 94, 0.55);
+  box-shadow: 0 14px 32px rgba(35, 58, 46, 0.12);
 }
 
 .portrait img {
   display: block;
   width: 100%;
   height: auto;
-  background: #e7d7cb;
+  background: #eaf0e6;
 }
 
 .portrait-media {
@@ -1114,10 +1115,10 @@ figcaption {
   height: 35%;
   background: linear-gradient(
     to bottom,
-    rgba(28, 16, 14, 0) 0%,
-    rgba(28, 16, 14, 0.62) 42%,
-    rgba(28, 16, 14, 0.62) 58%,
-    rgba(28, 16, 14, 0) 100%
+    rgba(35, 58, 46, 0) 0%,
+    rgba(35, 58, 46, 0.62) 42%,
+    rgba(35, 58, 46, 0.62) 58%,
+    rgba(35, 58, 46, 0) 100%
   );
   pointer-events: none;
 }
@@ -1211,7 +1212,7 @@ figcaption {
     align-self: end;
     transform: none;
     text-align: left;
-    color: #2a2420;
+    color: var(--ink);
   }
 
   .hero-title .kicker,
@@ -1220,13 +1221,13 @@ figcaption {
   }
 
   .hero-title .kicker {
-    color: #6d3142;
+    color: var(--label);
     font-size: 0.72rem;
     letter-spacing: 0.18em;
   }
 
   .hero-title h1 {
-    color: #2a2420;
+    color: var(--ink);
     font-size: clamp(2.15rem, 4vw, 3.2rem);
   }
 
@@ -1239,7 +1240,7 @@ figcaption {
   }
 
   .hero-title h1 .and.full {
-    color: #9a7040;
+    color: var(--amp);
   }
 
   .hero .date {
