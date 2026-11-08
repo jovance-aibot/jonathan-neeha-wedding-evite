@@ -1,8 +1,8 @@
 # Photograph provenance
 
-Verified 8 November 2026 before this layout was published. Only the three photographs from layout A are used.
+The invitation publishes one photograph of Jonathan Ve Vance and Neeha Shaitus, supplied by them for this page and shown twice. The original file is 1066 by 1600 pixels and 297,572 bytes, SHA-256 `f7f2c0b942e2930d2636582ebb416d23542a9d09562c65fdd4925e6d410dc6c9`. The public JPEG is that same frame with the EXIF and Photoshop segments removed, so the picture is not recompressed. A WebP of the same frame and a 640-pixel-wide WebP are the delivery copies. The picture ends around mid-leg. Earlier stock photographs are no longer on the page.
 
-The current Pexels license page, https://www.pexels.com/license/, says photos on Pexels may be used free on a website, including invitations, and may be modified. Attribution is not required. Unaltered copies may not be sold as prints, the pictures may not imply endorsement, and they may not be redistributed on another stock platform. No model or property release was found on the source pages, so none is claimed. The invitation page shows the couple and rings photographs only. The evening setting photograph is not published on the page.
+The notes below record the stock files that were used before this photograph replaced them.
 
 | File | Pexels photo | Source page | Name listed on that page | Match |
 |---|---|---|---|---|
@@ -10,6 +10,6 @@ The current Pexels license page, https://www.pexels.com/license/, says photos on
 | Rings | 18005574 | https://www.pexels.com/photo/close-up-of-bride-and-groom-touching-hands-and-showing-their-wedding-rings-18005574/ | Владимир Высоцкий | Same download URL pattern was byte-identical to the supplied file. SHA-256 `516eb466f8b4648140dd5ee668deade7647d457dab6718017c77ee15b5a834c8`. |
 | Evening setting | 37331161 | https://www.pexels.com/photo/elegant-outdoor-wedding-reception-setup-at-night-37331161/ | The Visionary Vows | The current CDN file and the supplied file are the same picture. A scaled pixel comparison was identical. The file hashes differ because the supplied JPEG metadata is not the same. The CDN file's embedded rights field says `@rbmbinnyproductions` and includes a phone number. That string was not copied into the site images, and it is not treated as a verified author name. The name used here is the one printed on the Pexels page. |
 
-The site images are cropped, metadata-stripped AVIF and WebP files generated from those downloads. They are not hotlinked.
+Those stock downloads are no longer published. The live page uses the couple's own photograph instead.
 
 The type is a self-hosted subset of Marcellus Regular (weight 400 only) from the Google Fonts `ofl/marcellus` directory, licensed under the SIL Open Font License 1.1. The license text is in `licenses/fonts/OFL-Marcellus.txt`.

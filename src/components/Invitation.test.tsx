@@ -65,11 +65,16 @@ describe('invitation details', () => {
     render(<Invitation now={new Date('2026-11-07T12:00:00+05:30')} />)
     const images = screen.getAllByRole('img')
     expect(images.map((image) => image.getAttribute('alt'))).toEqual([
-      'A couple seen from behind, walking at sunset.',
-      'Hands with wedding rings.',
+      'Jonathan Ve Vance and Neeha Shaitus standing together outdoors, shown from head to mid-leg.',
+      'The same photograph of Jonathan Ve Vance and Neeha Shaitus.',
     ])
+    expect(images[0].getAttribute('src')).toBe(images[1].getAttribute('src'))
+    expect(images[0]).toHaveAttribute('width', '1066')
+    expect(images[0]).toHaveAttribute('height', '1600')
     expect(images[0]).toHaveAttribute('loading', 'eager')
     expect(images[1]).toHaveAttribute('loading', 'lazy')
+    expect(screen.getByRole('heading', { name: 'Jonathan Ve Vance and Neeha Shaitus' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Until the ceremony' })).toBeInTheDocument()
     expect(screen.getByText('See you there')).toBeInTheDocument()
     expect(document.querySelector('.sign')?.textContent?.replace(/\s+/g, ' ').trim()).toBe('Jonathan & Neeha')
     expect(screen.getByText('Philips Pavilion')).toBeInTheDocument()

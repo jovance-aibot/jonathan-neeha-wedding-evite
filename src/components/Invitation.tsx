@@ -39,43 +39,45 @@ export function DateParts({ display }: { display: string }) {
   )
 }
 
+const portraitAlt = 'Jonathan Ve Vance and Neeha Shaitus standing together outdoors, shown from head to mid-leg.'
+
 export function Invitation({ config = defaultConfig, now, headingRef }: InvitationProps) {
   return (
     <main className="story">
       <article className="story-inner">
-        <header className="story-open">
-          <p className="kicker">Please join us to celebrate</p>
-          <CoupleHeading config={config} headingRef={headingRef} focusable />
+        <header className="hero">
+          <div className="hero-photo">
+            <Portrait eager overlay alt={portraitAlt} />
+            <div className="hero-title">
+              <p className="kicker">Please join us to celebrate</p>
+              <CoupleHeading config={config} headingRef={headingRef} focusable />
+            </div>
+          </div>
           <p className="date">
             <DateParts display={config.when.display} />
           </p>
         </header>
         <CountdownBlock config={config} now={now} />
-        <PhotoFigure
-          name="couple"
-          width={1200}
-          height={800}
-          eager
-          alt="A couple seen from behind, walking at sunset."
-        />
-        <section className="times" aria-label="Schedule">
-          <div className="time-block">
-            <h2>{config.ceremony.title}</h2>
-            <p className="when">
-              <TimeRange value={config.ceremony.timeDisplay} />
-            </p>
-            <p className="sub">{config.ceremony.room}</p>
-          </div>
-          <div className="time-block">
-            <h2>{config.reception.title}</h2>
-            <p className="when">
-              <TimeRange value={config.reception.timeDisplay} />
-            </p>
-            <p className="sub">Outdoor space</p>
-          </div>
-        </section>
-        <PhotoFigure name="rings" width={1200} height={800} alt="Hands with wedding rings." />
-        <VenueBlock config={config} />
+        <div className="day">
+          <section className="times" aria-label="Schedule">
+            <div className="time-block">
+              <h2>{config.ceremony.title}</h2>
+              <p className="when">
+                <TimeRange value={config.ceremony.timeDisplay} />
+              </p>
+              <p className="sub">{config.ceremony.room}</p>
+            </div>
+            <div className="time-block">
+              <h2>{config.reception.title}</h2>
+              <p className="when">
+                <TimeRange value={config.reception.timeDisplay} />
+              </p>
+              <p className="sub">Outdoor space</p>
+            </div>
+          </section>
+          <Portrait className="portrait-again" alt="The same photograph of Jonathan Ve Vance and Neeha Shaitus." />
+          <VenueBlock config={config} />
+        </div>
         <footer className="close">
           <p className="close-lead">We would love to celebrate with you</p>
           <p className="see">See you there</p>
@@ -89,34 +91,35 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
   )
 }
 
-function PhotoFigure({
-  name,
-  width,
-  height,
+function Portrait({
   alt,
   eager = false,
+  overlay = false,
+  className = '',
 }: {
-  name: string
-  width: number
-  height: number
   alt: string
   eager?: boolean
+  overlay?: boolean
+  className?: string
 }) {
-  const src = (kind: 'avif' | 'webp', size: 720 | 1200) => `${base}photos/${name}-${size}.${kind}`
+  const full = `${base}photos/portrait-1066.webp`
+  const small = `${base}photos/portrait-640.webp`
   return (
-    <figure className="photo">
-      <picture>
-        <source type="image/avif" srcSet={`${src('avif', 720)} 720w, ${src('avif', 1200)} 1200w`} sizes="(min-width: 800px) 40rem, 100vw" />
-        <source type="image/webp" srcSet={`${src('webp', 720)} 720w, ${src('webp', 1200)} 1200w`} sizes="(min-width: 800px) 40rem, 100vw" />
-        <img
-          src={src('webp', 1200)}
-          width={width}
-          height={height}
-          alt={alt}
-          loading={eager ? 'eager' : 'lazy'}
-          decoding="async"
-        />
-      </picture>
+    <figure className={className ? `portrait ${className}` : 'portrait'}>
+      <div className="portrait-media">
+        <picture>
+          <source type="image/webp" srcSet={`${small} 640w, ${full} 1066w`} sizes="(min-width: 800px) 28rem, 92vw" />
+          <img
+            src={`${base}photos/portrait-1066.jpg`}
+            width={1066}
+            height={1600}
+            alt={alt}
+            loading={eager ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        </picture>
+        {overlay ? <div className="hero-shade" aria-hidden="true" /> : null}
+      </div>
     </figure>
   )
 }
