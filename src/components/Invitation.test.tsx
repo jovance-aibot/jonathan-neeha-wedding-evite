@@ -89,7 +89,11 @@ describe('invitation details', () => {
     expect(document.body.textContent).not.toMatch(
       /two are better|ecclesiastes|music is omitted|draft preview|end time is not set|yet to get|still unsettled|to be confirmed|placeholder|stock/i,
     )
-    const invite = screen.getByText('We are happy to invite you to our wedding.')
+    const invite = screen.getByText(
+      'Together with their families, Jonathan and Neeha joyfully invite you to celebrate their wedding.',
+    )
+    const verse = screen.getByText('I have found the one whom my soul loves.')
+    expect(screen.getByText('Song of Solomon 3:4')).toBeInTheDocument()
     const date = document.querySelector('.date')!
     const countdown = screen.getByRole('heading', { name: 'Until the ceremony' })
     const following = Node.DOCUMENT_POSITION_FOLLOWING
@@ -98,8 +102,11 @@ describe('invitation details', () => {
     const close = screen.getByText('See you there')
     expect(screen.getByRole('button', { name: 'Scroll' })).toBeInTheDocument()
     expect(images[0].compareDocumentPosition(invite) & following).toBeTruthy()
-    expect(invite.compareDocumentPosition(date) & following).toBeTruthy()
-    expect(date.compareDocumentPosition(countdown) & following).toBeTruthy()
+    expect(invite.compareDocumentPosition(verse) & following).toBeTruthy()
+    expect(verse.compareDocumentPosition(date) & following).toBeTruthy()
+    expect(date.compareDocumentPosition(ceremony) & following).toBeTruthy()
+    expect(venue.compareDocumentPosition(countdown) & following).toBeTruthy()
+    expect(countdown.compareDocumentPosition(close) & following).toBeTruthy()
     expect(images[0].compareDocumentPosition(ceremony) & following).toBeTruthy()
     expect(ceremony.compareDocumentPosition(images[1]) & following).toBeTruthy()
     expect(images[1].compareDocumentPosition(venue) & following).toBeTruthy()
