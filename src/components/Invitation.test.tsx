@@ -87,15 +87,35 @@ describe('invitation details', () => {
     const directions = screen.getByRole('link', { name: eventConfig.map.directionsLabel })
     expect(directions).toHaveAttribute('href', 'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic')
 
-    await user.click(screen.getByRole('button', { name: eventConfig.map.showLabel }))
+    const toggle = screen.getByRole('button', { name: eventConfig.map.showLabel })
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+
+    await user.click(toggle)
 
     const frame = document.querySelector('iframe')
+    const hide = screen.getByRole('button', { name: eventConfig.map.hideLabel })
     expect(frame).not.toBeNull()
     expect(frame).toHaveAttribute('src', eventConfig.map.embedUrl)
     expect(frame?.getAttribute('src')).toContain('Philips+pavilion,+Memury')
     expect(frame?.getAttribute('allow') ?? '').not.toMatch(/geolocation/i)
-    expect(screen.getByRole('link', { name: eventConfig.map.directionsLabel })).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: eventConfig.map.showLabel })).not.toBeInTheDocument()
+    expect(hide).toHaveAttribute('aria-expanded', 'true')
+    expect(hide).toHaveAttribute('aria-controls', 'venue-map')
+    expect(hide).toHaveFocus()
+    expect(directions).toHaveAttribute('href', eventConfig.map.directionsUrl)
+
+    await user.click(hide)
+
+    expect(document.querySelector('iframe')).toBeNull()
+    const showAgain = screen.getByRole('button', { name: eventConfig.map.showLabel })
+    expect(showAgain).toHaveAttribute('aria-expanded', 'false')
+    expect(showAgain).toHaveFocus()
+    expect(directions).toHaveAttribute('href', eventConfig.map.directionsUrl)
+
+    await user.click(showAgain)
+
+    expect(document.querySelector('iframe')).toHaveAttribute('src', eventConfig.map.embedUrl)
+    expect(screen.getByRole('button', { name: eventConfig.map.hideLabel })).toHaveFocus()
+    expect(directions).toHaveAttribute('href', 'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic')
     expect(fetchSpy).not.toHaveBeenCalled()
   })
 

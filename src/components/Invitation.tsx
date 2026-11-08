@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Ref } from 'react'
 import { eventConfig as defaultConfig, type EventConfig } from '../config/event.ts'
 import { Sprig, Vine } from './art.tsx'
@@ -114,6 +114,16 @@ function ScheduleBlock({ config }: { config: EventConfig }) {
 function VenueBlock({ config }: { config: EventConfig }) {
   const [calendarError, setCalendarError] = useState<string | null>(null)
   const [mapRequested, setMapRequested] = useState(false)
+  const mapToggleRef = useRef<HTMLButtonElement>(null)
+  const skipMapFocus = useRef(true)
+
+  useEffect(() => {
+    if (skipMapFocus.current) {
+      skipMapFocus.current = false
+      return
+    }
+    mapToggleRef.current?.focus()
+  }, [mapRequested])
 
   function onDownload() {
     try {
@@ -145,14 +155,19 @@ function VenueBlock({ config }: { config: EventConfig }) {
         <button type="button" className="button" onClick={onDownload}>
           {config.calendar.buttonLabel}
         </button>
-        {mapRequested ? null : (
-          <button type="button" className="button button-quiet" onClick={() => setMapRequested(true)}>
-            {config.map.showLabel}
-          </button>
-        )}
+        <button
+          type="button"
+          className="button button-quiet"
+          ref={mapToggleRef}
+          aria-expanded={mapRequested}
+          aria-controls="venue-map"
+          onClick={() => setMapRequested((open) => !open)}
+        >
+          {mapRequested ? config.map.hideLabel : config.map.showLabel}
+        </button>
       </div>
       {mapRequested ? (
-        <div className="map-frame">
+        <div className="map-frame" id="venue-map">
           <iframe title={config.map.title} src={config.map.embedUrl} loading="lazy" />
         </div>
       ) : null}
