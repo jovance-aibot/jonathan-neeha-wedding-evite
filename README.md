@@ -32,6 +32,8 @@ Confirmed facts and wording live in [`src/config/event.ts`](src/config/event.ts)
 
 The ceremony start and the countdown target are the same instant: `2026-12-28T15:30:00+05:30` in `Asia/Kolkata`. After that instant the page says the ceremony time has passed. Less than a second before it, the page says less than a second remains. The page does not offer a calendar file.
 
+Opening the envelope starts “Painted Woods in Autumn” by TheFealdoProject. Skip stays quiet. **Play music** and **Turn music off** stay in the top bar. The recording is part of this invitation only; the page does not offer it as its own download. Source, hash, and licence notes are in [MUSIC.md](MUSIC.md).
+
 ## Confirmed
 
 - Jonathan Ve Vance and Neeha Shaitus

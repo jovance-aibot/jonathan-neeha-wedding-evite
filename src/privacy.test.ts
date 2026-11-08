@@ -50,9 +50,18 @@ describe('privacy boundaries', () => {
     expect(files.length).toBeGreaterThan(5)
     const hits: string[] = []
     for (const file of files) {
+      if (file.endsWith('.mp3')) continue
       const raw = readFileSync(file, 'utf8')
       const text = scrub(raw)
       for (const [label, pattern] of banned) {
+        if (label === 'audio' && file.endsWith('src/App.tsx')) {
+          const tags = raw.match(/<audio\b[\s\S]*?>/g) ?? []
+          if (tags.length !== 1 || tags.some((tag) => /https?:|download/i.test(tag))) {
+            hits.push(`${file}: audio`)
+          }
+          if (/new Audio\b/.test(raw)) hits.push(`${file}: audio constructor`)
+          continue
+        }
         if (pattern.test(text)) hits.push(`${file}: ${label}`)
       }
       const iframes = raw.match(/<iframe\b[^>]*>/gi) ?? []
