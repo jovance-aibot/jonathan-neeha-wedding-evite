@@ -41,8 +41,9 @@ describe('invitation details', () => {
     expect(document.querySelector('a[download]')).toBeNull()
     expect(document.body.textContent).not.toMatch(/\.ics|download ceremony calendar|add to calendar/i)
     expect(createUrl).not.toHaveBeenCalled()
-    expect(screen.getByText(eventConfig.ceremony.timeDisplay)).toBeInTheDocument()
-    expect(screen.getByText(eventConfig.reception.timeDisplay)).toBeInTheDocument()
+    expect(document.querySelectorAll('.when')[0]?.textContent).toBe(eventConfig.ceremony.timeDisplay)
+    expect(document.querySelectorAll('.when')[1]?.textContent).toBe(eventConfig.reception.timeDisplay)
+    expect(document.querySelector('.when .numeral')?.textContent).toBe('3:30')
     expect(screen.getByRole('link', { name: eventConfig.map.directionsLabel })).toHaveAttribute(
       'href',
       eventConfig.map.directionsUrl,
@@ -71,15 +72,17 @@ describe('invitation details', () => {
     expect(images[1]).toHaveAttribute('loading', 'lazy')
     expect(screen.getByText('See you there')).toBeInTheDocument()
     expect(document.querySelector('.sign')?.textContent?.replace(/\s+/g, ' ').trim()).toBe('Jonathan & Neeha')
-    expect(screen.getByText('Philip Pavilion')).toBeInTheDocument()
-    expect(screen.getByText('Outdoors · same venue')).toBeInTheDocument()
-    expect(screen.queryByText('Outdoors at Philip Pavilion.')).not.toBeInTheDocument()
+    expect(screen.getByText('Philips Pavilion')).toBeInTheDocument()
+    expect(screen.getByText('AC hall')).toBeInTheDocument()
+    expect(screen.getByText('Outdoor space')).toBeInTheDocument()
+    expect(screen.queryByText(/Indoors/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/same venue/)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: /rsvp/i })).not.toBeInTheDocument()
     expect(document.body.textContent).not.toMatch(
       /two are better|ecclesiastes|music is omitted|draft preview|end time is not set|yet to get|still unsettled|to be confirmed|placeholder|stock/i,
     )
     const following = Node.DOCUMENT_POSITION_FOLLOWING
-    const ceremony = screen.getByText(eventConfig.ceremony.timeDisplay)
+    const ceremony = document.querySelector('.when')!
     const venue = screen.getByRole('heading', { name: 'Venue' })
     const close = screen.getByText('See you there')
     expect(images[0].compareDocumentPosition(ceremony) & following).toBeTruthy()

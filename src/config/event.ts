@@ -1,7 +1,7 @@
 /**
  * Confirmed facts for this invitation draft.
  * Edit this file to update names, times, and wording.
- * The ceremony and the reception are both at Philip Pavilion.
+ * The ceremony and the reception are both at Philips Pavilion.
  * The displayed locality is Ramamangalam, Ernakulam. The directions link stays the supplied Maps URL.
  * Directions use the supplied Google Maps link. Do not replace that link
  * or invent another pin. The embed address is the no-key map Google
@@ -88,13 +88,13 @@ export const eventConfig = {
   },
   ceremony: {
     title: 'Ceremony',
-    venueName: 'Philip Pavilion',
+    venueName: 'Philips Pavilion',
     locality: 'Ramamangalam, Ernakulam',
     room: 'AC hall',
     startIso: ceremonyStartIso,
     endIso: ceremonyEndIso,
     timeDisplay: '3:30 - 4:30 PM',
-    placeDisplay: 'Philip Pavilion, Ramamangalam, Ernakulam',
+    placeDisplay: 'Philips Pavilion, Ramamangalam, Ernakulam',
     note: 'In the AC hall.',
   },
   reception: {
@@ -102,7 +102,7 @@ export const eventConfig = {
     startIso: receptionStartIso,
     endIso: receptionEndIso,
     timeDisplay: '6:30 - 9:30 PM',
-    placeDisplay: 'Philip Pavilion, outdoors',
+    placeDisplay: 'Philips Pavilion, outdoor space',
   },
   countdown: {
     targetIso: ceremonyStartIso,
@@ -117,12 +117,12 @@ export const eventConfig = {
   },
   copy: {
     invitation: 'You are warmly invited to celebrate their marriage.',
-    supporting: 'The ceremony is in the AC hall. The reception is outdoors at the same venue.',
+    supporting: 'The ceremony is in the AC hall. The reception is in the outdoor space at the same venue.',
     scheduleHeading: 'The day',
   },
   venue: {
     heading: 'Venue',
-    note: 'The ceremony is in the AC hall at Philip Pavilion. The reception is outdoors at the same venue.',
+    note: 'The ceremony is in the AC hall at Philips Pavilion. The reception is in the outdoor space at the same venue.',
   },
   map: {
     directionsLabel: 'Get directions',
