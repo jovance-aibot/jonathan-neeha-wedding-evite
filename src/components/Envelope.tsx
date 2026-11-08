@@ -100,57 +100,57 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                 <g className="riser">
                   <rect x="150" y="320" width="900" height="920" rx="6" fill="#fbf6ee" stroke="#3e5144" strokeOpacity="0.22" />
                   <text x="600" y="408" textAnchor="middle" fontSize="58" fill="#2a2420">
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="700">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {partnerA.initial}
                     </tspan>
-                    <tspan fontFamily="Great Vibes, cursive" fontSize="64">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400" fontSize="75" fill="#9a7040">
                       {' '}
                       &amp;{' '}
                     </tspan>
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="700">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {partnerB.initial}
                     </tspan>
                   </text>
                   <text x="600" y="462" textAnchor="middle" fontSize="22" fill="#2a2420">
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="700">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {partnerA.display}
                     </tspan>
-                    <tspan fontFamily="Great Vibes, cursive" fontSize="28">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400" fontSize="29" fill="#9a7040">
                       {' '}
                       &amp;{' '}
                     </tspan>
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="700">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {partnerB.display}
                     </tspan>
                   </text>
                   <text x="600" y="500" textAnchor="middle" fontSize="22" fill="#4a403a">
-                    <tspan fontFamily="Cormorant Garamond, serif" fontStyle="italic">
+                    <tspan fontFamily="Marcellus, serif" fontStyle="normal">
                       {gateDate?.weekday ?? ''}
                       {', '}
                     </tspan>
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="500">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {gateDate?.day ?? ''}
                     </tspan>
-                    <tspan fontFamily="Cormorant Garamond, serif" fontStyle="italic">
+                    <tspan fontFamily="Marcellus, serif" fontStyle="normal">
                       {' '}
                       {gateDate?.month ?? ''}{' '}
                     </tspan>
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="500">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {gateDate?.year ?? ''}
                     </tspan>
                   </text>
                   <path d="M430 528 H520 M680 528 H770" fill="none" stroke="#3e5144" strokeOpacity="0.4" strokeWidth="1.4" />
                   <path d="M600 520 l7 8 -7 8 -7 -8 Z" fill="#3e5144" opacity="0.5" />
-                  <text x="600" y="572" textAnchor="middle" fontFamily="Bodoni Moda, serif" fontWeight="700" fontSize="28" fill="#2a2420">
+                  <text x="600" y="572" textAnchor="middle" fontFamily="Marcellus, serif" fontWeight="400" fontSize="28" fill="#2a2420">
                     {eventConfig.ceremony.venueName}
                   </text>
                   <text
                     x="600"
                     y="606"
                     textAnchor="middle"
-                    fontFamily="Cormorant Garamond, serif"
+                    fontFamily="Marcellus, serif"
                     fontSize="20"
-                    fontStyle="italic"
+                    fontStyle="normal"
                     fill="#4a403a"
                   >
                     {eventConfig.ceremony.locality}
@@ -159,8 +159,8 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                     x="600"
                     y="658"
                     textAnchor="middle"
-                    fontFamily="Cormorant Garamond, serif"
-                    fontWeight="600"
+                    fontFamily="Marcellus, serif"
+                    fontWeight="400"
                     fontSize="16"
                     letterSpacing="3"
                     fill="#3e5144"
@@ -168,13 +168,13 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                     CEREMONY
                   </text>
                   <text x="600" y="688" textAnchor="middle" fontSize="24" fill="#2a2420">
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="500">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {eventConfig.ceremony.timeDisplay.split(' - ')[0]}
                     </tspan>
-                    <tspan fontFamily="Cormorant Garamond, serif" fontWeight="600">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {' - '}
                     </tspan>
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="500">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {eventConfig.ceremony.timeDisplay.split(' - ')[1]}
                     </tspan>
                   </text>
@@ -182,9 +182,9 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                     x="600"
                     y="716"
                     textAnchor="middle"
-                    fontFamily="Cormorant Garamond, serif"
+                    fontFamily="Marcellus, serif"
                     fontSize="18"
-                    fontStyle="italic"
+                    fontStyle="normal"
                     fill="#4a403a"
                   >
                     {eventConfig.ceremony.room}
@@ -193,8 +193,8 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                     x="600"
                     y="748"
                     textAnchor="middle"
-                    fontFamily="Cormorant Garamond, serif"
-                    fontWeight="600"
+                    fontFamily="Marcellus, serif"
+                    fontWeight="400"
                     fontSize="16"
                     letterSpacing="3"
                     fill="#3e5144"
@@ -202,13 +202,13 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                     RECEPTION
                   </text>
                   <text x="600" y="776" textAnchor="middle" fontSize="24" fill="#2a2420">
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="500">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {eventConfig.reception.timeDisplay.split(' - ')[0]}
                     </tspan>
-                    <tspan fontFamily="Cormorant Garamond, serif" fontWeight="600">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {' - '}
                     </tspan>
-                    <tspan fontFamily="Bodoni Moda, serif" fontWeight="500">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {eventConfig.reception.timeDisplay.split(' - ')[1]}
                     </tspan>
                   </text>
@@ -216,9 +216,9 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                     x="600"
                     y="802"
                     textAnchor="middle"
-                    fontFamily="Cormorant Garamond, serif"
+                    fontFamily="Marcellus, serif"
                     fontSize="18"
-                    fontStyle="italic"
+                    fontStyle="normal"
                     fill="#4a403a"
                   >
                     Outdoor space
@@ -251,7 +251,7 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                   <path d={waxPath} fill="url(#wine-wax)" stroke="#d7bb8b" strokeWidth="2" />
                   <circle cx="600" cy="993" r="73" fill="none" stroke="#73513c" strokeOpacity="0.48" strokeWidth="2" />
                   <circle cx="600" cy="993" r="68" fill="none" stroke="#73513c" strokeOpacity="0.24" />
-                  <text x="600" y="1006" textAnchor="middle" fontFamily="Bodoni Moda, serif" fontWeight="700" fontSize="36" fill="#73513c">
+                  <text x="600" y="1006" textAnchor="middle" fontFamily="Marcellus, serif" fontWeight="400" fontSize="36" fill="#73513c">
                     {monogram}
                   </text>
                 </g>
