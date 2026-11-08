@@ -6,7 +6,7 @@ import { usePrefersReducedMotion } from './lib/motion.ts'
 
 type Phase = 'closed' | 'opening' | 'invitation'
 
-export const OPEN_MS = 2100
+export const OPEN_MS = 4000
 const MUSIC_VOLUME = 0.35
 
 export default function App() {
