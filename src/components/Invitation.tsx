@@ -39,8 +39,8 @@ export function DateParts({ display }: { display: string }) {
   )
 }
 
-const heroAlt = 'Neeha Shaitus in a green dress and Jonathan Ve Vance in a pink striped shirt, standing in a garden.'
-const secondAlt = 'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing together outdoors, shown from head to mid-leg.'
+const heroAlt = 'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing together outdoors, shown from head to mid-leg.'
+const secondAlt = 'Neeha Shaitus in a green dress and Jonathan Ve Vance in a pink striped shirt, standing in a garden.'
 
 export function Invitation({ config = defaultConfig, now, headingRef }: InvitationProps) {
   return (
@@ -48,7 +48,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
       <article className="story-inner">
         <header className="hero">
           <div className="hero-photo">
-            <Portrait eager overlay variant="hero" alt={heroAlt} />
+            <Portrait eager overlay variant="blue" alt={heroAlt} />
             <div className="hero-title">
               <p className="kicker join-line">Please join us to celebrate</p>
               <CoupleHeading config={config} headingRef={headingRef} focusable />
@@ -76,7 +76,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
               <p className="sub">Outdoor space</p>
             </div>
           </section>
-          <Portrait className="portrait-again" alt={secondAlt} />
+          <Portrait className="portrait-again" variant="garden" alt={secondAlt} />
           <VenueBlock config={config} />
         </div>
         <footer className="close">
@@ -97,15 +97,15 @@ function Portrait({
   eager = false,
   overlay = false,
   className = '',
-  variant = 'second',
+  variant = 'blue',
 }: {
   alt: string
   eager?: boolean
   overlay?: boolean
   className?: string
-  variant?: 'hero' | 'second'
+  variant?: 'blue' | 'garden'
 }) {
-  const file = variant === 'hero'
+  const file = variant === 'garden'
     ? { small: 'hero-720.webp', smallW: 720, full: 'hero-1200.webp', fullW: 1200, jpg: 'hero-1200.jpg', w: 1200, h: 1600 }
     : { small: 'portrait-640.webp', smallW: 640, full: 'portrait-1066.webp', fullW: 1066, jpg: 'portrait-1066.jpg', w: 1066, h: 1600 }
   return (
