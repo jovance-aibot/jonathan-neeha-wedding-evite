@@ -18,7 +18,7 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
     <main className="gate">
       <div className="gate-body">
         <header className="gate-intro">
-          <p className="gate-kicker">Please join us to celebrate</p>
+          <p className="gate-kicker join-line">Please join us to celebrate</p>
           <p className="gate-names">
             {partnerA.display.split(' ')[0]} <span className="amp">&amp;</span> {partnerB.display.split(' ')[0]}
           </p>
