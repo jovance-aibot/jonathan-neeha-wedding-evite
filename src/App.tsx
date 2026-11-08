@@ -122,7 +122,7 @@ export default function App() {
 
 function MusicMark({ on }: { on: boolean }) {
   return (
-    <svg className="music-mark" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+    <svg className="music-mark" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
       <path
         fill="currentColor"
         d="M9 17.5a2.5 2.5 0 1 1-2-2.45V6.2l10-2v9.35a2.5 2.5 0 1 1-2-2.45V7.1l-6 1.2v9.2z"
