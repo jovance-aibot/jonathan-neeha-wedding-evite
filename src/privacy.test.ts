@@ -9,17 +9,20 @@ const svgNamespace = 'http://www.w3.org/2000/svg'
 function filesIn(path: string): string[] {
   const stat = statSync(path, { throwIfNoEntry: false })
   if (!stat) return []
-  if (stat.isFile()) {
-    if (path.endsWith('.test.ts') || path.endsWith('.test.tsx')) return []
-    return [path]
-  }
+    if (stat.isFile()) {
+      if (path.endsWith('.test.ts') || path.endsWith('.test.tsx') || binary.test(path)) return []
+      return [path]
+    }
   return readdirSync(path).flatMap((entry) => filesIn(join(path, entry)))
 }
 
 const allowedUrls = [
   'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic',
   'https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sWGW2%2B4C+Philips+pavilion,+Memury,+Keralam+686663',
+  'https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/og.jpg',
 ]
+
+const binary = /\.(avif|webp|jpe?g|png|woff2|mp3)$/i
 
 const banned: Array<[string, RegExp]> = [
   ['fetch', /fetch\s*\(/],

@@ -36,7 +36,7 @@ describe('envelope gate', () => {
     expect(open).toHaveTextContent('Outdoors')
     expect(open).not.toHaveTextContent('Two are better than one')
     expect(open).not.toHaveTextContent('Ecclesiastes')
-    expect(screen.getByText(/Draft preview — not final/)).toBeInTheDocument()
+    expect(screen.queryByText(/Draft preview/)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /skip/i })).not.toBeInTheDocument()
     expect(screen.queryByText(eventConfig.reception.note)).not.toBeInTheDocument()

@@ -92,4 +92,32 @@ describe('invitation details', () => {
     expect(fetchSpy).not.toHaveBeenCalled()
   })
 
+  it('follows the photo layout without a verse, RSVP, or empty photo frames', () => {
+    render(<Invitation now={new Date('2026-11-07T12:00:00+05:30')} />)
+    const images = screen.getAllByRole('img')
+    expect(images.map((image) => image.getAttribute('alt'))).toEqual([
+      'Stock photograph of a couple seen from behind, walking at sunset. Not Jonathan and Neeha.',
+      "Stock photograph of a bride and groom's hands and wedding rings. Not Jonathan and Neeha.",
+      'Stock photograph of an outdoor evening gathering under trees. Not Philip Pavilion.',
+    ])
+    expect(images[0]).toHaveAttribute('loading', 'eager')
+    expect(images[1]).toHaveAttribute('loading', 'lazy')
+    expect(images[2]).toHaveAttribute('loading', 'lazy')
+    expect(screen.getByText('See you there')).toBeInTheDocument()
+    expect(screen.getByText('Jonathan & Neeha')).toBeInTheDocument()
+    expect(screen.getByText(eventConfig.stock.note)).toBeInTheDocument()
+    expect(screen.getByText('Philip Pavilion')).toBeInTheDocument()
+    expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: /rsvp/i })).not.toBeInTheDocument()
+    expect(document.body.textContent).not.toMatch(/two are better|ecclesiastes|music is omitted|draft preview/i)
+    const following = Node.DOCUMENT_POSITION_FOLLOWING
+    const ceremony = screen.getByText(eventConfig.ceremony.timeDisplay)
+    const venue = screen.getByRole('heading', { name: 'Venue' })
+    const close = screen.getByText('See you there')
+    expect(images[0].compareDocumentPosition(ceremony) & following).toBeTruthy()
+    expect(ceremony.compareDocumentPosition(images[1]) & following).toBeTruthy()
+    expect(images[1].compareDocumentPosition(venue) & following).toBeTruthy()
+    expect(venue.compareDocumentPosition(images[2]) & following).toBeTruthy()
+    expect(images[2].compareDocumentPosition(close) & following).toBeTruthy()
+  })
 })

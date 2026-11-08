@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { coupleLabel, eventConfig } from './config/event.ts'
+import { coupleLabel } from './config/event.ts'
 import { EnvelopeGate } from './components/Envelope.tsx'
 import { Invitation } from './components/Invitation.tsx'
 import { usePrefersReducedMotion } from './lib/motion.ts'
@@ -20,7 +20,7 @@ export default function App() {
   const musicChoice = useRef<'unset' | 'on' | 'off'>('unset')
 
   useEffect(() => {
-    document.title = `${coupleLabel()} — draft preview`
+    document.title = coupleLabel()
   }, [])
 
   useEffect(() => {
@@ -80,9 +80,6 @@ export default function App() {
 
   return (
     <>
-      <header className="draft-bar">
-        <p className="draft-flag">{eventConfig.draft.label}</p>
-      </header>
       {phase === 'invitation' ? (
         <Invitation headingRef={headingRef} />
       ) : (
