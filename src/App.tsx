@@ -95,7 +95,6 @@ export default function App() {
           opening={phase === 'opening'}
           openButtonRef={openButtonRef}
           onOpen={openInvitation}
-          onSkip={reveal}
           onRecedeEnd={reveal}
         />
       )}

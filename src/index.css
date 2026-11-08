@@ -79,6 +79,11 @@ h1:focus-visible {
   scroll-margin-top: 4rem;
 }
 
+.sheet h1:focus,
+.sheet h1:focus-visible {
+  outline: none;
+}
+
 ::selection {
   background: #e7c3b0;
   color: var(--ink);
@@ -328,13 +333,26 @@ h1:focus-visible {
   }
 }
 
-.gate-card {
-  margin-top: 1.15rem;
-  padding: 1.15rem 1rem 1.2rem;
+.envelope-open {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
   text-align: center;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.open-cue {
+  display: block;
+  margin-top: 0.9rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--sage);
 }
 
 .eyebrow {

@@ -10,17 +10,21 @@ import { setReducedMotion } from './test/matchMedia.ts'
 const headingName = 'Jonathan Ve Vance and Neeha Shaitus'
 
 describe('envelope gate', () => {
-  it('starts on the envelope, with open focused before skip', async () => {
+  it('starts on the envelope alone, with Open invitation focused', async () => {
     const user = userEvent.setup()
     render(<App />)
     const open = screen.getByRole('button', { name: eventConfig.gate.openLabel })
-    const skip = screen.getByRole('button', { name: eventConfig.gate.skipLabel })
+    expect(open).toHaveAttribute('id', 'open-invitation')
+    expect(open.querySelector('.envelope')).not.toBeNull()
+    expect(open.querySelector('.seal')).not.toBeNull()
     expect(screen.getByText(/Draft preview — not final/)).toBeInTheDocument()
-    expect(screen.getByRole('heading', { level: 1, name: headingName })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /skip/i })).not.toBeInTheDocument()
     expect(screen.queryByText(eventConfig.reception.note)).not.toBeInTheDocument()
+    expect(document.querySelector('.gate-card')).toBeNull()
     expect(open).toHaveFocus()
     await user.tab()
-    expect(skip).toHaveFocus()
+    expect(screen.getByRole('button', { name: 'Play music' })).toHaveFocus()
   })
 
   it('opens from the keyboard without waiting when motion is reduced', async () => {
@@ -34,14 +38,18 @@ describe('envelope gate', () => {
     expect(document.querySelector('.envelope')).toBeNull()
   })
 
-  it('skips the envelope from the keyboard and moves focus to the invitation', async () => {
+  it('opens the envelope from the keyboard', async () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play').mockImplementation(function playNow(this: HTMLMediaElement) {
+      this.dispatchEvent(new Event('play'))
+      return Promise.resolve()
+    })
     const user = userEvent.setup()
     render(<App />)
-    await user.tab()
-    await user.keyboard(' ')
-    expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
-    expect(screen.getByText(eventConfig.ceremony.note)).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: eventConfig.gate.openLabel })).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: eventConfig.gate.openLabel })).toHaveFocus()
+    await user.keyboard('{Enter}')
+    expect(play).toHaveBeenCalledTimes(1)
+    expect(document.querySelector('.envelope-wrap.is-opening')).not.toBeNull()
+    expect(screen.queryByText(eventConfig.reception.note)).not.toBeInTheDocument()
   })
 
   it('holds the invitation back until the layered open motion finishes', async () => {
@@ -60,19 +68,6 @@ describe('envelope gate', () => {
     await act(async () => {
       await vi.advanceTimersByTimeAsync(1)
     })
-    expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
-    expect(document.querySelector('.envelope')).toBeNull()
-    expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
-  })
-
-  it('lets skip reveal the invitation during the open motion', async () => {
-    vi.useFakeTimers()
-    render(<App />)
-    fireEvent.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
-    await act(async () => {
-      await vi.advanceTimersByTimeAsync(500)
-    })
-    fireEvent.click(screen.getByRole('button', { name: eventConfig.gate.skipLabel }))
     expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
     expect(document.querySelector('.envelope')).toBeNull()
     expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
@@ -104,9 +99,8 @@ describe('music', () => {
     return element
   }
 
-  it('does not play on load, and skip stays silent', async () => {
+  it('does not play on load', () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, 'play').mockResolvedValue(undefined)
-    const user = userEvent.setup()
     render(<App />)
     const element = audio()
     expect(element.paused).toBe(true)
@@ -123,9 +117,7 @@ describe('music', () => {
       'M9 17.5a2.5 2.5 0 1 1-2-2.45V6.2l10-2v9.35a2.5 2.5 0 1 1-2-2.45V7.1l-6 1.2v9.2z',
     )
     expect(play).not.toHaveBeenCalled()
-
-    await user.click(screen.getByRole('button', { name: eventConfig.gate.skipLabel }))
-    expect(play).not.toHaveBeenCalled()
+    expect(screen.queryByRole('button', { name: /skip/i })).not.toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Play music' })).toBeInTheDocument()
   })
 
