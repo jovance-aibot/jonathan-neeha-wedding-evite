@@ -843,11 +843,17 @@ figcaption {
 }
 
 .story {
+  --story-pad-x: 16px;
+  --story-pad-end: 16px;
   background: transparent;
   color: var(--ink);
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 2.4rem 1.1rem calc(6.5rem + env(safe-area-inset-bottom, 0px));
+  padding: 2.4rem var(--story-pad-end) calc(6.5rem + env(safe-area-inset-bottom, 0px)) var(--story-pad-x);
+}
+
+.hero-band .date .date-word {
+  letter-spacing: 0.06em;
 }
 
 .story-inner {
@@ -987,7 +993,7 @@ figcaption {
 }
 
 .story .countdown h2 {
-  margin: 0;
+  margin: 8px 0 0;
   font-size: clamp(2.4rem, 5vw, 3.6rem);
   letter-spacing: 0;
   line-height: 1.15;
@@ -1063,12 +1069,12 @@ figcaption {
 }
 
 .venue-name {
-  margin: 0;
+  margin: 8px 0 0;
   font-family: "Marcellus", var(--serif);
-  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
   font-weight: 400;
   font-style: normal;
-  line-height: 1.15;
+  line-height: 0.95;
 }
 
 .story .stack-actions {
@@ -1133,10 +1139,20 @@ figcaption {
 }
 
 .hero-band {
-  margin: -2.4rem -1.1rem 1.8rem;
-  padding: 1.55rem 1.1rem 1rem;
+  margin: -2.4rem calc(var(--story-pad-end) * -1) 0 calc(var(--story-pad-x) * -1);
+  padding: 18px var(--story-pad-end) 20px var(--story-pad-x);
   background: #1a2f28;
   color: #f8f6ef;
+}
+
+.hero-band .date {
+  margin: 50px 0 0;
+  color: #f8f6ef;
+  font-size: clamp(1rem, 4.2vw, 1.55rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .scroll-cue {
@@ -1144,7 +1160,7 @@ figcaption {
   flex-direction: column;
   align-items: center;
   gap: 0.28rem;
-  margin: 0.95rem auto 0.15rem;
+  margin: 26px auto 0;
   padding: 0.25rem 0.7rem 0.15rem;
   border: 0;
   background: transparent;
@@ -1152,8 +1168,8 @@ figcaption {
   font-family: "Marcellus", var(--serif);
   font-weight: 400;
   font-style: normal;
-  font-size: 0.82rem;
-  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
   line-height: 1;
   text-transform: uppercase;
   cursor: pointer;
@@ -1173,16 +1189,18 @@ figcaption {
 
 .intro {
   width: min(46.25rem, 100%);
-  margin: 0.35rem auto 0;
+  margin: 0 auto;
+  padding: 28px 0;
   text-align: center;
   scroll-margin-top: 1.25rem;
 }
 
 .intro-rule {
-  width: 4.5rem;
+  display: block;
+  width: 100%;
   height: 1px;
-  margin: 0 auto 1.75rem;
-  background: rgba(138, 115, 65, 0.75);
+  margin: 0 auto 28px;
+  background: rgba(138, 115, 65, 0.45);
 }
 
 .verse {
@@ -1229,8 +1247,96 @@ figcaption {
   color: var(--soft);
 }
 
-.intro .date {
-  margin-top: 1.65rem;
+.day {
+  width: min(46.25rem, 100%);
+  margin: 8px auto 0;
+  text-align: center;
+}
+
+.day-kicker {
+  margin: 0;
+  font-size: 0.74rem;
+  letter-spacing: 0.38em;
+  color: var(--amp);
+}
+
+.shared-venue {
+  margin: 28px auto 0;
+  border: 1px solid rgba(138, 115, 65, 0.55);
+  text-align: left;
+}
+
+.shared-name {
+  margin: 0;
+  padding: 16px 14px;
+  border-bottom: 1px solid rgba(138, 115, 65, 0.45);
+  font-family: "Marcellus", var(--serif);
+  font-size: clamp(1.35rem, 4vw, 1.7rem);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.day-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.day-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  row-gap: 4px;
+  align-items: baseline;
+  padding: 16px 14px;
+}
+
+.day-list li + li {
+  border-top: 1px solid rgba(138, 115, 65, 0.45);
+}
+
+.day-list .when {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  color: var(--amp);
+  font-size: 1.28rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.event-role {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.day-list .sub {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  color: var(--soft);
+  font-size: clamp(0.78rem, 3.5vw, 0.95rem);
+  line-height: 1.35;
+}
+
+.portrait-again {
+  width: min(100%, 460px);
+  margin: 10px auto 20px;
+}
+
+.countdown .kicker {
+  margin: 0;
+  font-size: 0.74rem;
+  letter-spacing: 0.38em;
+  color: var(--amp);
 }
 
 .hero-photo {
@@ -1320,15 +1426,7 @@ figcaption {
 }
 
 .hero .date {
-  margin-top: 0.85rem;
-}
-
-.day {
-  margin-top: 1.6rem;
-}
-
-.day .times {
-  grid-template-columns: 1fr;
+  margin-top: 43px;
 }
 
 @media (min-width: 800px) {
@@ -1340,12 +1438,24 @@ figcaption {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .intro {
+    padding: 64px 0;
+  }
+
   .hero {
     display: grid;
-    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
-    column-gap: 3rem;
-    row-gap: 0.35rem;
+    grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+    column-gap: 64px;
+    row-gap: 0;
     align-items: center;
+  }
+
+  .hero-band .date {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    margin-top: 22px;
+    text-align: left;
   }
 
   .hero-photo {
@@ -1399,32 +1509,46 @@ figcaption {
     color: #f0d7ac;
   }
 
-  .day {
+  .shared-venue {
+    max-width: 44rem;
+  }
+
+  .day-list {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-    grid-template-areas:
-      "times photo"
-      "venue photo";
-    gap: 1.4rem 3rem;
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .day .times {
-    grid-area: times;
-  }
-
-  .day .portrait-again {
-    grid-area: photo;
-  }
-
-  .day .venue {
-    grid-area: venue;
+  .day-list li + li {
+    border-top: 0;
+    border-left: 1px solid rgba(138, 115, 65, 0.45);
   }
 }
 
-@media (max-width: 360px) {
-  .when {
-    font-size: 1.28rem;
+@media (max-width: 1239px) {
+  .story > article {
+    width: auto;
+    margin-right: calc(0.85rem + 64px + 12px - 16px);
+  }
+
+  .hero-band {
+    min-height: 100dvh;
+  }
+}
+
+@media (max-width: 380px) {
+  .day-list li {
+    grid-template-columns: 1fr;
+  }
+
+  .event-role,
+  .day-list .when,
+  .day-list .sub {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .day-list .when {
+    white-space: normal;
   }
 }
 

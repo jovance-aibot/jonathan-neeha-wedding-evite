@@ -63,6 +63,9 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
                 <CoupleHeading config={config} headingRef={headingRef} focusable />
               </div>
             </div>
+            <p className="date">
+              <DateParts display={config.when.display} />
+            </p>
           </div>
           <button type="button" className="scroll-cue" onClick={scrollToInvite}>
             Scroll
@@ -81,31 +84,34 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
           <p className="invite-line">
             Together with their families, Jonathan and Neeha joyfully invite you to celebrate their wedding.
           </p>
-          <p className="date">
-            <DateParts display={config.when.display} />
-          </p>
         </section>
-        <div className="day">
-          <section className="times" aria-label="Schedule">
-            <div className="time-block">
-              <h2>{config.ceremony.title}</h2>
-              <p className="when">
-                <TimeRange value={config.ceremony.timeDisplay} />
-              </p>
-              <p className="sub">{config.ceremony.room}</p>
-            </div>
-            <div className="time-block">
-              <h2>{config.reception.title}</h2>
-              <p className="when">
-                <TimeRange value={config.reception.timeDisplay} />
-              </p>
-              <p className="sub">Outdoor space</p>
-            </div>
-          </section>
-          <Portrait className="portrait-again" variant="garden" alt={secondAlt} />
-          <VenueBlock config={config} />
-        </div>
+        <section className="day" aria-labelledby="day-heading">
+          <p className="kicker day-kicker" id="day-heading">
+            {config.copy.scheduleHeading}
+          </p>
+          <div className="shared-venue">
+            <h2 className="shared-name">{config.ceremony.venueName}</h2>
+            <ol className="day-list">
+              <li>
+                <p className="when">
+                  <TimeRange value={config.ceremony.timeDisplay} />
+                </p>
+                <p className="event-role">{config.ceremony.title}</p>
+                <p className="sub">{config.ceremony.room}</p>
+              </li>
+              <li>
+                <p className="when">
+                  <TimeRange value={config.reception.timeDisplay} />
+                </p>
+                <p className="event-role">{config.reception.title}</p>
+                <p className="sub">Outdoor space</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+        <Portrait className="portrait-again" variant="garden" alt={secondAlt} />
         <CountdownBlock config={config} now={now} />
+        <VenueBlock config={config} />
         <footer className="close">
           <p className="close-lead">We would love to celebrate with you</p>
           <p className="see">See you there</p>
@@ -174,6 +180,7 @@ function CountdownBlock({ config, now }: { config: EventConfig; now?: Date }) {
 
   return (
     <section className="countdown" aria-labelledby="countdown-heading">
+      <p className="kicker">Counting the days</p>
       <h2 id="countdown-heading">{config.countdown.heading}</h2>
       {parts.status === 'invalid' ? (
         <p className="alert" role="alert">
