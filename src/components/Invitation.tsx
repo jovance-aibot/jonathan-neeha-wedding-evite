@@ -49,7 +49,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
           <div className="hero-photo">
             <Portrait eager overlay alt={portraitAlt} />
             <div className="hero-title">
-              <p className="kicker">Please join us to celebrate</p>
+              <p className="kicker join-line">Please join us to celebrate</p>
               <CoupleHeading config={config} headingRef={headingRef} focusable />
             </div>
           </div>
