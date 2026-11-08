@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { act } from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -78,7 +79,12 @@ describe('music', () => {
     expect(element).toHaveAttribute('loop')
     expect(element.getAttribute('src')).toMatch(/audio\/painted-woods-in-autumn\.mp3$/)
     expect(element.getAttribute('src')).not.toMatch(/^https?:/i)
-    expect(screen.getByRole('button', { name: 'Play music' })).toHaveAttribute('aria-pressed', 'false')
+    const toggle = screen.getByRole('button', { name: 'Play music' })
+    expect(toggle).toHaveAttribute('aria-pressed', 'false')
+    expect(toggle.closest('.draft-bar')).toBeNull()
+    expect(toggle.querySelector('.music-mark path')?.getAttribute('d')).toBe(
+      'M9 17.5a2.5 2.5 0 1 1-2-2.45V6.2l10-2v9.35a2.5 2.5 0 1 1-2-2.45V7.1l-6 1.2v9.2z',
+    )
     expect(play).not.toHaveBeenCalled()
 
     await user.click(screen.getByRole('button', { name: eventConfig.gate.skipLabel }))
@@ -157,5 +163,16 @@ describe('music', () => {
     await user.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
     expect(play).not.toHaveBeenCalled()
     expect(screen.getByRole('button', { name: 'Play music' })).toBeInTheDocument()
+  })
+
+  it('keeps the control fixed at the bottom right, including the mobile safe area', () => {
+    const css = readFileSync('src/index.css', 'utf8')
+    const rule = css.match(/\.music-toggle \{[^}]+\}/)?.[0] ?? ''
+    expect(rule).toContain('position: fixed')
+    expect(rule).toContain('right: max(0.85rem, env(safe-area-inset-right))')
+    expect(rule).toContain('bottom: max(0.85rem, env(safe-area-inset-bottom))')
+    expect(rule).toContain('width: 48px')
+    expect(rule).toContain('height: 48px')
+    expect(css).not.toContain('.draft-bar .music-toggle')
   })
 })

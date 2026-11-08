@@ -88,19 +88,13 @@ h1:focus-visible {
   position: sticky;
   top: 0;
   z-index: 5;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem 0.75rem;
-  padding: 0.4rem 0.75rem 0.5rem;
   background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
 
 .draft-flag {
   margin: 0;
-  padding: 0.35rem 0.25rem;
+  padding: 0.55rem 0.9rem;
   text-align: center;
   font-family: var(--sans);
   font-size: 0.82rem;
@@ -109,19 +103,21 @@ h1:focus-visible {
 }
 
 .music-toggle {
-  min-height: 48px;
+  position: fixed;
+  right: max(0.85rem, env(safe-area-inset-right));
+  bottom: max(0.85rem, env(safe-area-inset-bottom));
+  z-index: 6;
+  width: 48px;
+  height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  padding: 0.4rem 0.95rem;
+  padding: 0;
   border: 1px solid var(--sage);
   border-radius: 999px;
-  background: transparent;
+  background: var(--paper);
   color: var(--ink);
-  font-family: var(--sans);
-  font-size: 0.95rem;
-  line-height: 1.2;
+  box-shadow: 0 8px 22px rgba(90, 48, 28, 0.16);
   cursor: pointer;
 }
 
@@ -130,17 +126,11 @@ h1:focus-visible {
   flex: 0 0 auto;
 }
 
-@media (max-width: 719px) {
-  .music-toggle {
-    flex: 1 1 100%;
-  }
-}
-
 .gate {
   min-height: calc(100vh - 2.4rem);
   min-height: calc(100dvh - 2.4rem);
   display: flex;
-  padding: 0.5rem 0.85rem 2rem;
+  padding: 0.5rem 0.85rem calc(4.75rem + env(safe-area-inset-bottom, 0px));
 }
 
 .gate-body {
@@ -359,7 +349,7 @@ a.button {
 }
 
 .invitation {
-  padding: 0 0 2.5rem;
+  padding: 0 0 calc(4.75rem + env(safe-area-inset-bottom, 0px));
 }
 
 .sheet {
