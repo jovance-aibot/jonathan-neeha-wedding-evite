@@ -42,7 +42,6 @@ export type EventConfig = {
     endIso: string
     timeDisplay: string
     placeDisplay: string
-    note: string
   }
   countdown: {
     targetIso: string
@@ -67,14 +66,6 @@ export type EventConfig = {
   map: {
     directionsLabel: string
     directionsUrl: string
-    embedUrl: string
-    showLabel: string
-    hideLabel: string
-    title: string
-    note: string
-  }
-  stock: {
-    note: string
   }
 }
 
@@ -111,7 +102,6 @@ export const eventConfig = {
     endIso: receptionEndIso,
     timeDisplay: '6:30–9:30 PM IST',
     placeDisplay: 'Philip Pavilion, outdoors',
-    note: 'Outdoors at Philip Pavilion.',
   },
   countdown: {
     targetIso: ceremonyStartIso,
@@ -136,15 +126,6 @@ export const eventConfig = {
   map: {
     directionsLabel: 'Get directions',
     directionsUrl: 'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic',
-    embedUrl:
-      'https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sWGW2%2B4C+Philips+pavilion,+Memury,+Keralam+686663',
-    showLabel: 'Show map',
-    hideLabel: 'Hide map',
-    title: 'Map of Philip Pavilion in Memury',
-    note: 'Get directions opens Philip Pavilion in Google Maps. The map stays off this page until you choose Show map.',
-  },
-  stock: {
-    note: 'Temporary stock imagery. These photographs are not Jonathan and Neeha, and the evening scene is not Philip Pavilion.',
   },
 } satisfies EventConfig
 

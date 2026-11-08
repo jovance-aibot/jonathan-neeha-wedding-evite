@@ -39,7 +39,7 @@ describe('envelope gate', () => {
     expect(screen.queryByText(/Draft preview/)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /skip/i })).not.toBeInTheDocument()
-    expect(screen.queryByText(eventConfig.reception.note)).not.toBeInTheDocument()
+    expect(screen.queryByText('See you there')).not.toBeInTheDocument()
     expect(document.querySelector('.gate-card')).toBeNull()
     expect(open).not.toHaveFocus()
     await user.tab()
@@ -56,7 +56,7 @@ describe('envelope gate', () => {
     await user.tab()
     await user.keyboard('{Enter}')
     expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
-    expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
+    expect(screen.getByText('See you there')).toBeInTheDocument()
     expect(document.querySelector('.envelope')).toBeNull()
   })
 
@@ -73,7 +73,7 @@ describe('envelope gate', () => {
     await user.keyboard('{Enter}')
     expect(play).toHaveBeenCalledTimes(1)
     expect(document.querySelector('.envelope-wrap.is-opening')).not.toBeNull()
-    expect(screen.queryByText(eventConfig.reception.note)).not.toBeInTheDocument()
+    expect(screen.queryByText('See you there')).not.toBeInTheDocument()
   })
 
   it('holds the invitation back until the layered open motion finishes', async () => {
@@ -83,16 +83,16 @@ describe('envelope gate', () => {
     expect(document.querySelector('.envelope-wrap.is-opening .riser')).not.toBeNull()
     expect(document.querySelector('.flap')).not.toBeNull()
     expect(document.querySelector('.pocket')).not.toBeNull()
-    expect(screen.queryByText(eventConfig.reception.note)).not.toBeInTheDocument()
+    expect(screen.queryByText('See you there')).not.toBeInTheDocument()
     await act(async () => {
       await vi.advanceTimersByTimeAsync(OPEN_MS - 1)
     })
-    expect(screen.queryByText(eventConfig.reception.note)).not.toBeInTheDocument()
+    expect(screen.queryByText('See you there')).not.toBeInTheDocument()
     expect(document.querySelector('.envelope')).not.toBeNull()
     await act(async () => {
       await vi.advanceTimersByTimeAsync(1)
     })
-    expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
+    expect(screen.getByText('See you there')).toBeInTheDocument()
     expect(document.querySelector('.envelope')).toBeNull()
     expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
   })
@@ -112,7 +112,7 @@ describe('envelope gate', () => {
     await act(async () => {
       await vi.advanceTimersByTimeAsync(OPEN_MS)
     })
-    expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
+    expect(screen.getByText('See you there')).toBeInTheDocument()
   })
 })
 

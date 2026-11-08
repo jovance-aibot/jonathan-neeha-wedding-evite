@@ -18,7 +18,6 @@ function filesIn(path: string): string[] {
 
 const allowedUrls = [
   'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic',
-  'https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sWGW2%2B4C+Philips+pavilion,+Memury,+Keralam+686663',
   'https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/og.jpg',
 ]
 

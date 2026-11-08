@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Ref } from 'react'
 import { eventConfig as defaultConfig, type EventConfig } from '../config/event.ts'
 import { CoupleHeading } from './CoupleHeading.tsx'
@@ -22,12 +22,12 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
           <p className="date">{config.when.display}</p>
         </header>
         <CountdownBlock config={config} now={now} />
-        <StockFigure
+        <PhotoFigure
           name="couple"
           width={1200}
           height={800}
           eager
-          alt="Stock photograph of a couple seen from behind, walking at sunset. Not Jonathan and Neeha."
+          alt="A couple seen from behind, walking at sunset."
         />
         <section className="times" aria-label="Schedule">
           <div className="time-block">
@@ -41,21 +41,8 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
             <p className="sub">Outdoors · same venue</p>
           </div>
         </section>
-        <p className="sub time-note">{config.reception.note}</p>
-        <StockFigure
-          name="rings"
-          width={1200}
-          height={800}
-          alt="Stock photograph of a bride and groom's hands and wedding rings. Not Jonathan and Neeha."
-        />
+        <PhotoFigure name="rings" width={1200} height={800} alt="Hands with wedding rings." />
         <VenueBlock config={config} />
-        <StockFigure
-          name="setting"
-          width={1200}
-          height={1000}
-          alt="Stock photograph of an outdoor evening gathering under trees. Not Philip Pavilion."
-        />
-        <p className="stock-note">{config.stock.note}</p>
         <footer className="close">
           <p className="close-lead">We would love to celebrate with you</p>
           <p className="see">See you there</p>
@@ -66,7 +53,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
   )
 }
 
-function StockFigure({
+function PhotoFigure({
   name,
   width,
   height,
@@ -146,52 +133,16 @@ function Count({ value, singular, plural }: { value: number; singular: string; p
 }
 
 function VenueBlock({ config }: { config: EventConfig }) {
-  const [mapRequested, setMapRequested] = useState(false)
-  const mapToggleRef = useRef<HTMLButtonElement>(null)
-  const skipMapFocus = useRef(true)
-
-  useEffect(() => {
-    if (skipMapFocus.current) {
-      skipMapFocus.current = false
-      return
-    }
-    mapToggleRef.current?.focus()
-  }, [mapRequested])
-
   return (
     <section className="venue" aria-labelledby="venue-heading">
       <h2 id="venue-heading">{config.venue.heading}</h2>
       <p className="venue-name">{config.ceremony.venueName}</p>
       <p className="venue-locality">{config.ceremony.locality}</p>
       <div className="stack-actions">
-        <a
-          className="button"
-          href={config.map.directionsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-describedby="directions-note"
-        >
+        <a className="button" href={config.map.directionsUrl} target="_blank" rel="noopener noreferrer">
           {config.map.directionsLabel}
         </a>
-        <button
-          type="button"
-          className="button button-quiet"
-          ref={mapToggleRef}
-          aria-expanded={mapRequested}
-          aria-controls="venue-map"
-          onClick={() => setMapRequested((open) => !open)}
-        >
-          {mapRequested ? config.map.hideLabel : config.map.showLabel}
-        </button>
       </div>
-      {mapRequested ? (
-        <div className="map-frame" id="venue-map">
-          <iframe title={config.map.title} src={config.map.embedUrl} loading="lazy" />
-        </div>
-      ) : null}
-      <p id="directions-note" className="hint">
-        {config.map.note}
-      </p>
     </section>
   )
 }
