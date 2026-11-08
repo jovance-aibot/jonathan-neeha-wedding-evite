@@ -1090,6 +1090,58 @@ figcaption {
   font-weight: 400;
 }
 
+.hero-band {
+  margin: -2.4rem -1.1rem 1.8rem;
+  padding: 1.55rem 1.1rem 1rem;
+  background: #1a2f28;
+  color: #f8f6ef;
+}
+
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.28rem;
+  margin: 0.95rem auto 0.15rem;
+  padding: 0.25rem 0.7rem 0.15rem;
+  border: 0;
+  background: transparent;
+  color: #f8f6ef;
+  font-family: "Marcellus", var(--serif);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.scroll-cue::after {
+  content: "";
+  width: 1px;
+  height: 0.85rem;
+  background: #f0d7ac;
+}
+
+.scroll-cue:focus-visible {
+  outline: 2px solid #f8f6ef;
+  outline-offset: 4px;
+}
+
+.invite-line {
+  margin: 0.15rem auto 0;
+  max-width: 18rem;
+  text-align: center;
+  font-family: "Marcellus", var(--serif);
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(1.28rem, 4.6vw, 1.75rem);
+  line-height: 1.35;
+  color: var(--ink);
+  scroll-margin-top: 1.25rem;
+}
+
 .hero-photo {
   position: relative;
 }
@@ -1221,7 +1273,7 @@ figcaption {
     align-self: end;
     transform: none;
     text-align: left;
-    color: var(--ink);
+    color: #f8f6ef;
   }
 
   .hero-title h1 {
@@ -1229,14 +1281,14 @@ figcaption {
   }
 
   .hero-title .kicker {
-    color: var(--ink);
+    color: #f8f6ef;
     font-size: 1.05rem;
     letter-spacing: 0.05em;
     text-shadow: none;
   }
 
   .hero-title h1 {
-    color: var(--ink);
+    color: #f8f6ef;
     font-size: clamp(2.15rem, 4vw, 3.2rem);
   }
 
@@ -1249,15 +1301,7 @@ figcaption {
   }
 
   .hero-title h1 .and.full {
-    color: var(--amp);
-  }
-
-  .hero .date {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: start;
-    margin-top: 0.85rem;
-    text-align: left;
+    color: #f0d7ac;
   }
 
   .day {

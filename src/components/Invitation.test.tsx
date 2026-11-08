@@ -89,10 +89,17 @@ describe('invitation details', () => {
     expect(document.body.textContent).not.toMatch(
       /two are better|ecclesiastes|music is omitted|draft preview|end time is not set|yet to get|still unsettled|to be confirmed|placeholder|stock/i,
     )
+    const invite = screen.getByText('We are happy to invite you to our wedding.')
+    const date = document.querySelector('.date')!
+    const countdown = screen.getByRole('heading', { name: 'Until the ceremony' })
     const following = Node.DOCUMENT_POSITION_FOLLOWING
     const ceremony = document.querySelector('.when')!
     const venue = screen.getByRole('heading', { name: 'Venue' })
     const close = screen.getByText('See you there')
+    expect(screen.getByRole('button', { name: 'Scroll' })).toBeInTheDocument()
+    expect(images[0].compareDocumentPosition(invite) & following).toBeTruthy()
+    expect(invite.compareDocumentPosition(date) & following).toBeTruthy()
+    expect(date.compareDocumentPosition(countdown) & following).toBeTruthy()
     expect(images[0].compareDocumentPosition(ceremony) & following).toBeTruthy()
     expect(ceremony.compareDocumentPosition(images[1]) & following).toBeTruthy()
     expect(images[1].compareDocumentPosition(venue) & following).toBeTruthy()
