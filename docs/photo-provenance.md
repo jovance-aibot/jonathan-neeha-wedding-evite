@@ -12,4 +12,4 @@ The current Pexels license page, https://www.pexels.com/license/, says photos on
 
 The site images are cropped, metadata-stripped AVIF and WebP files generated from those downloads. They are not hotlinked.
 
-Fonts are self-hosted subsets of the SIL Open Font License 1.1 files from the Google Fonts `ofl` directories: Bodoni Moda, Cormorant Garamond, and Great Vibes. The license texts are in `licenses/fonts/`.
+The type is a self-hosted subset of Marcellus Regular (weight 400 only) from the Google Fonts `ofl/marcellus` directory, licensed under the SIL Open Font License 1.1. The license text is in `licenses/fonts/OFL-Marcellus.txt`.

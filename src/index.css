@@ -1,30 +1,6 @@
 @font-face {
-  font-family: "Bodoni Moda";
-  src: url("./fonts/bodoni-moda.woff2") format("woff2");
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Cormorant Garamond";
-  src: url("./fonts/cormorant-garamond.woff2") format("woff2");
-  font-weight: 300 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Cormorant Garamond";
-  src: url("./fonts/cormorant-garamond-italic.woff2") format("woff2");
-  font-weight: 300 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Great Vibes";
-  src: url("./fonts/great-vibes.woff2") format("woff2");
+  font-family: "Marcellus";
+  src: url("./fonts/marcellus.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -68,8 +44,11 @@ body {
   background-image:
     radial-gradient(ellipse 90% 48% at 50% -12%, #f8e6dc, transparent 60%),
     radial-gradient(ellipse 50% 40% at 100% 100%, #e8bfae, transparent 70%);
-  font-family: var(--serif);
+  font-family: "Marcellus", var(--serif);
   font-size: 1.0625rem;
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
 }
@@ -290,9 +269,10 @@ h1:focus-visible {
 .open-cue {
   display: block;
   margin-top: 0.75rem;
-  font-family: "Cormorant Garamond", var(--serif);
+  font-family: "Marcellus", var(--serif);
   font-size: 1.15rem;
-  font-weight: 600;
+  font-weight: 400;
+  font-style: normal;
   letter-spacing: 0.04em;
   color: var(--sage);
 }
@@ -305,8 +285,9 @@ h1:focus-visible {
 .gate-kicker,
 .gate-date,
 .gate-place {
-  font-family: "Cormorant Garamond", var(--serif);
-  font-weight: 600;
+  font-family: "Marcellus", var(--serif);
+  font-weight: 400;
+  font-style: normal;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -319,19 +300,22 @@ h1:focus-visible {
 
 .gate-names {
   margin: 0.35rem 0 0.15rem;
-  font-family: "Bodoni Moda", var(--serif);
+  font-family: "Marcellus", var(--serif);
   font-size: clamp(2.15rem, 8vw, 3.15rem);
-  font-weight: 700;
+  font-weight: 400;
+  font-style: normal;
   line-height: 1.05;
 }
 
 .gate-names .amp,
 .sign .amp,
 .story h1 .and {
-  font-family: "Great Vibes", cursive;
+  font-family: "Marcellus", var(--serif);
   font-style: normal;
   font-weight: 400;
-  color: #8a6a3a;
+  font-size: 1.3em;
+  line-height: 1;
+  color: #9a7040;
 }
 
 .gate-date {
@@ -343,18 +327,18 @@ h1:focus-visible {
   letter-spacing: 0.18em;
 }
 
-.numeral {
-  font-family: "Bodoni Moda", var(--serif);
-  font-weight: 500;
+.numeral,
+.time-sep {
+  font-family: "Marcellus", var(--serif);
+  font-weight: 400;
   font-style: normal;
-  letter-spacing: 0;
   text-transform: none;
 }
 
-/* Bodoni's hyphen is a hairline that disappears at the time size. The digits stay in that face. */
-.time-sep {
-  font-family: "Cormorant Garamond", var(--serif);
-  font-weight: 600;
+.gate-names .amp,
+.sign .amp {
+  display: inline-block;
+  vertical-align: 0.08em;
 }
 
 .gate-divider {
@@ -387,18 +371,19 @@ h1:focus-visible {
 
 .gate-venue-name {
   margin: 0.15rem 0 0;
-  font-family: "Bodoni Moda", var(--serif);
+  font-family: "Marcellus", var(--serif);
   font-size: clamp(1.7rem, 6vw, 2.15rem);
-  font-weight: 700;
+  font-weight: 400;
+  font-style: normal;
   line-height: 1.1;
 }
 
 .gate-locality {
   margin: 0.15rem 0 0;
-  font-family: "Cormorant Garamond", var(--serif);
+  font-family: "Marcellus", var(--serif);
   font-size: 1.15rem;
-  font-style: italic;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .eyebrow {
@@ -433,15 +418,17 @@ h1:focus-visible {
 
 .and {
   margin: 0.2rem 0;
-  color: var(--sage);
-  font-style: italic;
-  font-size: 0.62em;
+  color: #9a7040;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.3em;
 }
 
 .date {
   margin: 0.35rem 0 0;
   text-align: center;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 400;
   font-size: 1.12rem;
 }
 
@@ -568,9 +555,10 @@ a.button {
 }
 
 .amp {
-  color: var(--sage);
-  font-size: 0.42em;
-  font-style: italic;
+  color: #9a7040;
+  font-size: 1.3em;
+  font-style: normal;
+  font-weight: 400;
   letter-spacing: 0;
   line-height: 1;
 }
@@ -709,7 +697,8 @@ a.button {
 
 .venue-locality {
   margin: 0.15rem 0 0.55rem;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 400;
   font-size: 1.2rem;
 }
 
@@ -879,27 +868,20 @@ figcaption {
 .hint,
 .story .button,
 .when,
-.story .unit {
-  font-family: "Cormorant Garamond", var(--serif);
-}
-
+.story .unit,
 .story h1,
 .venue-name,
 .num,
-.gate-names,
-.gate-venue-name {
-  font-family: "Bodoni Moda", var(--serif);
-}
-
 .see {
-  font-family: "Great Vibes", cursive;
+  font-family: "Marcellus", var(--serif);
   font-weight: 400;
+  font-style: normal;
 }
 
 .kicker {
   margin: 0 0 0.85rem;
   font-size: 0.72rem;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #6d3142;
@@ -907,10 +889,10 @@ figcaption {
 
 .story h1 {
   margin: 0;
-  font-weight: 700;
+  font-weight: 400;
   font-size: clamp(2.05rem, 7vw, 3.35rem);
   line-height: 1.12;
-  font-family: "Bodoni Moda", var(--serif);
+  font-family: "Marcellus", var(--serif);
 }
 
 .story h1 .name,
@@ -919,18 +901,20 @@ figcaption {
 }
 
 .story h1 .and {
-  margin: 0.15rem 0;
-  color: #8a6a3a;
-  font-family: "Great Vibes", cursive;
-  font-size: 1.15em;
+  margin: 0.08rem 0;
+  color: #9a7040;
+  font-family: "Marcellus", var(--serif);
+  font-size: 1.3em;
   font-style: normal;
   font-weight: 400;
+  line-height: 1;
 }
 
 .story .date {
   margin: 1rem 0 0;
   font-size: 0.84rem;
-  font-weight: 600;
+  font-weight: 400;
+  font-style: normal;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -944,7 +928,7 @@ figcaption {
 .venue h2 {
   margin: 0 0 0.45rem;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #6d3142;
@@ -970,13 +954,15 @@ figcaption {
 
 .story .num {
   font-size: 1.35rem;
-  font-weight: 500;
+  font-weight: 400;
+  font-style: normal;
   line-height: 1;
 }
 
 .story .unit {
   margin-top: 0.2rem;
-  font-family: "Cormorant Garamond", var(--serif);
+  font-family: "Marcellus", var(--serif);
+  font-weight: 400;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1001,9 +987,10 @@ figcaption {
 
 .when {
   margin: 0;
-  font-family: "Bodoni Moda", var(--serif);
+  font-family: "Marcellus", var(--serif);
   font-size: clamp(1.55rem, 5vw, 2.15rem);
-  font-weight: 500;
+  font-weight: 400;
+  font-style: normal;
   line-height: 1.2;
 }
 
@@ -1027,9 +1014,10 @@ figcaption {
 
 .venue-name {
   margin: 0;
-  font-family: "Bodoni Moda", var(--serif);
+  font-family: "Marcellus", var(--serif);
   font-size: clamp(1.8rem, 5vw, 2.4rem);
-  font-weight: 700;
+  font-weight: 400;
+  font-style: normal;
   line-height: 1.15;
 }
 
@@ -1044,7 +1032,7 @@ figcaption {
   border-color: #6d3142;
   background: #6d3142;
   color: #f6f0e8;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .story .button-quiet {
@@ -1081,15 +1069,17 @@ figcaption {
 
 .see {
   margin: 0;
-  font-family: "Great Vibes", cursive;
-  font-size: clamp(2.6rem, 8vw, 3.6rem);
+  font-family: "Marcellus", var(--serif);
+  font-size: clamp(1.85rem, 6.2vw, 2.45rem);
   font-weight: 400;
-  line-height: 1.15;
+  font-style: normal;
+  line-height: 1.2;
+  color: #6d3142;
 }
 
 .sign {
   margin-top: 0.45rem;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 @media (min-width: 720px) {

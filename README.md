@@ -65,4 +65,4 @@ No street address, contact details, dress code, parents, story, or extra events 
 - oxlint 1.92.0
 - Puppeteer core 25.16.0, used only to capture local screenshots of the offline file
 
-The page uses self-hosted Bodoni Moda, Cormorant Garamond, and Great Vibes, subset under the SIL Open Font License. Those license texts are in `licenses/fonts/`. Dependency licenses stay recorded in `package-lock.json`.
+The page uses a self-hosted subset of Marcellus Regular, the single weight 400 cut, under the SIL Open Font License. The license text is in `licenses/fonts/`. Dependency licenses stay recorded in `package-lock.json`.

@@ -146,9 +146,10 @@ describe('music', () => {
     expect(css).toMatch(/\.envelope-open:focus,\s*\.envelope-open:focus-visible \{\s*outline: none;/)
     expect(css).toMatch(/\.envelope-open:focus-visible \.open-cue/)
     expect(css).toContain('closure-fade')
-    expect(css).toContain('font-family: "Bodoni Moda"')
-    expect(css).toContain('font-family: "Cormorant Garamond"')
-    expect(css).toContain('font-family: "Great Vibes"')
+    expect(css).toContain('font-family: "Marcellus"')
+    expect(css).not.toContain('Bodoni Moda')
+    expect(css).not.toContain('Cormorant Garamond')
+    expect(css).not.toContain('Great Vibes')
     expect(toggle.querySelector('.music-mark path')?.getAttribute('d')).toBe(
       'M9 17.5a2.5 2.5 0 1 1-2-2.45V6.2l10-2v9.35a2.5 2.5 0 1 1-2-2.45V7.1l-6 1.2v9.2z',
     )
