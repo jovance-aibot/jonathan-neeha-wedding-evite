@@ -1160,7 +1160,7 @@ figcaption {
   flex-direction: column;
   align-items: center;
   gap: 0.28rem;
-  margin: 26px auto 0;
+  margin: 32.5px auto 0;
   padding: 0.25rem 0.7rem 0.15rem;
   border: 0;
   background: transparent;
@@ -1190,17 +1190,26 @@ figcaption {
 .intro {
   width: min(46.25rem, 100%);
   margin: 0 auto;
-  padding: 28px 0;
+  padding: 28px 0 0;
   text-align: center;
   scroll-margin-top: 1.25rem;
 }
 
-.intro-rule {
+.intro-rule,
+.day-lead-rule {
   display: block;
   width: 100%;
   height: 1px;
-  margin: 0 auto 28px;
   background: rgba(138, 115, 65, 0.45);
+}
+
+.intro-rule {
+  margin: 0 auto 28px;
+}
+
+.day-lead-rule {
+  width: min(46.25rem, 100%);
+  margin: 35.5px auto;
 }
 
 .verse {
@@ -1236,7 +1245,7 @@ figcaption {
 }
 
 .invite-line {
-  margin: 18px 0 0;
+  margin: 22.5px 0 0;
   width: 100%;
   font-family: "Marcellus", var(--serif);
   font-weight: 400;
@@ -1249,7 +1258,7 @@ figcaption {
 
 .day {
   width: min(46.25rem, 100%);
-  margin: 8px auto 0;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -1426,7 +1435,14 @@ figcaption {
 }
 
 .hero .date {
-  margin-top: 43px;
+  margin-top: 49.7px;
+}
+
+.hero .portrait {
+  padding: 1.5px;
+  border: 0;
+  background: #f8f6ef;
+  box-shadow: none;
 }
 
 @media (min-width: 800px) {
@@ -1439,7 +1455,21 @@ figcaption {
   }
 
   .intro {
-    padding: 64px 0;
+    padding-top: 64px;
+    padding-bottom: 0;
+  }
+
+  .day-lead-rule {
+    margin-top: 71.5px;
+    margin-bottom: 71.5px;
+  }
+
+  .scroll-cue {
+    margin-top: 76.02px;
+  }
+
+  .hero .portrait {
+    padding: 2.25px;
   }
 
   .hero {

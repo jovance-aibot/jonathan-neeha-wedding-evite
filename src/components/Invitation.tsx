@@ -85,6 +85,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
             Together with their families, Jonathan and Neeha joyfully invite you to celebrate their wedding.
           </p>
         </section>
+        <div className="day-lead-rule" aria-hidden="true" />
         <section className="day" aria-labelledby="day-heading">
           <p className="kicker day-kicker" id="day-heading">
             {config.copy.scheduleHeading}
