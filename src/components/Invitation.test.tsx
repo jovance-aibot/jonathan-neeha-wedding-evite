@@ -81,7 +81,7 @@ describe('invitation details', () => {
     expect(screen.getByText('See you there')).toBeInTheDocument()
     expect(document.querySelector('.sign')?.textContent?.replace(/\s+/g, ' ').trim()).toBe('Jonathan & Neeha')
     expect(screen.getAllByText('Philips Pavilion')).toHaveLength(2)
-    expect(screen.getByText('AC hall')).toBeInTheDocument()
+    expect(screen.getByText('Indoor AC hall')).toBeInTheDocument()
     expect(screen.getByText('Outdoor space')).toBeInTheDocument()
     expect(screen.queryByText(/Indoors/)).not.toBeInTheDocument()
     expect(screen.queryByText(/same venue/)).not.toBeInTheDocument()

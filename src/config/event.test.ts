@@ -28,7 +28,7 @@ describe('confirmed event facts', () => {
     expect(eventConfig.ceremony.venueName).toBe('Philips Pavilion')
     expect(eventConfig.ceremony.locality).toBe('Ramamangalam, Ernakulam')
     expect(eventConfig.ceremony.timeDisplay).toBe('3:30 - 4:30 PM')
-    expect(eventConfig.ceremony.room).toBe('AC hall')
+    expect(eventConfig.ceremony.room).toBe('Indoor AC hall')
     const start = new Date(eventConfig.ceremony.startIso)
     const end = new Date(eventConfig.ceremony.endIso)
     expect(end.getTime() - start.getTime()).toBe(60 * 60 * 1000)
