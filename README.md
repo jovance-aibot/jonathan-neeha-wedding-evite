@@ -1,1 +1,72 @@
-# jonathan-neeha-wedding-evite
+# Jonathan and Neeha — invitation draft
+
+A public draft preview of the wedding invitation for Jonathan Ve Vance and Neeha Shaitus. The page is hosted with GitHub Pages from this repository. It does not collect replies, load remote fonts or media, or call a guest service.
+
+The live draft is [https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/](https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/).
+
+The banner reads **Draft preview — not final**. Hosting the page does not make the wording, photographs, map, or reception location final.
+
+## Local run
+
+```bash
+npm install
+npm test
+npm run lint
+npm run build
+npm run dev
+```
+
+`npm run dev` binds to `127.0.0.1:47321` only. `npm run preview` serves the production build on port 47321. Because this is a project site, the built app is under `/jonathan-neeha-wedding-evite/`.
+
+`npm run preview:file` writes one offline HTML file to `/opt/cursor/artifacts/invitation-preview.html`. That file is a local copy, not the published site.
+
+## Pages
+
+Pushes to `main` run [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The workflow installs dependencies, runs tests and lint, builds `dist`, and deploys that folder with GitHub’s Pages actions. The repository setting **Settings → Pages → Source** must be **GitHub Actions**. There is no custom domain.
+
+Vite `base` is `/jonathan-neeha-wedding-evite/` so the script and stylesheet resolve on that subpath.
+
+## Content
+
+Confirmed facts and wording live in [`src/config/event.ts`](src/config/event.ts).
+
+The ceremony start and the countdown target are the same instant: `2026-12-28T15:30:00+05:30` in `Asia/Kolkata`. After that instant the page says the ceremony time has passed. Less than a second before it, the page says less than a second remains.
+
+**Download ceremony calendar** builds `jonathan-neeha-ceremony-2026-12-28.ics` in the browser and saves it only when that button is clicked. The file is the ceremony only, 15:30–16:30 IST, which is 10:00–11:00 UTC. The reception is not in the file.
+
+## Confirmed
+
+- Jonathan Ve Vance and Neeha Shaitus
+- Monday, 28 December 2026
+- Ceremony, 3:30–4:30 PM IST, Philips Pavilion, Memury, in the AC hall
+- Reception outdoors from 6:30 PM IST, with no confirmed end time
+
+## Still open on purpose
+
+- Photographs
+- A verified map pin
+- The reception location
+- Any reply path
+- Music, until a permitted recording is supplied
+
+No street address, coordinates, contact details, dress code, parents, story, or extra events are invented here. The map control stays disabled until a verified pin is added to the config. There is no audio control.
+
+## Limits
+
+- The site is public at the Pages address above. A `noindex` hint asks crawlers not to index it. That hint is not access control.
+- There is no RSVP form and no guest storage.
+- The calendar download is a local save. Nothing is sent to an invite service.
+- React’s production bundle includes the text `https://react.dev/errors/` for its error decoder, plus W3C namespace strings used by SVG. The invitation does not request those addresses.
+
+## Technology actually installed
+
+- Node.js 22.23.4
+- React 19.3.1 and React DOM 19.3.1
+- Vite 8.3.6 with `@vitejs/plugin-react` 6.2.1
+- TypeScript 7.0.2
+- Vitest 5.1.0, jsdom 31.0.0
+- Testing Library React 16.3.3, user-event 14.6.8, jest-dom 7.0.1
+- oxlint 1.92.0
+- Puppeteer core 25.16.0, used only to capture local screenshots of the offline file
+
+Typography is the system serif stack (`Iowan Old Style`, Palatino, Liberation Serif, DejaVu Serif, Georgia). No font file is downloaded. Botanical marks are original SVG in the repo. Dependency licenses stay recorded in `package-lock.json`. This draft did not add a separate license file of its own.
