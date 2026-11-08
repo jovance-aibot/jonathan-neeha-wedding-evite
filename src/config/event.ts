@@ -73,6 +73,7 @@ export type EventConfig = {
     directionsUrl: string
     embedUrl: string
     showLabel: string
+    hideLabel: string
     title: string
     note: string
   }
@@ -164,6 +165,7 @@ export const eventConfig = {
     embedUrl:
       'https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1sWGW2%2B4C+Philips+pavilion,+Memury,+Keralam+686663',
     showLabel: 'Show map',
+    hideLabel: 'Hide map',
     title: 'Map of Philip Pavilion in Memury',
     note: 'Get directions opens Philip Pavilion in Google Maps. The map stays off this page until you choose Show map.',
   },
