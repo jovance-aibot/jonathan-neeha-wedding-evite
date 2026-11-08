@@ -60,3 +60,102 @@ describe('envelope gate', () => {
     expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
   })
 })
+
+describe('music', () => {
+  function audio() {
+    const element = document.querySelector('audio')
+    if (!(element instanceof HTMLAudioElement)) throw new Error('missing audio')
+    return element
+  }
+
+  it('does not play on load, and skip stays silent', async () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play').mockResolvedValue(undefined)
+    const user = userEvent.setup()
+    render(<App />)
+    const element = audio()
+    expect(element.paused).toBe(true)
+    expect(element.preload).toBe('none')
+    expect(element).toHaveAttribute('loop')
+    expect(element.getAttribute('src')).toMatch(/audio\/painted-woods-in-autumn\.mp3$/)
+    expect(element.getAttribute('src')).not.toMatch(/^https?:/i)
+    expect(screen.getByRole('button', { name: 'Play music' })).toHaveAttribute('aria-pressed', 'false')
+    expect(play).not.toHaveBeenCalled()
+
+    await user.click(screen.getByRole('button', { name: eventConfig.gate.skipLabel }))
+    expect(play).not.toHaveBeenCalled()
+    expect(screen.getByRole('button', { name: 'Play music' })).toBeInTheDocument()
+  })
+
+  it('starts on open, pauses without rewinding, and resumes from the same place', async () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play').mockImplementation(function playNow(this: HTMLMediaElement) {
+      this.dispatchEvent(new Event('play'))
+      return Promise.resolve()
+    })
+    const pause = vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(function pauseNow(this: HTMLMediaElement) {
+      this.dispatchEvent(new Event('pause'))
+    })
+    const user = userEvent.setup()
+    render(<App />)
+    const element = audio()
+
+    await user.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
+    expect(play).toHaveBeenCalledTimes(1)
+    expect(element.volume).toBeCloseTo(0.35)
+    expect(screen.getByRole('button', { name: 'Turn music off' })).toHaveAttribute('aria-pressed', 'true')
+
+    element.currentTime = 12
+    await user.click(screen.getByRole('button', { name: 'Turn music off' }))
+    expect(pause).toHaveBeenCalled()
+    expect(element.currentTime).toBe(12)
+    expect(screen.getByRole('button', { name: 'Play music' })).toHaveAttribute('aria-pressed', 'false')
+
+    await user.click(screen.getByRole('button', { name: 'Play music' }))
+    expect(element.currentTime).toBe(12)
+    expect(screen.getByRole('button', { name: 'Turn music off' })).toHaveFocus()
+  })
+
+  it('keeps Play music when the browser rejects playback, and still opens', async () => {
+    vi.spyOn(HTMLMediaElement.prototype, 'play').mockRejectedValue(new DOMException('NotAllowedError'))
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
+    expect(screen.getByRole('button', { name: 'Play music' })).toHaveAttribute('aria-pressed', 'false')
+    expect(document.querySelector('.envelope.is-opening, .invitation')).not.toBeNull()
+  })
+
+  it('survives a missing audio file and can be used from the keyboard', async () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play').mockImplementation(function playNow(this: HTMLMediaElement) {
+      this.dispatchEvent(new Event('play'))
+      return Promise.resolve()
+    })
+    const user = userEvent.setup()
+    render(<App />)
+    audio().dispatchEvent(new Event('error'))
+    expect(screen.getByRole('button', { name: 'Play music' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: eventConfig.gate.openLabel })).toBeInTheDocument()
+
+    const toggle = screen.getByRole('button', { name: 'Play music' })
+    toggle.focus()
+    await user.keyboard('{Enter}')
+    expect(play).toHaveBeenCalledTimes(1)
+    expect(screen.getByRole('button', { name: 'Turn music off' })).toHaveFocus()
+  })
+
+  it('does not restart music after it was turned off', async () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play').mockImplementation(function playNow(this: HTMLMediaElement) {
+      this.dispatchEvent(new Event('play'))
+      return Promise.resolve()
+    })
+    vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(function pauseNow(this: HTMLMediaElement) {
+      this.dispatchEvent(new Event('pause'))
+    })
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: 'Play music' }))
+    await user.click(screen.getByRole('button', { name: 'Turn music off' }))
+    play.mockClear()
+    await user.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
+    expect(play).not.toHaveBeenCalled()
+    expect(screen.getByRole('button', { name: 'Play music' })).toBeInTheDocument()
+  })
+})

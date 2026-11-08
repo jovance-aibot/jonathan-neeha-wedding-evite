@@ -134,9 +134,9 @@ export const eventConfig = {
   },
   gate: {
     kicker: 'Wedding invitation',
-    openLabel: 'Open the invitation',
+    openLabel: 'Open the invitation with music',
     skipLabel: 'Skip the envelope',
-    hint: 'Opening plays a short paper motion. Skip reveals the invitation at once.',
+    hint: 'Opening plays a short paper motion and starts the music. Skip reveals the invitation without music.',
   },
   copy: {
     invitation: 'You are warmly invited to celebrate their marriage.',

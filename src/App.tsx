@@ -7,14 +7,18 @@ import { usePrefersReducedMotion } from './lib/motion.ts'
 type Phase = 'closed' | 'opening' | 'invitation'
 
 const OPEN_MS = 720
+const MUSIC_VOLUME = 0.35
 
 export default function App() {
   const reduced = usePrefersReducedMotion()
   const [phase, setPhase] = useState<Phase>('closed')
+  const [musicOn, setMusicOn] = useState(false)
   const openButtonRef = useRef<HTMLButtonElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const revealTimer = useRef<number | null>(null)
   const revealed = useRef(false)
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const musicChoice = useRef<'unset' | 'on' | 'off'>('unset')
 
   useEffect(() => {
     document.title = `${coupleLabel()} — draft preview`
@@ -38,6 +42,26 @@ export default function App() {
     }
   }, [])
 
+  function playMusic() {
+    const audio = audioRef.current
+    if (!audio) return
+    musicChoice.current = 'on'
+    audio.volume = MUSIC_VOLUME
+    let pending: Promise<void> | undefined
+    try {
+      pending = audio.play()
+    } catch {
+      setMusicOn(false)
+      return
+    }
+    void pending?.catch(() => setMusicOn(false))
+  }
+
+  function stopMusic() {
+    musicChoice.current = 'off'
+    audioRef.current?.pause()
+  }
+
   function reveal() {
     if (revealed.current) return
     revealed.current = true
@@ -50,6 +74,7 @@ export default function App() {
 
   function openInvitation() {
     if (revealed.current || phase === 'opening') return
+    if (musicChoice.current !== 'off') playMusic()
     if (reduced) {
       reveal()
       return
@@ -62,6 +87,19 @@ export default function App() {
     <>
       <header className="draft-bar">
         <p className="draft-flag">{eventConfig.draft.label}</p>
+        <button type="button" className="music-toggle" aria-pressed={musicOn} onClick={() => (musicOn ? stopMusic() : playMusic())}>
+          <MusicMark on={musicOn} />
+          <span>{musicOn ? 'Turn music off' : 'Play music'}</span>
+        </button>
+        <audio
+          ref={audioRef}
+          src={`${import.meta.env.BASE_URL}audio/painted-woods-in-autumn.mp3`}
+          loop
+          preload="none"
+          onPlay={() => setMusicOn(true)}
+          onPause={() => setMusicOn(false)}
+          onError={() => setMusicOn(false)}
+        />
       </header>
       {phase === 'invitation' ? (
         <Invitation headingRef={headingRef} />
@@ -74,5 +112,17 @@ export default function App() {
         />
       )}
     </>
+  )
+}
+
+function MusicMark({ on }: { on: boolean }) {
+  return (
+    <svg className="music-mark" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M9 17.5a2.5 2.5 0 1 1-2-2.45V6.2l10-2v9.35a2.5 2.5 0 1 1-2-2.45V7.1l-6 1.2v9.2z"
+      />
+      {on ? null : <path d="M4.2 4.2l15.6 15.6" fill="none" stroke="currentColor" strokeWidth="1.8" />}
+    </svg>
   )
 }
