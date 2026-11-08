@@ -1,10 +1,10 @@
 # Jonathan and Neeha — invitation draft
 
-A public draft preview of the wedding invitation for Jonathan Ve Vance and Neeha Shaitus. The page is hosted with GitHub Pages from this repository. It does not collect replies, load remote fonts or media, or call a guest service.
+A public draft preview of the wedding invitation for Jonathan Ve Vance and Neeha Shaitus. The page is hosted with GitHub Pages from this repository. It does not collect replies or call a guest service. Fonts stay on the device. Google Maps is requested only after Show map is clicked.
 
 The live draft is [https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/](https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/).
 
-The banner reads **Draft preview — not final**. Hosting the page does not make the wording, photographs, map, or reception location final.
+The banner reads **Draft preview — not final**. Hosting the page does not make the wording or photographs final.
 
 ## Local run
 
@@ -38,18 +38,17 @@ The ceremony start and the countdown target are the same instant: `2026-12-28T15
 
 - Jonathan Ve Vance and Neeha Shaitus
 - Monday, 28 December 2026
-- Ceremony, 3:30–4:30 PM IST, Philips Pavilion, Memury, in the AC hall
-- Reception outdoors from 6:30 PM IST, with no confirmed end time
+- Ceremony, 3:30–4:30 PM IST, Philip Pavilion, Memury, in the AC hall
+- Reception outdoors at Philip Pavilion from 6:30 PM IST, with no confirmed end time
+- Directions open the supplied Google Maps link for that venue
 
 ## Still open on purpose
 
 - Photographs
-- A verified map pin
-- The reception location
 - Any reply path
 - Music, until a permitted recording is supplied
 
-No street address, coordinates, contact details, dress code, parents, story, or extra events are invented here. The map control stays disabled until a verified pin is added to the config. There is no audio control.
+No street address, contact details, dress code, parents, story, or extra events are invented here. **Get directions** uses the supplied Maps link and does not open it on its own. **Show map** is the only control that loads the map. There is no audio control.
 
 ## Limits
 

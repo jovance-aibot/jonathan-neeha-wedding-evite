@@ -24,7 +24,7 @@ describe('confirmed event facts', () => {
     expect(eventConfig.ceremony.startIso).toBe('2026-12-28T15:30:00+05:30')
     expect(eventConfig.ceremony.endIso).toBe('2026-12-28T16:30:00+05:30')
     expect(eventConfig.countdown.targetIso).toBe(eventConfig.ceremony.startIso)
-    expect(eventConfig.ceremony.venueName).toBe('Philips Pavilion')
+    expect(eventConfig.ceremony.venueName).toBe('Philip Pavilion')
     expect(eventConfig.ceremony.locality).toBe('Memury')
     expect(eventConfig.ceremony.room).toBe('AC hall')
     const start = new Date(eventConfig.ceremony.startIso)
@@ -32,12 +32,17 @@ describe('confirmed event facts', () => {
     expect(end.getTime() - start.getTime()).toBe(60 * 60 * 1000)
   })
 
-  it('does not treat the reception place as confirmed', () => {
-    expect(eventConfig.reception.locationStatus).toBe('awaiting-confirmation')
-    expect(eventConfig.reception.note.toLowerCase()).toContain('awaiting confirmation')
-    expect(eventConfig.reception.placeDisplay).toBe('Outdoors')
-    expect(eventConfig.venue.note.toLowerCase()).not.toContain('same venue')
-    expect(eventConfig.map.enabled).toBe(false)
+  it('places the ceremony and the reception at Philip Pavilion', () => {
+    expect(eventConfig.ceremony.placeDisplay).toBe('Philip Pavilion, Memury')
+    expect(eventConfig.reception.placeDisplay).toBe('Philip Pavilion, outdoors')
+    expect(eventConfig.reception.note.toLowerCase()).not.toContain('awaiting')
+    expect(eventConfig.venue.note.toLowerCase()).toContain('same venue')
+    expect(eventConfig.venue.note).toContain('AC hall')
+    expect(eventConfig.placeholders.join(' ').toLowerCase()).not.toContain('reception location')
+    expect(eventConfig.map.directionsLabel).toBe('Get directions')
+    expect(eventConfig.map.directionsUrl).toBe('https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic')
+    expect(eventConfig.map.embedUrl).toContain('WGW2%2B4C+Philips+pavilion,+Memury,+Keralam+686663')
+    expect(eventConfig.map.embedUrl.startsWith('https://www.google.com/maps/embed?')).toBe(true)
   })
 
   it('uses a safe ceremony calendar filename', () => {

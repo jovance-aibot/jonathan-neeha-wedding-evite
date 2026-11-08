@@ -52,8 +52,11 @@ describe('invitation details', () => {
 
     render(<Invitation now={new Date('2026-11-07T12:00:00+05:30')} />)
     expect(URL.createObjectURL).not.toHaveBeenCalled()
-    expect(document.querySelector('form, input, textarea, select, audio, iframe, a')).toBeNull()
-    expect(screen.getByRole('button', { name: eventConfig.map.disabledLabel })).toBeDisabled()
+    expect(document.querySelector('form, input, textarea, select, audio, iframe')).toBeNull()
+    const directions = screen.getByRole('link', { name: eventConfig.map.directionsLabel })
+    expect(directions).toHaveAttribute('href', eventConfig.map.directionsUrl)
+    expect(directions).toHaveAttribute('target', '_blank')
+    expect(directions).toHaveAttribute('rel', 'noopener noreferrer')
     expect(screen.getByText(eventConfig.rsvp.note)).toBeInTheDocument()
     expect(screen.getByText(/Draft preview/)).toBeInTheDocument()
 
@@ -68,6 +71,32 @@ describe('invitation details', () => {
     expect(text).not.toContain('6:30')
     expect(fetchSpy).not.toHaveBeenCalled()
     expect(document.querySelector('form, input, textarea, select, audio, iframe')).toBeNull()
+    expect(screen.getByRole('link', { name: eventConfig.map.directionsLabel })).toHaveAttribute(
+      'href',
+      eventConfig.map.directionsUrl,
+    )
+  })
+
+  it('keeps the map off the page until asked, without opening directions itself', async () => {
+    const user = userEvent.setup()
+    const fetchSpy = vi.fn()
+    vi.stubGlobal('fetch', fetchSpy)
+    render(<Invitation now={new Date('2026-11-07T12:00:00+05:30')} />)
+
+    expect(document.querySelector('iframe')).toBeNull()
+    const directions = screen.getByRole('link', { name: eventConfig.map.directionsLabel })
+    expect(directions).toHaveAttribute('href', 'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic')
+
+    await user.click(screen.getByRole('button', { name: eventConfig.map.showLabel }))
+
+    const frame = document.querySelector('iframe')
+    expect(frame).not.toBeNull()
+    expect(frame).toHaveAttribute('src', eventConfig.map.embedUrl)
+    expect(frame?.getAttribute('src')).toContain('Philips+pavilion,+Memury')
+    expect(frame?.getAttribute('allow') ?? '').not.toMatch(/geolocation/i)
+    expect(screen.getByRole('link', { name: eventConfig.map.directionsLabel })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: eventConfig.map.showLabel })).not.toBeInTheDocument()
+    expect(fetchSpy).not.toHaveBeenCalled()
   })
 
   it('does not download when the calendar config cannot be written', async () => {
