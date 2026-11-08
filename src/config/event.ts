@@ -38,6 +38,8 @@ export type EventConfig = {
   }
   reception: {
     title: string
+    startIso: string
+    endIso: string
     timeDisplay: string
     placeDisplay: string
     note: string
@@ -78,6 +80,8 @@ export type EventConfig = {
 
 const ceremonyStartIso = '2026-12-28T15:30:00+05:30'
 const ceremonyEndIso = '2026-12-28T16:30:00+05:30'
+const receptionStartIso = '2026-12-28T18:30:00+05:30'
+const receptionEndIso = '2026-12-28T21:30:00+05:30'
 
 export const eventConfig = {
   couple: {
@@ -103,9 +107,11 @@ export const eventConfig = {
   },
   reception: {
     title: 'Reception',
-    timeDisplay: 'From 6:30 PM IST',
+    startIso: receptionStartIso,
+    endIso: receptionEndIso,
+    timeDisplay: '6:30–9:30 PM IST',
     placeDisplay: 'Philip Pavilion, outdoors',
-    note: 'Outdoors at Philip Pavilion. An end time is not set.',
+    note: 'Outdoors at Philip Pavilion.',
   },
   countdown: {
     targetIso: ceremonyStartIso,
@@ -120,8 +126,7 @@ export const eventConfig = {
   },
   copy: {
     invitation: 'You are warmly invited to celebrate their marriage.',
-    supporting:
-      'What is confirmed for the day is written below. Anything still unsettled is labeled plainly.',
+    supporting: 'The ceremony is in the AC hall. The reception is outdoors at the same venue.',
     scheduleHeading: 'The day',
   },
   venue: {
