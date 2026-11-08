@@ -11,6 +11,7 @@
   --cloth: #eaf0e6;
   --cloth-deep: #dfe9dc;
   --mist: #f4f7f1;
+  --stage: #e5f0df;
   --paper: #f8f6ef;
   --paper-2: #f8f6ef;
   --shade: #eaf0e6;
@@ -36,6 +37,7 @@
 
 html {
   overflow-x: clip;
+  background-color: var(--stage);
 }
 
 body {
@@ -43,8 +45,8 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   color: var(--ink);
-  background-color: var(--cloth);
-  background-image: linear-gradient(180deg, var(--mist) 0%, var(--cloth) 48%, var(--cloth-deep) 100%);
+  background-color: var(--stage);
+  background-image: none;
   font-family: "Marcellus", var(--serif);
   font-size: 1.0625rem;
   font-weight: 400;
@@ -151,6 +153,7 @@ h1:focus-visible {
   display: flex;
   overflow: visible;
   padding: 0.5rem 0.85rem calc(6rem + env(safe-area-inset-bottom, 0px));
+  background-color: var(--stage);
 }
 
 .gate-body {
@@ -1156,13 +1159,14 @@ figcaption {
 .hero-band {
   margin: -2.4rem calc(var(--story-pad-end) * -1) 0 calc(var(--story-pad-x) * -1);
   padding: 22.5px var(--story-pad-end) 20px var(--story-pad-x);
-  background: #1a2f28;
-  color: #f8f6ef;
+  background-color: var(--stage);
+  background-image: none;
+  color: var(--ink);
 }
 
 .hero-band .date {
   margin: 50px 0 0;
-  color: #f8f6ef;
+  color: var(--ink);
   font-size: clamp(1rem, 4.2vw, 1.55rem);
   letter-spacing: 0.06em;
   line-height: 1;
@@ -1179,7 +1183,7 @@ figcaption {
   padding: 0.25rem 0.7rem 0.15rem;
   border: 0;
   background: transparent;
-  color: #f8f6ef;
+  color: var(--ink);
   font-family: "Marcellus", var(--serif);
   font-weight: 400;
   font-style: normal;
@@ -1194,11 +1198,11 @@ figcaption {
   content: "";
   width: 1px;
   height: 0.85rem;
-  background: #f0d7ac;
+  background: var(--amp);
 }
 
 .scroll-cue:focus-visible {
-  outline: 2px solid #f8f6ef;
+  outline: 2px solid var(--ink);
   outline-offset: 4px;
 }
 
@@ -1563,7 +1567,7 @@ figcaption {
     align-self: end;
     transform: none;
     text-align: left;
-    color: #f8f6ef;
+    color: var(--ink);
   }
 
   .hero-title h1 {
@@ -1571,14 +1575,14 @@ figcaption {
   }
 
   .hero-title .kicker {
-    color: #f8f6ef;
+    color: var(--ink);
     font-size: 1.05rem;
     letter-spacing: 0.05em;
     text-shadow: none;
   }
 
   .hero-title h1 {
-    color: #f8f6ef;
+    color: var(--ink);
     font-size: clamp(2.15rem, 4vw, 3.2rem);
   }
 
@@ -1591,7 +1595,7 @@ figcaption {
   }
 
   .hero-title h1 .and.full {
-    color: #f0d7ac;
+    color: var(--amp);
   }
 
 }
