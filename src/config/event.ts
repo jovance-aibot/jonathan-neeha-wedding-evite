@@ -15,10 +15,6 @@ export type PersonName = {
 }
 
 export type EventConfig = {
-  draft: {
-    label: string
-    detail: string
-  }
   couple: {
     partnerA: PersonName
     partnerB: PersonName
@@ -75,27 +71,15 @@ export type EventConfig = {
     title: string
     note: string
   }
-  photos: {
-    heading: string
-    note: string
-    frames: readonly { id: string; label: string }[]
-  }
-  rsvp: {
-    heading: string
+  stock: {
     note: string
   }
-  notesHeading: string
-  placeholders: readonly string[]
 }
 
 const ceremonyStartIso = '2026-12-28T15:30:00+05:30'
 const ceremonyEndIso = '2026-12-28T16:30:00+05:30'
 
 export const eventConfig = {
-  draft: {
-    label: 'Draft preview — not final',
-    detail: 'Draft preview. The wording is not final, and this page does not collect replies.',
-  },
   couple: {
     partnerA: { display: 'Jonathan Ve Vance', initial: 'J' },
     partnerB: { display: 'Neeha Shaitus', initial: 'N' },
@@ -154,25 +138,9 @@ export const eventConfig = {
     title: 'Map of Philip Pavilion in Memury',
     note: 'Get directions opens Philip Pavilion in Google Maps. The map stays off this page until you choose Show map.',
   },
-  photos: {
-    heading: 'Photographs',
-    note: 'These frames are empty on purpose. No photographs are included in this draft.',
-    frames: [
-      { id: 'frame-1', label: 'Frame 1' },
-      { id: 'frame-2', label: 'Frame 2' },
-      { id: 'frame-3', label: 'Frame 3' },
-    ],
+  stock: {
+    note: 'Temporary stock imagery. These photographs are not Jonathan and Neeha, and the evening scene is not Philip Pavilion.',
   },
-  rsvp: {
-    heading: 'RSVP',
-    note: 'Replies are not collected here. This draft has no response form, and it does not send or store guest details.',
-  },
-  notesHeading: 'Still open in this draft',
-  placeholders: [
-    'Photographs have not been added.',
-    'No reply path is open.',
-    'Music is omitted until a permitted recording is supplied.',
-  ],
 } satisfies EventConfig
 
 export function coupleLabel(config: EventConfig = eventConfig): string {

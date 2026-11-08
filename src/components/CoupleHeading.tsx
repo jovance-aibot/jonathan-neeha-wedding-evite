@@ -16,7 +16,9 @@ export function CoupleHeading({
   return (
     <h1 ref={headingRef} tabIndex={focusable ? -1 : undefined} aria-label={label}>
       <span className="name">{config.couple.partnerA.display}</span>
-      <span className="and">{config.couple.conjunction}</span>
+      <span className="and" aria-hidden="true">
+        &amp;
+      </span>
       <span className="name">{config.couple.partnerB.display}</span>
     </h1>
   )

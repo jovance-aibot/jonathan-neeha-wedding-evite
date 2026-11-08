@@ -3,12 +3,13 @@ import { describe, expect, it } from 'vitest'
 import { eventConfig } from './event.ts'
 
 describe('confirmed event facts', () => {
-  it('labels the public preview as a draft without calling it private', () => {
-    expect(eventConfig.draft.label).toBe('Draft preview — not final')
-    expect(`${eventConfig.draft.label} ${eventConfig.draft.detail}`.toLowerCase()).not.toContain('private')
-    expect(eventConfig.draft.detail.toLowerCase()).not.toContain('not published')
-    expect(eventConfig.rsvp.note.toLowerCase()).not.toContain('private')
+  it('does not describe the invitation as private or unpublished', () => {
+    const published = `${eventConfig.stock.note} ${eventConfig.venue.note} ${eventConfig.map.note}`.toLowerCase()
+    expect(published).not.toContain('private')
+    expect(published).not.toContain('not published')
+    expect(published).not.toContain('rsvp')
     expect('calendar' in eventConfig).toBe(false)
+    expect('draft' in eventConfig).toBe(false)
   })
 
   it('names the couple and the ceremony day', () => {
@@ -38,7 +39,6 @@ describe('confirmed event facts', () => {
     expect(eventConfig.reception.note.toLowerCase()).not.toContain('awaiting')
     expect(eventConfig.venue.note.toLowerCase()).toContain('same venue')
     expect(eventConfig.venue.note).toContain('AC hall')
-    expect(eventConfig.placeholders.join(' ').toLowerCase()).not.toContain('reception location')
     expect(eventConfig.map.directionsLabel).toBe('Get directions')
     expect(eventConfig.map.directionsUrl).toBe('https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic')
     expect(eventConfig.map.embedUrl).toContain('WGW2%2B4C+Philips+pavilion,+Memury,+Keralam+686663')

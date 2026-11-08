@@ -1,10 +1,10 @@
 # Jonathan and Neeha — invitation draft
 
-A public draft preview of the wedding invitation for Jonathan Ve Vance and Neeha Shaitus. The page is hosted with GitHub Pages from this repository. It does not collect replies or call a guest service. Fonts stay on the device. Google Maps is requested only after Show map is clicked.
+The wedding invitation for Jonathan Ve Vance and Neeha Shaitus. The page is hosted with GitHub Pages from this repository. It does not collect replies or call a guest service. Fonts and photographs are files in this repository. Google Maps is requested only after Show map is clicked.
 
-The live draft is [https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/](https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/).
+The live page is [https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/](https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/).
 
-The banner reads **Draft preview — not final**. Hosting the page does not make the wording or photographs final.
+The photographs are temporary stock images. They are not Jonathan and Neeha, and the evening scene is not Philip Pavilion. See `docs/photo-provenance.md`.
 
 ## Local run
 
@@ -44,15 +44,14 @@ Opening the envelope starts “Painted Woods in Autumn” by TheFealdoProject. *
 
 ## Still open on purpose
 
-- Photographs
-- Any reply path
-- Music, until a permitted recording is supplied
+- The photographs are stock, not the couple or the venue
+- There is no reply path
 
-No street address, contact details, dress code, parents, story, or extra events are invented here. **Get directions** uses the supplied Maps link and does not open it on its own. **Show map** is the only control that loads the map. There is no audio control.
+No street address, contact details, dress code, parents, story, or extra events are invented here. **Get directions** uses the supplied Maps link and does not open it on its own. **Show map** is the only control that loads the map. The music control plays the supplied recording after Open invitation.
 
 ## Limits
 
-- The site is public at the Pages address above. A `noindex` hint asks crawlers not to index it. That hint is not access control.
+- The site is public at the Pages address above.
 - There is no RSVP form and no guest storage. Nothing is sent to an invite service.
 - React’s production bundle includes the text `https://react.dev/errors/` for its error decoder, plus W3C namespace strings used by SVG. The invitation does not request those addresses.
 
@@ -67,4 +66,4 @@ No street address, contact details, dress code, parents, story, or extra events 
 - oxlint 1.92.0
 - Puppeteer core 25.16.0, used only to capture local screenshots of the offline file
 
-Typography is the system serif stack (`Iowan Old Style`, Palatino, Liberation Serif, DejaVu Serif, Georgia). No font file is downloaded. Botanical marks are original SVG in the repo. Dependency licenses stay recorded in `package-lock.json`. This draft did not add a separate license file of its own.
+The opened page uses self-hosted Noto Serif and Source Sans 3, subset under the SIL Open Font License. Those license texts are in `licenses/fonts/`. The envelope artwork stays in the original system serif. Dependency licenses stay recorded in `package-lock.json`.

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Ref } from 'react'
 import { eventConfig as defaultConfig, type EventConfig } from '../config/event.ts'
-import { Sprig, Vine } from './art.tsx'
 import { CoupleHeading } from './CoupleHeading.tsx'
 import { getCountdown, unitWord } from '../lib/countdown.ts'
 
@@ -11,32 +10,91 @@ type InvitationProps = {
   headingRef?: Ref<HTMLHeadingElement>
 }
 
+const base = import.meta.env.BASE_URL
+
 export function Invitation({ config = defaultConfig, now, headingRef }: InvitationProps) {
   return (
-    <main className="invitation">
-      <article className="sheet">
-        <Sprig className="corner corner-tl" />
-        <Sprig className="corner corner-tr" />
-        <p className="eyebrow">{config.gate.kicker}</p>
-        <p className="monogram" aria-hidden="true">
-          <span>{config.couple.partnerA.initial}</span>
-          <span className="amp">&amp;</span>
-          <span>{config.couple.partnerB.initial}</span>
-        </p>
-        <CoupleHeading config={config} headingRef={headingRef} focusable />
-        <p className="date">{config.when.display}</p>
-        <p className="tz">{config.when.timezoneLabel}</p>
-        <Vine className="vine" />
-        <p className="lede">{config.copy.invitation}</p>
-        <p className="supporting">{config.copy.supporting}</p>
+    <main className="story">
+      <article className="story-inner">
+        <header className="story-open">
+          <p className="kicker">Please join us to celebrate</p>
+          <CoupleHeading config={config} headingRef={headingRef} focusable />
+          <p className="date">{config.when.display}</p>
+        </header>
         <CountdownBlock config={config} now={now} />
-        <ScheduleBlock config={config} />
+        <StockFigure
+          name="couple"
+          width={1200}
+          height={800}
+          eager
+          alt="Stock photograph of a couple seen from behind, walking at sunset. Not Jonathan and Neeha."
+        />
+        <section className="times" aria-label="Schedule">
+          <div className="time-block">
+            <h2>{config.ceremony.title}</h2>
+            <p className="when">{config.ceremony.timeDisplay}</p>
+            <p className="sub">Indoors · {config.ceremony.room}</p>
+          </div>
+          <div className="time-block">
+            <h2>{config.reception.title}</h2>
+            <p className="when">{config.reception.timeDisplay}</p>
+            <p className="sub">Outdoors · same venue</p>
+          </div>
+        </section>
+        <p className="sub time-note">{config.reception.note}</p>
+        <StockFigure
+          name="rings"
+          width={1200}
+          height={800}
+          alt="Stock photograph of a bride and groom's hands and wedding rings. Not Jonathan and Neeha."
+        />
         <VenueBlock config={config} />
-        <PhotosBlock config={config} />
-        <RsvpBlock config={config} />
-        <NotesBlock config={config} />
+        <StockFigure
+          name="setting"
+          width={1200}
+          height={1000}
+          alt="Stock photograph of an outdoor evening gathering under trees. Not Philip Pavilion."
+        />
+        <p className="stock-note">{config.stock.note}</p>
+        <footer className="close">
+          <p className="close-lead">We would love to celebrate with you</p>
+          <p className="see">See you there</p>
+          <p className="sign">Jonathan &amp; Neeha</p>
+        </footer>
       </article>
     </main>
+  )
+}
+
+function StockFigure({
+  name,
+  width,
+  height,
+  alt,
+  eager = false,
+}: {
+  name: string
+  width: number
+  height: number
+  alt: string
+  eager?: boolean
+}) {
+  const src = (kind: 'avif' | 'webp', size: 720 | 1200) => `${base}photos/${name}-${size}.${kind}`
+  return (
+    <figure className="photo">
+      <picture>
+        <source type="image/avif" srcSet={`${src('avif', 720)} 720w, ${src('avif', 1200)} 1200w`} sizes="(min-width: 800px) 40rem, 100vw" />
+        <source type="image/webp" srcSet={`${src('webp', 720)} 720w, ${src('webp', 1200)} 1200w`} sizes="(min-width: 800px) 40rem, 100vw" />
+        <img
+          src={src('webp', 1200)}
+          width={width}
+          height={height}
+          alt={alt}
+          loading={eager ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+      </picture>
+    </figure>
   )
 }
 
@@ -54,7 +112,7 @@ function CountdownBlock({ config, now }: { config: EventConfig; now?: Date }) {
   const parts = getCountdown(instant, config.countdown.targetIso)
 
   return (
-    <section className="block" aria-labelledby="countdown-heading">
+    <section className="countdown" aria-labelledby="countdown-heading">
       <h2 id="countdown-heading">{config.countdown.heading}</h2>
       {parts.status === 'invalid' ? (
         <p className="alert" role="alert">
@@ -87,28 +145,6 @@ function Count({ value, singular, plural }: { value: number; singular: string; p
   )
 }
 
-function ScheduleBlock({ config }: { config: EventConfig }) {
-  return (
-    <section className="block" aria-labelledby="schedule-heading">
-      <h2 id="schedule-heading">{config.copy.scheduleHeading}</h2>
-      <ul className="schedule">
-        <li>
-          <h3>{config.ceremony.title}</h3>
-          <p className="time">{config.ceremony.timeDisplay}</p>
-          <p className="place">{config.ceremony.placeDisplay}</p>
-          <p className="note">{config.ceremony.note}</p>
-        </li>
-        <li>
-          <h3>{config.reception.title}</h3>
-          <p className="time">{config.reception.timeDisplay}</p>
-          <p className="place">{config.reception.placeDisplay}</p>
-          <p className="note">{config.reception.note}</p>
-        </li>
-      </ul>
-    </section>
-  )
-}
-
 function VenueBlock({ config }: { config: EventConfig }) {
   const [mapRequested, setMapRequested] = useState(false)
   const mapToggleRef = useRef<HTMLButtonElement>(null)
@@ -123,11 +159,10 @@ function VenueBlock({ config }: { config: EventConfig }) {
   }, [mapRequested])
 
   return (
-    <section className="block" aria-labelledby="venue-heading">
+    <section className="venue" aria-labelledby="venue-heading">
       <h2 id="venue-heading">{config.venue.heading}</h2>
       <p className="venue-name">{config.ceremony.venueName}</p>
       <p className="venue-locality">{config.ceremony.locality}</p>
-      <p className="note">{config.venue.note}</p>
       <div className="stack-actions">
         <a
           className="button"
@@ -158,50 +193,5 @@ function VenueBlock({ config }: { config: EventConfig }) {
         {config.map.note}
       </p>
     </section>
-  )
-}
-
-function PhotosBlock({ config }: { config: EventConfig }) {
-  return (
-    <section className="block" aria-labelledby="photos-heading">
-      <h2 id="photos-heading">{config.photos.heading}</h2>
-      <p className="note">{config.photos.note}</p>
-      <div className="frames">
-        {config.photos.frames.map((frame) => (
-          <figure key={frame.id}>
-            <div className="frame" aria-hidden="true">
-              <span>Photograph</span>
-            </div>
-            <figcaption>{frame.label}</figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function RsvpBlock({ config }: { config: EventConfig }) {
-  return (
-    <section className="block" aria-labelledby="rsvp-heading">
-      <h2 id="rsvp-heading">{config.rsvp.heading}</h2>
-      <p className="rsvp-note">{config.rsvp.note}</p>
-    </section>
-  )
-}
-
-function NotesBlock({ config }: { config: EventConfig }) {
-  return (
-    <footer className="notes">
-      <p>{config.draft.detail}</p>
-      <section aria-labelledby="notes-heading">
-        <h2 id="notes-heading">{config.notesHeading}</h2>
-        <ul>
-          {config.placeholders.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
-      <Sprig className="closing-sprig" />
-    </footer>
   )
 }

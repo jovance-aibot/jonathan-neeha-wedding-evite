@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Noto Serif";
+  src: url("./fonts/noto-serif.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("./fonts/source-sans-3.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   --cloth: #efd3c4;
@@ -80,7 +96,9 @@ h1:focus-visible {
 }
 
 .sheet h1:focus,
-.sheet h1:focus-visible {
+.sheet h1:focus-visible,
+.story h1:focus,
+.story h1:focus-visible {
   outline: none;
 }
 
@@ -704,6 +722,250 @@ figcaption {
   .actions .button,
   .stack-actions .button {
     width: 100%;
+  }
+}
+
+.story {
+  background: #f6f0e8;
+  color: #2a2420;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 2.4rem 1.1rem calc(6.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.story-inner {
+  width: min(40rem, 100%);
+  margin: 0 auto;
+}
+
+.story-open,
+.times,
+.venue,
+.close,
+.countdown,
+.stock-note {
+  text-align: center;
+}
+
+.kicker,
+.story .date,
+.time-block h2,
+.venue h2,
+.countdown h2,
+.sub,
+.stock-note,
+.sign,
+.close-lead,
+.hint,
+.story .button {
+  font-family: "Source Sans 3", var(--sans);
+}
+
+.story h1,
+.when,
+.venue-name,
+.see,
+.num {
+  font-family: "Noto Serif", var(--serif);
+}
+
+.kicker {
+  margin: 0 0 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6d3142;
+}
+
+.story h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(2.05rem, 7vw, 3.35rem);
+  line-height: 1.12;
+}
+
+.story h1 .name,
+.story h1 .and {
+  display: block;
+}
+
+.story h1 .and {
+  margin: 0.15rem 0;
+  color: #6d3142;
+  font-size: 0.72em;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.story .date {
+  margin: 1rem 0 0;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.countdown {
+  margin: 1.15rem 0 0.2rem;
+}
+
+.countdown h2,
+.time-block h2,
+.venue h2 {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6d3142;
+}
+
+.story .count-grid {
+  display: flex;
+  justify-content: center;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.story .count-grid li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3.2rem;
+  padding: 0;
+  border: 0;
+}
+
+.story .num {
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.story .unit {
+  margin-top: 0.2rem;
+  font-family: "Source Sans 3", var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.photo {
+  margin: 1.45rem 0;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #e7d7cb;
+}
+
+.times {
+  display: grid;
+  gap: 1.35rem;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.when {
+  margin: 0;
+  font-size: clamp(1.55rem, 5vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.sub,
+.venue-locality,
+.close-lead,
+.sign {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.time-note {
+  margin: 0.85rem auto 0;
+  max-width: 28rem;
+}
+
+.venue {
+  margin: 0.3rem 0 0.2rem;
+}
+
+.venue-name {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.story .stack-actions {
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.story .button {
+  width: auto;
+  min-width: 11rem;
+  border-color: #6d3142;
+  background: #6d3142;
+  color: #f6f0e8;
+  font-weight: 600;
+}
+
+.story .button-quiet {
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: #6d3142;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.story .hint,
+.stock-note {
+  max-width: 34rem;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.stock-note {
+  margin-top: 0.2rem;
+  margin-bottom: 1.6rem;
+  color: #4a403a;
+}
+
+.close-lead {
+  margin-bottom: 0.85rem;
+}
+
+.see {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.sign {
+  margin-top: 0.45rem;
+  font-weight: 600;
+}
+
+@media (min-width: 720px) {
+  .times {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .when {
+    font-size: 1.28rem;
   }
 }
 
