@@ -109,7 +109,9 @@ describe('invitation details', () => {
     expect(screen.getByText('Philip Pavilion')).toBeInTheDocument()
     expect(screen.getByText(eventConfig.reception.note)).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: /rsvp/i })).not.toBeInTheDocument()
-    expect(document.body.textContent).not.toMatch(/two are better|ecclesiastes|music is omitted|draft preview/i)
+    expect(document.body.textContent).not.toMatch(
+      /two are better|ecclesiastes|music is omitted|draft preview|end time is not set|yet to get|still unsettled|to be confirmed|placeholder/i,
+    )
     const following = Node.DOCUMENT_POSITION_FOLLOWING
     const ceremony = screen.getByText(eventConfig.ceremony.timeDisplay)
     const venue = screen.getByRole('heading', { name: 'Venue' })

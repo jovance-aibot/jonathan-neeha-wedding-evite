@@ -39,7 +39,7 @@ Opening the envelope starts “Painted Woods in Autumn” by TheFealdoProject. *
 - Jonathan Ve Vance and Neeha Shaitus
 - Monday, 28 December 2026
 - Ceremony, 3:30–4:30 PM IST, Philip Pavilion, Memury, in the AC hall
-- Reception outdoors at Philip Pavilion from 6:30 PM IST, with no confirmed end time
+- Reception outdoors at Philip Pavilion, 6:30–9:30 PM IST
 - Directions open the supplied Google Maps link for that venue
 
 ## Still open on purpose
