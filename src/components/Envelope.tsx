@@ -68,7 +68,7 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                   <rect x="120" y="650" width="960" height="610" rx="9" />
                 </clipPath>
                 <clipPath id="sheet-clip">
-                  <rect x="80" y="0" width="1040" height="1262" />
+                  <rect x="140" y="0" width="920" height="1236" />
                 </clipPath>
               </defs>
               <g clipPath="url(#wine-clip)">
@@ -79,14 +79,47 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
               <g clipPath="url(#sheet-clip)">
                 <g className="riser">
                   <rect x="150" y="320" width="900" height="920" rx="6" fill="#fbf6ee" stroke="#3e5144" strokeOpacity="0.22" />
-                  <text x="600" y="430" textAnchor="middle" fontFamily="Georgia, serif" fontSize="64" fill="#2a2420">
+                  <text x="600" y="408" textAnchor="middle" fontFamily="Georgia, serif" fontSize="58" fill="#2a2420">
                     {monogram}
                   </text>
-                  <text x="600" y="496" textAnchor="middle" fontFamily="Georgia, serif" fontSize="28" fill="#2a2420">
+                  <text x="600" y="462" textAnchor="middle" fontFamily="Georgia, serif" fontSize="24" fill="#2a2420">
                     {partnerA.display} and {partnerB.display}
                   </text>
-                  <text x="600" y="542" textAnchor="middle" fontFamily="Georgia, serif" fontSize="22" fontStyle="italic" fill="#4a403a">
+                  <text x="600" y="500" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontStyle="italic" fill="#4a403a">
                     {eventConfig.when.display}
+                  </text>
+                  <path d="M430 528 H520 M680 528 H770" fill="none" stroke="#3e5144" strokeOpacity="0.4" strokeWidth="1.4" />
+                  <path d="M600 520 l7 8 -7 8 -7 -8 Z" fill="#3e5144" opacity="0.5" />
+                  <text x="600" y="572" textAnchor="middle" fontFamily="Georgia, serif" fontSize="28" fill="#2a2420">
+                    {eventConfig.ceremony.venueName}
+                  </text>
+                  <text x="600" y="606" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontStyle="italic" fill="#4a403a">
+                    {eventConfig.ceremony.locality}
+                  </text>
+                  <text x="600" y="658" textAnchor="middle" fontFamily="Georgia, serif" fontSize="16" letterSpacing="3" fill="#3e5144">
+                    CEREMONY
+                  </text>
+                  <text x="600" y="688" textAnchor="middle" fontFamily="Georgia, serif" fontSize="22" fill="#2a2420">
+                    {eventConfig.ceremony.timeDisplay}
+                  </text>
+                  <text x="600" y="716" textAnchor="middle" fontFamily="Georgia, serif" fontSize="18" fontStyle="italic" fill="#4a403a">
+                    {eventConfig.ceremony.room}
+                  </text>
+                  <text x="600" y="748" textAnchor="middle" fontFamily="Georgia, serif" fontSize="16" letterSpacing="3" fill="#3e5144">
+                    RECEPTION
+                  </text>
+                  <text x="600" y="776" textAnchor="middle" fontFamily="Georgia, serif" fontSize="22" fill="#2a2420">
+                    {eventConfig.reception.timeDisplay}
+                  </text>
+                  <text x="600" y="802" textAnchor="middle" fontFamily="Georgia, serif" fontSize="18" fontStyle="italic" fill="#4a403a">
+                    Outdoors
+                  </text>
+                  <path d="M490 820 H710" fill="none" stroke="#3e5144" strokeOpacity="0.35" strokeWidth="1.2" />
+                  <text x="600" y="846" textAnchor="middle" fontFamily="Georgia, serif" fontSize="20" fontStyle="italic" fill="#2a2420">
+                    Two are better than one
+                  </text>
+                  <text x="600" y="870" textAnchor="middle" fontFamily="Georgia, serif" fontSize="15" fill="#3e5144">
+                    Ecclesiastes 4:9 · KJV
                   </text>
                 </g>
               </g>
@@ -105,7 +138,7 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                 </g>
               </g>
               <g className="pocket">
-                <path d="M122 1258 L122 1234 L552 942 Q600 913 648 942 L1078 1234 L1078 1258Z" fill="url(#wine-pocket)" />
+                <path d="M122 1260 L122 1234 L552 942 Q600 913 648 942 L1078 1234 L1078 1260Z" fill="url(#wine-pocket)" />
                 <path d="M126 1235 L553 944 M647 944 L1074 1235" fill="none" stroke="#3f1e2b" strokeOpacity="0.32" strokeWidth="2" />
               </g>
               <g className="closure">
