@@ -92,6 +92,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
           </p>
           <div className="shared-venue">
             <h2 className="shared-name">{config.ceremony.venueName}</h2>
+            <p className="shared-locality">{config.ceremony.locality}</p>
             <div className="day-columns">
               <div className="day-col">
                 <p className="event-role">{config.ceremony.title}</p>
@@ -111,6 +112,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
             </div>
           </div>
         </section>
+        <div className="schedule-rule" aria-hidden="true" />
         <Portrait className="portrait-again" variant="garden" alt={secondAlt} />
         <CountdownBlock config={config} now={now} />
         <VenueBlock config={config} />
