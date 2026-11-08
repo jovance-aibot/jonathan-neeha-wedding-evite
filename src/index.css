@@ -928,9 +928,10 @@ figcaption {
 }
 
 .countdown {
-  margin: 3rem 0 2.2rem;
-  padding-top: 2.2rem;
-  border-top: 1px solid rgba(168, 146, 94, 0.55);
+  width: min(57.5rem, 100%);
+  margin: 3.4rem auto 1.6rem;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .countdown h2,
@@ -957,7 +958,7 @@ figcaption {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 3.2rem;
+  min-width: 0;
   padding: 0;
   border: 0;
 }
@@ -971,27 +972,41 @@ figcaption {
 
 .story .countdown .count-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.75rem 0.8rem;
-  max-width: 22rem;
-  margin: 0.4rem auto 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 45rem;
+  margin: 1.75rem auto 0;
+}
+
+.story .countdown .count-grid li {
+  padding: 22px 8px 18px;
+  border: 1px solid rgba(138, 115, 65, 0.55);
+  border-radius: 18px;
+  background: var(--paper);
+  box-shadow: 0 12px 28px rgba(35, 58, 46, 0.05);
 }
 
 .story .countdown h2 {
-  margin-bottom: 1.35rem;
-  font-size: 0.8rem;
+  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  letter-spacing: 0;
+  line-height: 1.15;
+  text-transform: none;
+  color: var(--ink);
 }
 
 .story .countdown .num {
-  font-size: clamp(2.75rem, 12vw, 4.4rem);
-  line-height: 0.95;
+  font-size: clamp(2.6rem, 6vw, 3.6rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--ink);
 }
 
 .story .countdown .unit {
-  margin-top: 0.45rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  color: var(--label);
+  margin-top: 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--amp);
 }
 
 .story .unit {
@@ -1156,25 +1171,23 @@ figcaption {
   outline-offset: 4px;
 }
 
-.invite-line {
-  margin: 0.15rem auto 0;
-  width: min(22rem, calc(100vw - 11rem));
-  max-width: 100%;
+.intro {
+  width: min(46.25rem, 100%);
+  margin: 0.35rem auto 0;
   text-align: center;
-  font-family: "Marcellus", var(--serif);
-  font-weight: 400;
-  font-style: normal;
-  font-size: clamp(1.28rem, 4.4vw, 1.7rem);
-  line-height: 1.4;
-  color: var(--ink);
   scroll-margin-top: 1.25rem;
 }
 
+.intro-rule {
+  width: 4.5rem;
+  height: 1px;
+  margin: 0 auto 1.75rem;
+  background: rgba(138, 115, 65, 0.75);
+}
+
 .verse {
-  margin: 1.35rem auto 0;
-  width: min(18rem, calc(100vw - 11rem));
-  max-width: 100%;
-  text-align: center;
+  margin: 0;
+  width: 100%;
 }
 
 .verse blockquote {
@@ -1186,20 +1199,38 @@ figcaption {
   font-family: "Marcellus", var(--serif);
   font-weight: 400;
   font-style: normal;
-  font-size: clamp(1.15rem, 3.6vw, 1.45rem);
-  line-height: 1.45;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.25;
+  text-wrap: balance;
   color: var(--ink);
 }
 
 .verse figcaption {
-  margin-top: 0.45rem;
+  margin-top: 12px;
   font-family: "Marcellus", var(--serif);
   font-weight: 400;
   font-style: normal;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  line-height: 1.25;
   text-transform: uppercase;
-  color: var(--label);
+  color: var(--amp);
+}
+
+.invite-line {
+  margin: 18px 0 0;
+  width: 100%;
+  font-family: "Marcellus", var(--serif);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  text-wrap: balance;
+  color: var(--soft);
+}
+
+.intro .date {
+  margin-top: 1.65rem;
 }
 
 .hero-photo {
@@ -1307,12 +1338,6 @@ figcaption {
 
   .story .countdown .count-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    max-width: 42rem;
-    gap: 1.5rem;
-  }
-
-  .story .countdown .num {
-    font-size: 4.4rem;
   }
 
   .hero {

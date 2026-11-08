@@ -70,18 +70,21 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
         </div>
       </header>
       <article className="story-inner">
-        <p className="invite-line" id="invite-line">
-          Together with their families, Jonathan and Neeha joyfully invite you to celebrate their wedding.
-        </p>
-        <figure className="verse">
-          <blockquote>
-            <p>I have found the one whom my soul loves.</p>
-          </blockquote>
-          <figcaption>Song of Solomon 3:4</figcaption>
-        </figure>
-        <p className="date">
-          <DateParts display={config.when.display} />
-        </p>
+        <section className="intro" id="invite-line">
+          <div className="intro-rule" aria-hidden="true" />
+          <figure className="verse">
+            <blockquote>
+              <p>I have found the one whom my soul loves.</p>
+            </blockquote>
+            <figcaption>Song of Solomon 3:4</figcaption>
+          </figure>
+          <p className="invite-line">
+            Together with their families, Jonathan and Neeha joyfully invite you to celebrate their wedding.
+          </p>
+          <p className="date">
+            <DateParts display={config.when.display} />
+          </p>
+        </section>
         <div className="day">
           <section className="times" aria-label="Schedule">
             <div className="time-block">
