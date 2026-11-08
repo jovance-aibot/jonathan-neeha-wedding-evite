@@ -181,9 +181,8 @@ h1:focus-visible {
 
 .envelope-wrap {
   width: 100%;
-  margin: 0.85rem auto 0;
-  /* Room for the sheet to stand above the envelope without meeting the viewport edge. */
-  padding-top: 38%;
+  margin: 3.52rem auto 0;
+  padding-top: 0;
   perspective: 1200px;
 }
 
@@ -322,7 +321,7 @@ h1:focus-visible {
   margin: 0.35rem 0 0.15rem;
   font-family: "Bodoni Moda", var(--serif);
   font-size: clamp(2.15rem, 8vw, 3.15rem);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.05;
 }
 
@@ -338,6 +337,24 @@ h1:focus-visible {
 .gate-date {
   margin: 0.2rem 0 0;
   font-size: 0.78rem;
+}
+
+.date-word {
+  letter-spacing: 0.18em;
+}
+
+.numeral {
+  font-family: "Bodoni Moda", var(--serif);
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Bodoni's hyphen is a hairline that disappears at the time size. The digits stay in that face. */
+.time-sep {
+  font-family: "Cormorant Garamond", var(--serif);
+  font-weight: 600;
 }
 
 .gate-divider {
@@ -372,7 +389,7 @@ h1:focus-visible {
   margin: 0.15rem 0 0;
   font-family: "Bodoni Moda", var(--serif);
   font-size: clamp(1.7rem, 6vw, 2.15rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.1;
 }
 
@@ -890,7 +907,7 @@ figcaption {
 
 .story h1 {
   margin: 0;
-  font-weight: 500;
+  font-weight: 700;
   font-size: clamp(2.05rem, 7vw, 3.35rem);
   line-height: 1.12;
   font-family: "Bodoni Moda", var(--serif);
@@ -984,6 +1001,7 @@ figcaption {
 
 .when {
   margin: 0;
+  font-family: "Bodoni Moda", var(--serif);
   font-size: clamp(1.55rem, 5vw, 2.15rem);
   font-weight: 500;
   line-height: 1.2;
@@ -1011,7 +1029,7 @@ figcaption {
   margin: 0;
   font-family: "Bodoni Moda", var(--serif);
   font-size: clamp(1.8rem, 5vw, 2.4rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.15;
 }
 

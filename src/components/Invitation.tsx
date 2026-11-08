@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { Ref } from 'react'
 import { eventConfig as defaultConfig, type EventConfig } from '../config/event.ts'
+import { parseDateDisplay } from '../lib/dateDisplay.ts'
 import { CoupleHeading } from './CoupleHeading.tsx'
 import { getCountdown, unitWord } from '../lib/countdown.ts'
 
@@ -12,6 +13,32 @@ type InvitationProps = {
 
 const base = import.meta.env.BASE_URL
 
+export function TimeRange({ value }: { value: string }) {
+  const match = value.match(/^(.*?)\s-\s(.*)$/)
+  if (!match) return value
+  return (
+    <>
+      <span className="numeral">{match[1]}</span>
+      <span className="time-sep"> - </span>
+      <span className="numeral">{match[2]}</span>
+    </>
+  )
+}
+
+export function DateParts({ display }: { display: string }) {
+  const parts = parseDateDisplay(display)
+  if (!parts) return display
+  return (
+    <>
+      <span className="date-word">{parts.weekday}</span>
+      <span className="date-sep"> · </span>
+      <span className="numeral">{parts.day}</span>{' '}
+      <span className="date-word">{parts.month}</span>{' '}
+      <span className="numeral">{parts.year}</span>
+    </>
+  )
+}
+
 export function Invitation({ config = defaultConfig, now, headingRef }: InvitationProps) {
   return (
     <main className="story">
@@ -19,7 +46,9 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
         <header className="story-open">
           <p className="kicker">Please join us to celebrate</p>
           <CoupleHeading config={config} headingRef={headingRef} focusable />
-          <p className="date">{config.when.display}</p>
+          <p className="date">
+            <DateParts display={config.when.display} />
+          </p>
         </header>
         <CountdownBlock config={config} now={now} />
         <PhotoFigure
@@ -32,13 +61,17 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
         <section className="times" aria-label="Schedule">
           <div className="time-block">
             <h2>{config.ceremony.title}</h2>
-            <p className="when">{config.ceremony.timeDisplay}</p>
-            <p className="sub">Indoors · {config.ceremony.room}</p>
+            <p className="when">
+              <TimeRange value={config.ceremony.timeDisplay} />
+            </p>
+            <p className="sub">{config.ceremony.room}</p>
           </div>
           <div className="time-block">
             <h2>{config.reception.title}</h2>
-            <p className="when">{config.reception.timeDisplay}</p>
-            <p className="sub">Outdoors · same venue</p>
+            <p className="when">
+              <TimeRange value={config.reception.timeDisplay} />
+            </p>
+            <p className="sub">Outdoor space</p>
           </div>
         </section>
         <PhotoFigure name="rings" width={1200} height={800} alt="Hands with wedding rings." />

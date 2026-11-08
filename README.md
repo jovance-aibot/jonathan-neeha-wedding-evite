@@ -38,8 +38,8 @@ Opening the envelope starts “Painted Woods in Autumn” by TheFealdoProject. *
 
 - Jonathan Ve Vance and Neeha Shaitus
 - Monday, 28 December 2026
-- Ceremony, 3:30 - 4:30 PM, Philip Pavilion, Ramamangalam, Ernakulam, in the AC hall
-- Reception outdoors at Philip Pavilion, 6:30 - 9:30 PM
+- Ceremony, 3:30 - 4:30 PM, Philips Pavilion, Ramamangalam, Ernakulam, in the AC hall
+- Reception in the outdoor space at Philips Pavilion, 6:30 - 9:30 PM
 - Directions open the supplied Google Maps link for that venue
 
 ## Still open on purpose

@@ -25,7 +25,7 @@ describe('confirmed event facts', () => {
     expect(eventConfig.ceremony.startIso).toBe('2026-12-28T15:30:00+05:30')
     expect(eventConfig.ceremony.endIso).toBe('2026-12-28T16:30:00+05:30')
     expect(eventConfig.countdown.targetIso).toBe(eventConfig.ceremony.startIso)
-    expect(eventConfig.ceremony.venueName).toBe('Philip Pavilion')
+    expect(eventConfig.ceremony.venueName).toBe('Philips Pavilion')
     expect(eventConfig.ceremony.locality).toBe('Ramamangalam, Ernakulam')
     expect(eventConfig.ceremony.timeDisplay).toBe('3:30 - 4:30 PM')
     expect(eventConfig.ceremony.room).toBe('AC hall')
@@ -34,9 +34,9 @@ describe('confirmed event facts', () => {
     expect(end.getTime() - start.getTime()).toBe(60 * 60 * 1000)
   })
 
-  it('places the ceremony and the reception at Philip Pavilion', () => {
-    expect(eventConfig.ceremony.placeDisplay).toBe('Philip Pavilion, Ramamangalam, Ernakulam')
-    expect(eventConfig.reception.placeDisplay).toBe('Philip Pavilion, outdoors')
+  it('places the ceremony and the reception at Philips Pavilion', () => {
+    expect(eventConfig.ceremony.placeDisplay).toBe('Philips Pavilion, Ramamangalam, Ernakulam')
+    expect(eventConfig.reception.placeDisplay).toBe('Philips Pavilion, outdoor space')
     expect(eventConfig.reception.startIso).toBe('2026-12-28T18:30:00+05:30')
     expect(eventConfig.reception.endIso).toBe('2026-12-28T21:30:00+05:30')
     expect(eventConfig.reception.timeDisplay).toBe('6:30 - 9:30 PM')
