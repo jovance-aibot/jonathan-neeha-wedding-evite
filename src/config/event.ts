@@ -90,7 +90,7 @@ export const eventConfig = {
     title: 'Ceremony',
     venueName: 'Philips Pavilion',
     locality: 'Ramamangalam, Ernakulam',
-    room: 'AC hall',
+    room: 'Indoor AC hall',
     startIso: ceremonyStartIso,
     endIso: ceremonyEndIso,
     timeDisplay: '3:30 - 4:30 PM',

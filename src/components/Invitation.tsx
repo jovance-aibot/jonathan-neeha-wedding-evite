@@ -115,7 +115,9 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
         <div className="schedule-rule" aria-hidden="true" />
         <Portrait className="portrait-again" variant="garden" alt={secondAlt} />
         <CountdownBlock config={config} now={now} />
+        <div className="venue-rule" aria-hidden="true" />
         <VenueBlock config={config} />
+        <div className="close-rule" aria-hidden="true" />
         <footer className="close">
           <p className="close-lead">We would love to celebrate with you</p>
           <p className="see">See you there</p>

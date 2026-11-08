@@ -35,7 +35,7 @@ describe('envelope gate', () => {
     expect(screen.getAllByText('Ramamangalam, Ernakulam').length).toBeGreaterThan(0)
     expect(open).not.toHaveTextContent('IST')
     expect(open).toHaveTextContent(eventConfig.ceremony.timeDisplay)
-    expect(open).toHaveTextContent('AC hall')
+    expect(open).toHaveTextContent('Indoor AC hall')
     expect(open).toHaveTextContent(eventConfig.reception.timeDisplay)
     expect(open).toHaveTextContent('Outdoor space')
     expect(open).not.toHaveTextContent('Indoors')
