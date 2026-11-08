@@ -53,17 +53,17 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
             <svg className="envelope" viewBox="120 650 960 610" aria-hidden="true">
               <defs>
                 <linearGradient id="wine-body" x2="0.4" y2="1">
-                  <stop stopColor="#9bb892" />
-                  <stop offset="1" stopColor="#6e9472" />
+                  <stop stopColor="var(--envelope-body-light)" />
+                  <stop offset="1" stopColor="var(--envelope-body-deep)" />
                 </linearGradient>
                 <linearGradient id="wine-pocket" x2="0" y2="1">
-                  <stop stopColor="#86a781" />
-                  <stop offset="1" stopColor="#64866a" />
+                  <stop stopColor="var(--envelope-mid)" />
+                  <stop offset="1" stopColor="var(--envelope-fold)" />
                 </linearGradient>
                 <linearGradient id="wine-flap" x2="0.2" y2="1">
-                  <stop stopColor="#a9c4a4" />
-                  <stop offset="0.55" stopColor="#86a781" />
-                  <stop offset="1" stopColor="#6f9274" />
+                  <stop stopColor="var(--envelope-flap-light)" />
+                  <stop offset="0.55" stopColor="var(--envelope-mid)" />
+                  <stop offset="1" stopColor="var(--envelope-flap-deep)" />
                 </linearGradient>
                 <linearGradient id="wine-ribbon">
                   <stop stopColor="#ad8e62" />
@@ -92,7 +92,7 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                 </clipPath>
               </defs>
               <g clipPath="url(#wine-clip)">
-                <rect x="120" y="650" width="960" height="610" fill="#5e7a62" />
+                <rect x="120" y="650" width="960" height="610" fill="var(--envelope-base)" />
                 <rect x="120" y="650" width="960" height="610" fill="url(#wine-body)" />
                 <rect x="120" y="650" width="960" height="610" filter="url(#wine-grain)" opacity="0.32" />
               </g>
@@ -226,13 +226,13 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
                 </g>
               </g>
               <g clipPath="url(#wine-clip)">
-                <path d="M122 659 L662 1037 L122 1257Z" fill="#64866a" />
-                <path d="M1078 659 L538 1037 L1078 1257Z" fill="#64866a" />
+                <path d="M122 659 L662 1037 L122 1257Z" fill="var(--envelope-fold)" />
+                <path d="M1078 659 L538 1037 L1078 1257Z" fill="var(--envelope-fold)" />
                 <g className="flap">
                   <path
                     d="M122 652 H1078 L645 1003 Q600 1035 555 1003Z"
                     fill="url(#wine-flap)"
-                    stroke="#4f6b54"
+                    stroke="var(--envelope-stroke)"
                     strokeOpacity="0.4"
                     strokeWidth="1.5"
                   />
@@ -241,7 +241,7 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
               </g>
               <g className="pocket">
                 <path d="M122 1260 L122 1234 L552 942 Q600 913 648 942 L1078 1234 L1078 1260Z" fill="url(#wine-pocket)" />
-                <path d="M126 1235 L553 944 M647 944 L1074 1235" fill="none" stroke="#4f6b54" strokeOpacity="0.32" strokeWidth="2" />
+                <path d="M126 1235 L553 944 M647 944 L1074 1235" fill="none" stroke="var(--envelope-stroke)" strokeOpacity="0.32" strokeWidth="2" />
               </g>
               <g className="closure">
                 <path className="ribbon" d="M564 652 H636 V1258 H564Z" fill="url(#wine-ribbon)" />

@@ -16,6 +16,15 @@
   --shade: #eaf0e6;
   --peach: #dfe9dc;
   --flap: #86a781;
+  --invite-ground: #1a2f28;
+  --envelope-flap-light: #a9c4a4;
+  --envelope-body-light: #9bb892;
+  --envelope-mid: #86a781;
+  --envelope-flap-deep: #6f9274;
+  --envelope-body-deep: #6e9472;
+  --envelope-fold: #64866a;
+  --envelope-base: #5e7a62;
+  --envelope-stroke: #4f6b54;
   --ink: #233a2e;
   --soft: #4a5f51;
   --sage: #4a5f51;
@@ -146,11 +155,22 @@ h1:focus-visible {
 }
 
 .gate {
+  position: relative;
+  z-index: 0;
   min-height: calc(100vh - 2.4rem);
   min-height: calc(100dvh - 2.4rem);
   display: flex;
   overflow: visible;
   padding: 0.5rem 0.85rem calc(6rem + env(safe-area-inset-bottom, 0px));
+  color: #f8f6ef;
+}
+
+.gate::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--invite-ground);
 }
 
 .gate-body {
@@ -262,7 +282,7 @@ h1:focus-visible {
 }
 
 .envelope-open:focus-visible .open-cue {
-  outline: 2px solid var(--sage);
+  outline: 2px solid #f8f6ef;
   outline-offset: 5px;
   border-radius: 2px;
 }
@@ -275,7 +295,7 @@ h1:focus-visible {
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0.04em;
-  color: var(--sage);
+  color: #f8f6ef;
 }
 
 .gate-intro {
@@ -296,11 +316,11 @@ h1:focus-visible {
 .gate-kicker {
   margin: 0;
   font-size: 0.72rem;
-  color: var(--label);
+  color: #f0d7ac;
 }
 
 .gate-kicker.join-line {
-  color: var(--ink);
+  color: #f8f6ef;
   font-size: 0.95rem;
   letter-spacing: 0.045em;
   line-height: 1.35;
@@ -324,6 +344,10 @@ h1:focus-visible {
   font-size: 1.3em;
   line-height: 1;
   color: var(--amp);
+}
+
+.gate-names .amp {
+  color: #f0d7ac;
 }
 
 .gate-date {
@@ -1156,7 +1180,7 @@ figcaption {
 .hero-band {
   margin: -2.4rem calc(var(--story-pad-end) * -1) 0 calc(var(--story-pad-x) * -1);
   padding: 22.5px var(--story-pad-end) 20px var(--story-pad-x);
-  background: #1a2f28;
+  background: var(--invite-ground);
   color: #f8f6ef;
 }
 
