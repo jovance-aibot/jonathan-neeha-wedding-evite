@@ -39,25 +39,43 @@ export function DateParts({ display }: { display: string }) {
   )
 }
 
+function scrollToInvite() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  document.getElementById('invite-line')?.scrollIntoView({
+    behavior: reduce ? 'auto' : 'smooth',
+    block: 'start',
+  })
+}
+
 const heroAlt = 'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing together outdoors, shown from head to mid-leg.'
 const secondAlt = 'Neeha Shaitus in a green dress and Jonathan Ve Vance in a pink striped shirt, standing in a garden.'
 
 export function Invitation({ config = defaultConfig, now, headingRef }: InvitationProps) {
   return (
     <main className="story">
-      <article className="story-inner">
-        <header className="hero">
-          <div className="hero-photo">
-            <Portrait eager overlay variant="blue" alt={heroAlt} />
-            <div className="hero-title">
-              <p className="kicker join-line">Please join us to celebrate</p>
-              <CoupleHeading config={config} headingRef={headingRef} focusable />
+      <header className="hero-band">
+        <div className="story-inner">
+          <div className="hero">
+            <div className="hero-photo">
+              <Portrait eager overlay variant="blue" alt={heroAlt} />
+              <div className="hero-title">
+                <p className="kicker join-line">Please join us to celebrate</p>
+                <CoupleHeading config={config} headingRef={headingRef} focusable />
+              </div>
             </div>
           </div>
-          <p className="date">
-            <DateParts display={config.when.display} />
-          </p>
-        </header>
+          <button type="button" className="scroll-cue" onClick={scrollToInvite}>
+            Scroll
+          </button>
+        </div>
+      </header>
+      <article className="story-inner">
+        <p className="invite-line" id="invite-line">
+          We are happy to invite you to our wedding.
+        </p>
+        <p className="date">
+          <DateParts display={config.when.display} />
+        </p>
         <CountdownBlock config={config} now={now} />
         <div className="day">
           <section className="times" aria-label="Schedule">
