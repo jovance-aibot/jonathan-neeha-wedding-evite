@@ -92,6 +92,10 @@ export function EnvelopeGate({ opening, fading, onOpen }: EnvelopeGateProps) {
               <g clipPath="url(#sheet-clip)">
                 <g className="riser">
                   <rect x="150" y="320" width="900" height="920" rx="6" fill="#f8f6ef" stroke="#4a5f51" strokeOpacity="0.22" />
+                  <g className="letter-rules" fill="none" stroke="#a8925e" strokeWidth="2.2" strokeLinecap="round">
+                    <path d="M470 406 H730" />
+                    <path d="M470 580 H730" />
+                  </g>
                   <text className="letter-mark" x="600" y="493" textAnchor="middle" dominantBaseline="central" fontSize="84" fill="#233a2e">
                     <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {partnerA.initial}
