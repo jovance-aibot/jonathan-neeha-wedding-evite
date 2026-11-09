@@ -209,6 +209,9 @@ h1:focus-visible {
   width: min(28rem, 100%);
   margin: auto;
   overflow: visible;
+  /* Half the dark space under the locality: the centered block's bottom gap is
+     2.4rem below the gate plus 6rem padding plus half the free space inside it. */
+  transform: translateY(calc(25dvh + 2.4rem / 4 + 6rem / 4 - 0.5rem / 4 - 25%));
 }
 
 .envelope-wrap {
