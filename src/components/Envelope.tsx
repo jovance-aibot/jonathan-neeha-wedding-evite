@@ -92,44 +92,16 @@ export function EnvelopeGate({ opening, fading, onOpen }: EnvelopeGateProps) {
               <g clipPath="url(#sheet-clip)">
                 <g className="riser">
                   <rect x="150" y="320" width="900" height="920" rx="6" fill="#f8f6ef" stroke="#4a5f51" strokeOpacity="0.22" />
-                  <text x="600" y="408" textAnchor="middle" fontSize="58" fill="#233a2e">
+                  <text className="letter-mark" x="600" y="493" textAnchor="middle" dominantBaseline="central" fontSize="84" fill="#233a2e">
                     <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {partnerA.initial}
                     </tspan>
-                    <tspan fontFamily="Marcellus, serif" fontWeight="400" fontSize="75" fill="#8a7341">
+                    <tspan fontFamily="Marcellus, serif" fontWeight="400" fontSize="108" fill="#8a7341">
                       {' '}
                       &amp;{' '}
                     </tspan>
                     <tspan fontFamily="Marcellus, serif" fontWeight="400">
                       {partnerB.initial}
-                    </tspan>
-                  </text>
-                  <text x="600" y="462" textAnchor="middle" fontSize="22" fill="#233a2e">
-                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
-                      {partnerA.display}
-                    </tspan>
-                    <tspan fontFamily="Marcellus, serif" fontWeight="400" fontSize="29" fill="#8a7341">
-                      {' '}
-                      &amp;{' '}
-                    </tspan>
-                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
-                      {partnerB.display}
-                    </tspan>
-                  </text>
-                  <text x="600" y="500" textAnchor="middle" fontSize="22" fill="#4a5f51">
-                    <tspan fontFamily="Marcellus, serif" fontStyle="normal">
-                      {gateDate?.weekday ?? ''}
-                      {', '}
-                    </tspan>
-                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
-                      {gateDate?.day ?? ''}
-                    </tspan>
-                    <tspan fontFamily="Marcellus, serif" fontStyle="normal">
-                      {' '}
-                      {gateDate?.month ?? ''}{' '}
-                    </tspan>
-                    <tspan fontFamily="Marcellus, serif" fontWeight="400">
-                      {gateDate?.year ?? ''}
                     </tspan>
                   </text>
                 </g>
