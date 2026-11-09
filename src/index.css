@@ -213,8 +213,7 @@ h1:focus-visible {
 
 .envelope-wrap {
   width: 100%;
-  /* 330/960 of the width is how far the risen sheet paints above the SVG. */
-  margin: calc(1.686rem + 34.375%) auto 0;
+  margin: 1.686rem auto 0;
   padding-top: 0;
   perspective: 1200px;
 }
