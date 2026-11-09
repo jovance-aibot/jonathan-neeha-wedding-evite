@@ -3,7 +3,7 @@ import { act } from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
-import App, { HANDOFF_AT, HANDOFF_MS, OPEN_MS } from './App.tsx'
+import App, { GATE_FADE_MS, HANDOFF_AT, HANDOFF_MS, HERO_DELAY_MS, HERO_FADE_MS, OPEN_MS } from './App.tsx'
 import { eventConfig } from './config/event.ts'
 import { setReducedMotion } from './test/matchMedia.ts'
 
@@ -82,7 +82,7 @@ describe('envelope gate', () => {
     expect(document.querySelector('.hero-reveal')).toHaveAttribute('aria-hidden', 'true')
   })
 
-  it('crossfades the risen card into the invitation and then removes the envelope', async () => {
+  it('fades the risen card away before the invitation fades in', async () => {
     vi.useFakeTimers()
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
@@ -95,22 +95,30 @@ describe('envelope gate', () => {
       await vi.advanceTimersByTimeAsync(HANDOFF_AT - 1)
     })
     expect(document.querySelector('.gate.is-fading')).toBeNull()
-    expect(document.querySelector('.hero-reveal.is-fading')).toBeNull()
+    expect(document.querySelector('.hero-reveal.is-arriving')).toBeNull()
     expect(document.querySelector('.envelope')).not.toBeNull()
-    expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
     await act(async () => {
       await vi.advanceTimersByTimeAsync(1)
     })
     expect(document.querySelector('.gate.is-fading')).not.toBeNull()
-    expect(document.querySelector('.hero-reveal')).not.toBeNull()
-    expect(document.querySelector('.reveal-ground')).toBeNull()
+    expect(document.querySelector('.hero-reveal.is-arriving')).toBeNull()
+    expect(document.querySelector('.reveal-ground')).not.toBeNull()
     expect(document.querySelector('.envelope-wrap.is-opening')).not.toBeNull()
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(HERO_DELAY_MS - 1)
+    })
+    expect(document.querySelector('.hero-reveal.is-arriving')).toBeNull()
     expect(document.querySelector('.envelope')).not.toBeNull()
     await act(async () => {
-      await vi.advanceTimersByTimeAsync(HANDOFF_MS - 1)
+      await vi.advanceTimersByTimeAsync(1)
+    })
+    expect(document.querySelector('.hero-reveal.is-arriving')).not.toBeNull()
+    expect(document.querySelector('.gate.is-fading')).not.toBeNull()
+    expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(HERO_FADE_MS - 1)
     })
     expect(document.querySelector('.envelope')).not.toBeNull()
-    expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
     await act(async () => {
       await vi.advanceTimersByTimeAsync(1)
     })
@@ -119,7 +127,9 @@ describe('envelope gate', () => {
     expect(document.querySelector('.hero-reveal')).toBeNull()
     expect(document.querySelector('.reveal-ground')).toBeNull()
     expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
+    expect(HANDOFF_MS).toBe(HERO_DELAY_MS + HERO_FADE_MS)
     expect(OPEN_MS).toBe(HANDOFF_AT + HANDOFF_MS)
+    expect(HERO_DELAY_MS).toBeGreaterThanOrEqual(GATE_FADE_MS - 80)
   })
 
   it('ignores a second open click while the envelope is already opening', async () => {
@@ -166,11 +176,12 @@ describe('music', () => {
     expect(css).toMatch(/\.envelope-open:focus,\s*\.envelope-open:focus-visible \{\s*outline: none;/)
     expect(css).toMatch(/\.envelope-open:focus-visible \.open-cue/)
     expect(css).toContain('closure-fade')
-    expect(css).toContain('gate-fade-out 800ms cubic-bezier(0.4, 0, 0.2, 1)')
-    expect(css).not.toContain('hero-fade-in')
+    expect(css).toContain(`gate-fade-out ${GATE_FADE_MS}ms cubic-bezier(0, 0, 0.2, 1)`)
+    expect(css).toContain(`hero-fade-in ${HERO_FADE_MS}ms cubic-bezier(0.16, 0.04, 0.2, 1)`)
     expect(css).not.toContain('envelope-recede')
     expect(css).not.toContain('scale(0.95)')
-    expect(HANDOFF_MS).toBe(800)
+    expect(css).not.toMatch(/gate-fade-out[\s\S]{0,80}transform/)
+    expect(HANDOFF_MS).toBe(HERO_DELAY_MS + HERO_FADE_MS)
     expect(css).toContain('font-family: "Marcellus"')
     expect(css).not.toContain('Bodoni Moda')
     expect(css).not.toContain('Cormorant Garamond')

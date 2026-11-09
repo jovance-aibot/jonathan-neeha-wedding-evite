@@ -4,11 +4,14 @@ import { EnvelopeGate } from './components/Envelope.tsx'
 import { Invitation } from './components/Invitation.tsx'
 import { usePrefersReducedMotion } from './lib/motion.ts'
 
-type Phase = 'closed' | 'opening' | 'handoff' | 'invitation'
+type Phase = 'closed' | 'opening' | 'handoff' | 'arrive' | 'invitation'
 
-/** Letter rise ends at 3200ms. The crossfade starts after a short rest and finishes here. */
+/** Letter rise ends at 3200ms. The gate fades out before the hero fades in. */
 export const HANDOFF_AT = 3300
-export const HANDOFF_MS = 800
+export const GATE_FADE_MS = 600
+export const HERO_DELAY_MS = 540
+export const HERO_FADE_MS = 760
+export const HANDOFF_MS = HERO_DELAY_MS + HERO_FADE_MS
 export const OPEN_MS = HANDOFF_AT + HANDOFF_MS
 const MUSIC_VOLUME = 0.35
 
@@ -80,7 +83,7 @@ export default function App() {
   }
 
   function openInvitation() {
-    if (revealed.current || phase === 'opening' || phase === 'handoff') return
+    if (revealed.current || phase === 'opening' || phase === 'handoff' || phase === 'arrive') return
     if (musicChoice.current !== 'off') playMusic()
     if (reduced) {
       reveal()
@@ -90,18 +93,23 @@ export default function App() {
     revealTimer.current = window.setTimeout(() => {
       window.scrollTo(0, 0)
       setPhase('handoff')
-      revealTimer.current = window.setTimeout(reveal, HANDOFF_MS)
+      revealTimer.current = window.setTimeout(() => {
+        setPhase('arrive')
+        revealTimer.current = window.setTimeout(reveal, HERO_FADE_MS)
+      }, HERO_DELAY_MS)
     }, HANDOFF_AT)
   }
 
   const invitationReady = phase !== 'closed'
   const invitationSettled = phase === 'invitation'
+  const gateOpen = phase === 'opening' || phase === 'handoff' || phase === 'arrive'
 
   return (
     <>
+      {gateOpen ? <div className="reveal-ground" aria-hidden="true" /> : null}
       {invitationReady ? (
         <div
-          className={invitationSettled ? undefined : 'hero-reveal'}
+          className={invitationSettled ? undefined : phase === 'arrive' ? 'hero-reveal is-arriving' : 'hero-reveal'}
           inert={invitationSettled ? undefined : true}
           aria-hidden={invitationSettled ? undefined : true}
         >
@@ -109,11 +117,7 @@ export default function App() {
         </div>
       ) : null}
       {invitationSettled ? null : (
-        <EnvelopeGate
-          opening={phase === 'opening' || phase === 'handoff'}
-          fading={phase === 'handoff'}
-          onOpen={openInvitation}
-        />
+        <EnvelopeGate opening={gateOpen} fading={phase === 'handoff' || phase === 'arrive'} onOpen={openInvitation} />
       )}
       <button
         type="button"
