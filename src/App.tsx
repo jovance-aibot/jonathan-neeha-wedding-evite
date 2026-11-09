@@ -4,9 +4,12 @@ import { EnvelopeGate } from './components/Envelope.tsx'
 import { Invitation } from './components/Invitation.tsx'
 import { usePrefersReducedMotion } from './lib/motion.ts'
 
-type Phase = 'closed' | 'opening' | 'invitation'
+type Phase = 'closed' | 'opening' | 'handoff' | 'invitation'
 
-export const OPEN_MS = 4000
+/** Letter rise ends at 3200ms. The crossfade starts after a short rest and finishes here. */
+export const HANDOFF_AT = 3300
+export const HANDOFF_MS = 800
+export const OPEN_MS = HANDOFF_AT + HANDOFF_MS
 const MUSIC_VOLUME = 0.35
 
 export default function App() {
@@ -29,6 +32,15 @@ export default function App() {
 
   useEffect(() => {
     if (phase === 'invitation') headingRef.current?.focus()
+  }, [phase])
+
+  useEffect(() => {
+    if (phase !== 'opening') return
+    const images = document.querySelectorAll('.hero-reveal img')
+    images.forEach((node) => {
+      if (!(node instanceof HTMLImageElement) || typeof node.decode !== 'function') return
+      void node.decode().catch(() => undefined)
+    })
   }, [phase])
 
   useEffect(() => {
@@ -68,22 +80,40 @@ export default function App() {
   }
 
   function openInvitation() {
-    if (revealed.current || phase === 'opening') return
+    if (revealed.current || phase === 'opening' || phase === 'handoff') return
     if (musicChoice.current !== 'off') playMusic()
     if (reduced) {
       reveal()
       return
     }
     setPhase('opening')
-    revealTimer.current = window.setTimeout(reveal, OPEN_MS)
+    revealTimer.current = window.setTimeout(() => {
+      window.scrollTo(0, 0)
+      setPhase('handoff')
+      revealTimer.current = window.setTimeout(reveal, HANDOFF_MS)
+    }, HANDOFF_AT)
   }
+
+  const invitationReady = phase !== 'closed'
+  const invitationSettled = phase === 'invitation'
 
   return (
     <>
-      {phase === 'invitation' ? (
-        <Invitation headingRef={headingRef} />
-      ) : (
-        <EnvelopeGate opening={phase === 'opening'} onOpen={openInvitation} onRecedeEnd={reveal} />
+      {invitationReady ? (
+        <div
+          className={invitationSettled ? undefined : 'hero-reveal'}
+          inert={invitationSettled ? undefined : true}
+          aria-hidden={invitationSettled ? undefined : true}
+        >
+          <Invitation headingRef={invitationSettled ? headingRef : undefined} />
+        </div>
+      ) : null}
+      {invitationSettled ? null : (
+        <EnvelopeGate
+          opening={phase === 'opening' || phase === 'handoff'}
+          fading={phase === 'handoff'}
+          onOpen={openInvitation}
+        />
       )}
       <button
         type="button"

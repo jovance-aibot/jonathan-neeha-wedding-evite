@@ -6,16 +6,16 @@ const waxPath =
 
 type EnvelopeGateProps = {
   opening: boolean
+  fading: boolean
   onOpen: () => void
-  onRecedeEnd: () => void
 }
 
-export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps) {
+export function EnvelopeGate({ opening, fading, onOpen }: EnvelopeGateProps) {
   const { partnerA, partnerB } = eventConfig.couple
   const monogram = `${partnerA.initial} & ${partnerB.initial}`
   const gateDate = parseDateDisplay(eventConfig.when.display)
   return (
-    <main className="gate">
+    <main className={fading ? 'gate is-fading' : 'gate'}>
       <div className="gate-body">
         <header className="gate-intro">
           <p className="gate-kicker join-line">Please join us to celebrate</p>
@@ -42,14 +42,7 @@ export function EnvelopeGate({ opening, onOpen, onRecedeEnd }: EnvelopeGateProps
           aria-label={eventConfig.gate.openLabel}
           onClick={onOpen}
         >
-          <div
-            className={opening ? 'envelope-wrap is-opening' : 'envelope-wrap'}
-            onAnimationEnd={(event) => {
-              if (event.animationName !== 'envelope-recede') return
-              if (event.target !== event.currentTarget) return
-              onRecedeEnd()
-            }}
-          >
+          <div className={opening ? 'envelope-wrap is-opening' : 'envelope-wrap'}>
             <svg className="envelope" viewBox="120 650 960 610" aria-hidden="true">
               <defs>
                 <linearGradient id="wine-body" x2="0.4" y2="1">

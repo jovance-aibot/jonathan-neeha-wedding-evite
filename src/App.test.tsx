@@ -3,7 +3,7 @@ import { act } from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
-import App, { OPEN_MS } from './App.tsx'
+import App, { HANDOFF_AT, HANDOFF_MS, OPEN_MS } from './App.tsx'
 import { eventConfig } from './config/event.ts'
 import { setReducedMotion } from './test/matchMedia.ts'
 
@@ -78,28 +78,48 @@ describe('envelope gate', () => {
     await user.keyboard('{Enter}')
     expect(play).toHaveBeenCalledTimes(1)
     expect(document.querySelector('.envelope-wrap.is-opening')).not.toBeNull()
-    expect(screen.queryByText('See you there')).not.toBeInTheDocument()
+    expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
+    expect(document.querySelector('.hero-reveal')).toHaveAttribute('aria-hidden', 'true')
   })
 
-  it('holds the invitation back until the layered open motion finishes', async () => {
+  it('crossfades the risen card into the invitation and then removes the envelope', async () => {
     vi.useFakeTimers()
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: eventConfig.gate.openLabel }))
     expect(document.querySelector('.envelope-wrap.is-opening .riser')).not.toBeNull()
     expect(document.querySelector('.flap')).not.toBeNull()
     expect(document.querySelector('.pocket')).not.toBeNull()
-    expect(screen.queryByText('See you there')).not.toBeInTheDocument()
+    expect(document.querySelector('.hero-reveal img')).not.toBeNull()
+    expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
     await act(async () => {
-      await vi.advanceTimersByTimeAsync(OPEN_MS - 1)
+      await vi.advanceTimersByTimeAsync(HANDOFF_AT - 1)
     })
-    expect(screen.queryByText('See you there')).not.toBeInTheDocument()
+    expect(document.querySelector('.gate.is-fading')).toBeNull()
+    expect(document.querySelector('.hero-reveal.is-fading')).toBeNull()
     expect(document.querySelector('.envelope')).not.toBeNull()
+    expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(1)
+    })
+    expect(document.querySelector('.gate.is-fading')).not.toBeNull()
+    expect(document.querySelector('.hero-reveal')).not.toBeNull()
+    expect(document.querySelector('.reveal-ground')).toBeNull()
+    expect(document.querySelector('.envelope-wrap.is-opening')).not.toBeNull()
+    expect(document.querySelector('.envelope')).not.toBeNull()
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(HANDOFF_MS - 1)
+    })
+    expect(document.querySelector('.envelope')).not.toBeNull()
+    expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
     await act(async () => {
       await vi.advanceTimersByTimeAsync(1)
     })
     expect(screen.getByText('See you there')).toBeInTheDocument()
     expect(document.querySelector('.envelope')).toBeNull()
+    expect(document.querySelector('.hero-reveal')).toBeNull()
+    expect(document.querySelector('.reveal-ground')).toBeNull()
     expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
+    expect(OPEN_MS).toBe(HANDOFF_AT + HANDOFF_MS)
   })
 
   it('ignores a second open click while the envelope is already opening', async () => {
@@ -146,6 +166,11 @@ describe('music', () => {
     expect(css).toMatch(/\.envelope-open:focus,\s*\.envelope-open:focus-visible \{\s*outline: none;/)
     expect(css).toMatch(/\.envelope-open:focus-visible \.open-cue/)
     expect(css).toContain('closure-fade')
+    expect(css).toContain('gate-fade-out 800ms cubic-bezier(0.4, 0, 0.2, 1)')
+    expect(css).not.toContain('hero-fade-in')
+    expect(css).not.toContain('envelope-recede')
+    expect(css).not.toContain('scale(0.95)')
+    expect(HANDOFF_MS).toBe(800)
     expect(css).toContain('font-family: "Marcellus"')
     expect(css).not.toContain('Bodoni Moda')
     expect(css).not.toContain('Cormorant Garamond')
