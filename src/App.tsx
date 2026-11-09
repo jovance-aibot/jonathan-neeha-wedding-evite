@@ -130,7 +130,7 @@ export default function App() {
       </button>
       <audio
         ref={audioRef}
-        src={`${import.meta.env.BASE_URL}audio/painted-woods-in-autumn.mp3`}
+        src={`${import.meta.env.BASE_URL}audio/wedding-song.mp3`}
         loop
         preload="none"
         onPlay={() => setMusicOn(true)}

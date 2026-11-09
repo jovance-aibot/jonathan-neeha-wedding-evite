@@ -165,7 +165,7 @@ describe('music', () => {
     expect(element.paused).toBe(true)
     expect(element.preload).toBe('none')
     expect(element).toHaveAttribute('loop')
-    expect(element.getAttribute('src')).toMatch(/audio\/painted-woods-in-autumn\.mp3$/)
+    expect(element.getAttribute('src')).toMatch(/audio\/wedding-song\.mp3$/)
     expect(element.getAttribute('src')).not.toMatch(/^https?:/i)
     const toggle = screen.getByRole('button', { name: 'Play music' })
     expect(toggle).toHaveAttribute('aria-pressed', 'false')
