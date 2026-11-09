@@ -6,6 +6,12 @@
   font-display: swap;
 }
 
+@property --letter-peak {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
 :root {
   color-scheme: light;
   --cloth: #eaf0e6;
@@ -25,6 +31,8 @@
   --envelope-fold: #9bbb96;
   --envelope-base: #8aaf86;
   --envelope-stroke: #6e9474;
+  --photo-frame: 1.5px;
+  --letter-clearance: calc(var(--photo-frame) * 4);
   --ink: #233a2e;
   --soft: #4a5f51;
   --sage: #4a5f51;
@@ -209,6 +217,7 @@ h1:focus-visible {
   width: min(28rem, 100%);
   margin: auto;
   overflow: visible;
+  container-type: inline-size;
   /* Three quarters of the earlier downward shift, so the space under the
      locality is 1.25 times that lowered gap. */
   transform: translateY(calc(0.75 * (25dvh + 2.4rem / 4 + 6rem / 4 - 0.5rem / 4 - 25%)));
@@ -219,6 +228,7 @@ h1:focus-visible {
   margin: 1.686rem auto 0;
   padding-top: 0;
   perspective: 1200px;
+  --letter-peak: calc(332px - var(--letter-clearance) * 960px / 100cqi);
 }
 
 .gate.is-fading {
@@ -290,7 +300,7 @@ h1:focus-visible {
     transform: translateY(47%);
   }
   to {
-    transform: translateY(0);
+    transform: translateY(var(--letter-peak));
   }
 }
 
@@ -1546,7 +1556,7 @@ figcaption {
 }
 
 .hero .portrait {
-  padding: 1.5px;
+  padding: var(--photo-frame);
   border: 0;
   background: #f8f6ef;
   box-shadow: none;
@@ -1581,8 +1591,12 @@ figcaption {
     margin-top: 76.02px;
   }
 
+  :root {
+    --photo-frame: 2.25px;
+  }
+
   .hero .portrait {
-    padding: 2.25px;
+    padding: var(--photo-frame);
   }
 
   .hero {
