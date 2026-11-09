@@ -176,7 +176,7 @@ describe('music', () => {
     expect(css).toMatch(/\.envelope-open:focus,\s*\.envelope-open:focus-visible \{\s*outline: none;/)
     expect(css).toMatch(/\.envelope-open:focus-visible \.open-cue/)
     expect(css).toContain('closure-fade')
-    expect(css).toContain(`gate-fade-out ${GATE_FADE_MS}ms cubic-bezier(0, 0, 0.2, 1)`)
+    expect(css).toContain(`gate-fade-out ${GATE_FADE_MS}ms linear`)
     expect(css).toContain(`hero-fade-in ${HERO_FADE_MS}ms cubic-bezier(0.16, 0.04, 0.2, 1)`)
     expect(css).not.toContain('envelope-recede')
     expect(css).not.toContain('scale(0.95)')

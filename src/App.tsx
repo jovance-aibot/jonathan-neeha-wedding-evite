@@ -8,8 +8,8 @@ type Phase = 'closed' | 'opening' | 'handoff' | 'arrive' | 'invitation'
 
 /** Letter rise ends at 3200ms. The gate fades out before the hero fades in. */
 export const HANDOFF_AT = 3300
-export const GATE_FADE_MS = 600
-export const HERO_DELAY_MS = 540
+export const GATE_FADE_MS = 900
+export const HERO_DELAY_MS = 820
 export const HERO_FADE_MS = 760
 export const HANDOFF_MS = HERO_DELAY_MS + HERO_FADE_MS
 export const OPEN_MS = HANDOFF_AT + HANDOFF_MS
