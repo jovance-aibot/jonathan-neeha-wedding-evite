@@ -32,7 +32,7 @@
   --envelope-base: #8aaf86;
   --envelope-stroke: #6e9474;
   --photo-frame: 1.5px;
-  --letter-clearance: calc(var(--photo-frame) * 4);
+  --letter-clearance: calc(var(--photo-frame) * 8);
   --ink: #233a2e;
   --soft: #4a5f51;
   --sage: #4a5f51;
