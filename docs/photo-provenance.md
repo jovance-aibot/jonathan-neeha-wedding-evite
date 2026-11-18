@@ -2,7 +2,7 @@
 
 The invitation publishes two photographs of Jonathan Ve Vance and Neeha Shaitus, both supplied by them.
 
-The first photograph, with the names over it on a phone, is the outdoor portrait of Jonathan in a white shirt and Neeha in a blue dress, 1066 by 1600, SHA-256 `f7f2c0b942e2930d2636582ebb416d23542a9d09562c65fdd4925e6d410dc6c9`. Its public JPEG is that full frame with metadata removed. The picture ends around mid-leg.
+The first photograph, with the names over it on a phone, is the full-length outdoor portrait of Jonathan in a white shirt and Neeha in a blue dress, both facing the camera. The published JPEG is that frame with metadata removed, 1066 by 1600, SHA-256 `c01fcb1406b3820caafa0f0fd33343b0692297ce70da56590582efdc1829a788`. A WebP of the same frame and a 640-pixel-wide WebP are the delivery copies.
 
 The second photograph is the full-length garden picture: Neeha in an olive dress and Jonathan in a pink striped shirt, both facing the camera. The published JPEG is that frame with metadata removed, 1192 by 1600, SHA-256 `c73c03bc96607377390a3155c9bac725733278a30024fa28f510c46c65b331ed`. A WebP of the same frame and a 720-pixel-wide WebP are the delivery copies. Earlier stock photographs are no longer on the page.
 

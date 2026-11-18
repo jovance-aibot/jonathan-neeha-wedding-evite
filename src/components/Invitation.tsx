@@ -47,7 +47,7 @@ function scrollToInvite() {
   })
 }
 
-const heroAlt = 'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing together outdoors, shown from head to mid-leg.'
+const heroAlt = 'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing full length outdoors.'
 const secondAlt = 'Neeha Shaitus in an olive dress and Jonathan Ve Vance in a pink striped shirt, standing full length in a garden.'
 
 export function Invitation({ config = defaultConfig, now, headingRef }: InvitationProps) {
