@@ -65,7 +65,7 @@ describe('invitation details', () => {
     render(<Invitation now={new Date('2026-11-07T12:00:00+05:30')} />)
     const images = screen.getAllByRole('img')
     expect(images.map((image) => image.getAttribute('alt'))).toEqual([
-      'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing together outdoors, shown from head to mid-leg.',
+      'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing full length outdoors.',
       'Neeha Shaitus in an olive dress and Jonathan Ve Vance in a pink striped shirt, standing full length in a garden.',
     ])
     expect(images[0].getAttribute('src')).toContain('portrait-1066.jpg')
