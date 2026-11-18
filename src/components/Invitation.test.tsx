@@ -66,20 +66,21 @@ describe('invitation details', () => {
     const images = screen.getAllByRole('img')
     expect(images.map((image) => image.getAttribute('alt'))).toEqual([
       'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing together outdoors, shown from head to mid-leg.',
-      'Neeha Shaitus in a green dress and Jonathan Ve Vance in a pink striped shirt, standing in a garden.',
+      'Neeha Shaitus in an olive dress and Jonathan Ve Vance in a pink striped shirt, standing full length in a garden.',
     ])
     expect(images[0].getAttribute('src')).toContain('portrait-1066.jpg')
     expect(images[1].getAttribute('src')).toContain('hero-1200.jpg')
     expect(images[0]).toHaveAttribute('width', '1066')
     expect(images[0]).toHaveAttribute('height', '1600')
-    expect(images[1]).toHaveAttribute('width', '1200')
+    expect(images[1]).toHaveAttribute('width', '1192')
     expect(images[1]).toHaveAttribute('height', '1600')
     expect(images[0]).toHaveAttribute('loading', 'eager')
     expect(images[1]).toHaveAttribute('loading', 'lazy')
     expect(screen.getByRole('heading', { name: 'Jonathan Ve Vance and Neeha Shaitus' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Until the ceremony' })).toBeInTheDocument()
-    expect(screen.getByText('See you there')).toBeInTheDocument()
-    expect(document.querySelector('.sign')?.textContent?.replace(/\s+/g, ' ').trim()).toBe('Jonathan & Neeha')
+    expect(screen.getByText('Come share the day with us')).toBeInTheDocument()
+    expect(screen.getByText('With love')).toBeInTheDocument()
+    expect(document.querySelector('.sign')?.textContent?.replace(/\s+/g, ' ').trim()).toBe('Jonathan and Neeha')
     expect(screen.getAllByText('Philips Pavilion')).toHaveLength(2)
     expect(screen.getByText('Indoor AC hall')).toBeInTheDocument()
     expect(screen.getByText('Outdoor space')).toBeInTheDocument()
@@ -90,7 +91,7 @@ describe('invitation details', () => {
       /two are better|ecclesiastes|music is omitted|draft preview|end time is not set|yet to get|still unsettled|to be confirmed|placeholder|stock/i,
     )
     const invite = screen.getByText(
-      'Together with their families, Jonathan and Neeha joyfully invite you to celebrate their wedding.',
+      'With grateful hearts, we invite you and your family to our wedding.',
     )
     const verse = screen.getByText('I have found the one whom my soul loves.')
     expect(screen.getByText('Song of Solomon 3:4')).toBeInTheDocument()
@@ -100,7 +101,7 @@ describe('invitation details', () => {
     const ceremony = document.querySelector('.when')!
     const day = screen.getByText('The day')
     const venue = screen.getByRole('heading', { name: 'Venue' })
-    const close = screen.getByText('See you there')
+    const close = screen.getByText('Come share the day with us')
     expect(screen.getByRole('button', { name: 'Scroll' })).toBeInTheDocument()
     expect(screen.getByText('Counting the days')).toBeInTheDocument()
     expect(document.querySelectorAll('.date')).toHaveLength(1)

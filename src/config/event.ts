@@ -113,7 +113,7 @@ export const eventConfig = {
   },
   gate: {
     kicker: 'Wedding invitation',
-    openLabel: 'Open invitation',
+    openLabel: 'Tap the seal to open',
   },
   copy: {
     invitation: 'You are warmly invited to celebrate their marriage.',

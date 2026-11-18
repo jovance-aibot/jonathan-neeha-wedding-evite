@@ -48,7 +48,7 @@ function scrollToInvite() {
 }
 
 const heroAlt = 'Jonathan Ve Vance in a white shirt and Neeha Shaitus in a blue dress, standing together outdoors, shown from head to mid-leg.'
-const secondAlt = 'Neeha Shaitus in a green dress and Jonathan Ve Vance in a pink striped shirt, standing in a garden.'
+const secondAlt = 'Neeha Shaitus in an olive dress and Jonathan Ve Vance in a pink striped shirt, standing full length in a garden.'
 
 export function Invitation({ config = defaultConfig, now, headingRef }: InvitationProps) {
   return (
@@ -59,7 +59,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
             <div className="hero-photo">
               <Portrait eager overlay variant="blue" alt={heroAlt} />
               <div className="hero-title">
-                <p className="kicker join-line">Please join us to celebrate</p>
+                <p className="kicker join-line">Together with their families</p>
                 <CoupleHeading config={config} headingRef={headingRef} focusable />
               </div>
             </div>
@@ -82,7 +82,7 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
             <figcaption>Song of Solomon 3:4</figcaption>
           </figure>
           <p className="invite-line">
-            Together with their families, Jonathan and Neeha joyfully invite you to celebrate their wedding.
+            With grateful hearts, we invite you and your family to our wedding.
           </p>
         </section>
         <div className="day-lead-rule" aria-hidden="true" />
@@ -119,12 +119,9 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
         <VenueBlock config={config} />
         <div className="close-rule" aria-hidden="true" />
         <footer className="close">
-          <p className="close-lead">We would love to celebrate with you</p>
-          <p className="see">See you there</p>
-          <p className="sign">
-            {config.couple.partnerA.display.split(' ')[0]} <span className="amp">&amp;</span>{' '}
-            {config.couple.partnerB.display.split(' ')[0]}
-          </p>
+          <p className="close-lead">Come share the day with us</p>
+          <p className="see">With love</p>
+          <p className="sign">Jonathan and Neeha</p>
         </footer>
       </article>
     </main>
@@ -145,7 +142,7 @@ function Portrait({
   variant?: 'blue' | 'garden'
 }) {
   const file = variant === 'garden'
-    ? { small: 'hero-720.webp', smallW: 720, full: 'hero-1200.webp', fullW: 1200, jpg: 'hero-1200.jpg', w: 1200, h: 1600 }
+    ? { small: 'hero-720.webp', smallW: 720, full: 'hero-1200.webp', fullW: 1192, jpg: 'hero-1200.jpg', w: 1192, h: 1600 }
     : { small: 'portrait-640.webp', smallW: 640, full: 'portrait-1066.webp', fullW: 1066, jpg: 'portrait-1066.jpg', w: 1066, h: 1600 }
   return (
     <figure className={className ? `portrait ${className}` : 'portrait'}>

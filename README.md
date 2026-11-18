@@ -46,7 +46,7 @@ Opening the envelope starts the supplied recording. **Play music** and **Turn mu
 
 - There is no reply path
 
-No street address, contact details, dress code, parents, story, or extra events are invented here. **Get directions** uses the supplied Maps link and does not open it on its own. The page does not load a map. The music control plays the supplied recording after Open invitation.
+No street address, contact details, dress code, parents, story, or extra events are invented here. **Get directions** uses the supplied Maps link and does not open it on its own. The page does not load a map. The music control plays the supplied recording after the envelope is opened.
 
 ## Limits
 
