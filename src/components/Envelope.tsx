@@ -19,7 +19,7 @@ export function EnvelopeGate({ opening, fading, onOpen }: EnvelopeGateProps) {
     <main className={fading ? 'gate is-fading' : 'gate'}>
       <div className="gate-body">
         <header className="gate-intro">
-          <p className="gate-kicker join-line">Please join us to celebrate</p>
+          <p className="gate-kicker join-line">Come celebrate with us</p>
           <p className="gate-names">
             {partnerA.display.split(' ')[0]} <span className="amp">&amp;</span> {partnerB.display.split(' ')[0]}
           </p>
@@ -138,14 +138,6 @@ export function EnvelopeGate({ opening, fading, onOpen }: EnvelopeGateProps) {
           </div>
           <span className="open-cue">{eventConfig.gate.openLabel}</span>
         </button>
-        <div className="gate-divider" aria-hidden="true">
-          <span />
-        </div>
-        <section className="gate-venue" aria-label="Venue">
-          <p className="gate-kicker">The venue</p>
-          <p className="gate-venue-name">{eventConfig.ceremony.venueName}</p>
-          <p className="gate-locality">{eventConfig.ceremony.locality}</p>
-        </section>
       </div>
     </main>
   )
