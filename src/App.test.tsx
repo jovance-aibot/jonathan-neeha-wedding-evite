@@ -58,7 +58,7 @@ describe('envelope gate', () => {
     expect(screen.queryByText(/Draft preview/)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { level: 1, name: headingName })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /skip/i })).not.toBeInTheDocument()
-    expect(screen.queryByText('Come share the day with us')).not.toBeInTheDocument()
+    expect(screen.queryByText('With love')).not.toBeInTheDocument()
     expect(document.querySelector('.gate-card')).toBeNull()
     expect(open).not.toHaveFocus()
     await user.tab()
@@ -75,7 +75,7 @@ describe('envelope gate', () => {
     await user.tab()
     await user.keyboard('{Enter}')
     expect(screen.getByRole('heading', { level: 1, name: headingName })).toHaveFocus()
-    expect(screen.getByText('Come share the day with us')).toBeInTheDocument()
+    expect(screen.getByText('With love')).toBeInTheDocument()
     expect(document.querySelector('.envelope')).toBeNull()
   })
 
@@ -136,7 +136,7 @@ describe('envelope gate', () => {
     await act(async () => {
       await vi.advanceTimersByTimeAsync(1)
     })
-    expect(screen.getByText('Come share the day with us')).toBeInTheDocument()
+    expect(screen.getByText('With love')).toBeInTheDocument()
     expect(document.querySelector('.envelope')).toBeNull()
     expect(document.querySelector('.hero-reveal')).toBeNull()
     expect(document.querySelector('.reveal-ground')).toBeNull()
@@ -161,7 +161,7 @@ describe('envelope gate', () => {
     await act(async () => {
       await vi.advanceTimersByTimeAsync(OPEN_MS)
     })
-    expect(screen.getByText('Come share the day with us')).toBeInTheDocument()
+    expect(screen.getByText('With love')).toBeInTheDocument()
   })
 })
 
@@ -196,9 +196,9 @@ describe('music', () => {
     expect(css).not.toContain('scale(0.95)')
     expect(css).not.toMatch(/gate-fade-out[\s\S]{0,80}transform/)
     expect(HANDOFF_MS).toBe(HERO_DELAY_MS + HERO_FADE_MS)
-    expect(css).toContain('font-family: "Marcellus"')
+    expect(css).toMatch(/body\s*\{[^}]*font-family:\s*"Marcellus"/)
+    expect(css).toContain('font-family: "Cormorant Garamond"')
     expect(css).not.toContain('Bodoni Moda')
-    expect(css).not.toContain('Cormorant Garamond')
     expect(css).not.toContain('Great Vibes')
     expect(toggle.querySelector('.music-mark path')?.getAttribute('d')).toBe(
       'M9 17.5a2.5 2.5 0 1 1-2-2.45V6.2l10-2v9.35a2.5 2.5 0 1 1-2-2.45V7.1l-6 1.2v9.2z',

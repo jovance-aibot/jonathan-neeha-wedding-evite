@@ -6,6 +6,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("./fonts/cormorant-garamond-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("./fonts/cormorant-garamond-italic-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 @property --letter-peak {
   syntax: "<length>";
   inherits: true;
@@ -946,7 +962,6 @@ figcaption {
 .sub,
 .stock-note,
 .sign,
-.close-lead,
 .hint,
 .story .button,
 .when,
@@ -1120,7 +1135,6 @@ figcaption {
 
 .sub,
 .venue-locality,
-.close-lead,
 .sign {
   margin: 0.25rem 0 0;
   font-size: 1rem;
@@ -1202,23 +1216,27 @@ figcaption {
   margin: 43.09px auto 41.09px;
 }
 
-.close-lead {
-  margin-bottom: 0.85rem;
-}
-
 .see {
   margin: 0;
-  font-family: "Marcellus", var(--serif);
-  font-size: clamp(1.85rem, 6.2vw, 2.45rem);
+  font-family: "Cormorant Garamond", var(--serif);
+  font-size: clamp(2.35rem, 10.8vw, 3.15rem);
   font-weight: 400;
-  font-style: normal;
-  line-height: 1.2;
+  font-style: italic;
+  font-feature-settings: "ss03" 1;
+  line-height: 1;
+  letter-spacing: 0.01em;
   color: var(--ink);
 }
 
 .sign {
-  margin-top: 0.45rem;
+  margin-top: clamp(0.35rem, 1.6vw, 0.7rem);
+  font-family: "Cormorant Garamond", var(--serif);
+  font-size: clamp(1.7rem, 8vw, 2.15rem);
   font-weight: 400;
+  font-style: normal;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--ink);
 }
 
 .hero-band {

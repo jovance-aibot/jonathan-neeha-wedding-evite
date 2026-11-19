@@ -78,7 +78,7 @@ describe('invitation details', () => {
     expect(images[1]).toHaveAttribute('loading', 'lazy')
     expect(screen.getByRole('heading', { name: 'Jonathan Ve Vance and Neeha Shaitus' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Until the ceremony' })).toBeInTheDocument()
-    expect(screen.getByText('Come share the day with us')).toBeInTheDocument()
+    expect(screen.queryByText('Come share the day with us')).not.toBeInTheDocument()
     expect(screen.getByText('With love')).toBeInTheDocument()
     expect(document.querySelector('.sign')?.textContent?.replace(/\s+/g, ' ').trim()).toBe('Jonathan and Neeha')
     expect(screen.getAllByText('Philips Pavilion')).toHaveLength(2)
@@ -101,7 +101,7 @@ describe('invitation details', () => {
     const ceremony = document.querySelector('.when')!
     const day = screen.getByText('The day')
     const venue = screen.getByRole('heading', { name: 'Venue' })
-    const close = screen.getByText('Come share the day with us')
+    const close = screen.getByText('With love')
     expect(screen.getByRole('button', { name: 'Scroll' })).toBeInTheDocument()
     expect(screen.getByText('Counting the days')).toBeInTheDocument()
     expect(document.querySelectorAll('.date')).toHaveLength(1)

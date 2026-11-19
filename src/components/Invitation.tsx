@@ -119,7 +119,6 @@ export function Invitation({ config = defaultConfig, now, headingRef }: Invitati
         <VenueBlock config={config} />
         <div className="close-rule" aria-hidden="true" />
         <footer className="close">
-          <p className="close-lead">Come share the day with us</p>
           <p className="see">With love</p>
           <p className="sign">Jonathan and Neeha</p>
         </footer>
