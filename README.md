@@ -65,4 +65,4 @@ No street address, contact details, dress code, parents, story, or extra events 
 - oxlint 1.92.0
 - Puppeteer core 25.16.0, used only to capture local screenshots of the offline file
 
-The page uses a self-hosted subset of Marcellus Regular, the single weight 400 cut, under the SIL Open Font License. The closing signature uses a self-hosted subset of Cormorant Garamond, regular and italic, under the same license. The license texts are in `licenses/fonts/`. Dependency licenses stay recorded in `package-lock.json`.
+The page uses a self-hosted subset of Marcellus Regular, the single weight 400 cut, under the SIL Open Font License. “With love” uses a self-hosted subset of Pinyon Script, and the names beneath it use a self-hosted subset of Cormorant Garamond regular, both under the same license. The license texts are in `licenses/fonts/`. Dependency licenses stay recorded in `package-lock.json`.

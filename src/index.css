@@ -15,10 +15,10 @@
 }
 
 @font-face {
-  font-family: "Cormorant Garamond";
-  src: url("./fonts/cormorant-garamond-italic-400.woff2") format("woff2");
+  font-family: "Pinyon Script";
+  src: url("./fonts/pinyon-script-400.woff2") format("woff2");
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -1218,13 +1218,12 @@ figcaption {
 
 .see {
   margin: 0;
-  font-family: "Cormorant Garamond", var(--serif);
-  font-size: clamp(2.35rem, 10.8vw, 3.15rem);
+  font-family: "Pinyon Script", var(--serif);
+  font-size: clamp(2.5rem, 11.5vw, 3.4rem);
   font-weight: 400;
-  font-style: italic;
-  font-feature-settings: "ss03" 1;
-  line-height: 1;
-  letter-spacing: 0.01em;
+  font-style: normal;
+  line-height: 1.35;
+  letter-spacing: 0;
   color: var(--ink);
 }
 
