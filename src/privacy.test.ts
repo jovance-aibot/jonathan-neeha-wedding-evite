@@ -17,6 +17,9 @@ function filesIn(path: string): string[] {
 }
 
 const allowedUrls = [
+  'https://fonts.googleapis.com/css2?family=Parisienne&display=swap',
+  'https://fonts.googleapis.com',
+  'https://fonts.gstatic.com',
   'https://maps.app.goo.gl/6DUQjm4gRWES4AgY6?g_st=ic',
   'https://jovance-aibot.github.io/jonathan-neeha-wedding-evite/og.jpg',
 ]
